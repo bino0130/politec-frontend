@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 66 : overflow 프로퍼티 활용 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>visibility 프로퍼티</title>
+    <style>
+        p {
+            width: 15em;
+            height: 3em;
+            border: 1px solid lightgray;
+        }
+        /* p태그의 너비를 15em, 높이를 3em, border의 크기를 1px,
+        style을 solid, 색상을 lightgray로 설정 */
+        .hidden {
+            overflow: hidden;
+        }
+        /* 클래스가 hidden인 태그의 overflow를 hidden으로 설정 */
+        .visible {
+            overflow: visible;
+        }
+        /* 클래스가 visible인 태그의 overflow를 visible으로 설정 */
+        .scroll {
+            overflow: scroll;
+        }
+        /* 클래스가 scroll인 태그의 overflow를 scroll으로 설정 */
+    </style>
+    <!-- overflow : content의 내용이 박스를 넘어갈 경우 설정해주는 세팅
+    주로 overflow : auto를 많이 사용한다. -->
+</head>
+<body>
+    <h3>overflow 프로퍼티</h3> <!--hn(h1 ~ h6) 태그 : 6단계의 구획 제목을 나타내는 태그-->
+    <hr> <!--수평 가로선 그려주는 태그-->
+    <p class="hidden">overflow에 hidden값을 적용하면
+        박스를 넘어가는 내용이 잘려 보이지 않습니다.
+    </p><br>
+    <!-- 클래스명이 hidden인 문단 태그 p, 개행태그 br -->
+    <p class="visible">overflow에 visible값을 적용하면
+        콘텐트가 박스를 넘어가서도 출력됩니다.
+    </p><br>
+    <!-- 클래스명이 visible인 문단 태그 p -->
+    <p class="scroll">overflow에 scroll값을 적용하면
+        박스에 스크롤바를 붙여 출력합니다.
+    </p>
+    <!-- 클래스명이 scroll인 문단 태그 p -->
+</body>
+</html>

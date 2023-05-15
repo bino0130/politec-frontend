@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 35 : 텍스트 꾸미기 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>텍스트 꾸미기</title>
+    <style>
+        h3 {
+            text-align: right;
+        }
+        /* h3에 텍스트 정렬 : 우측으로 설정 */
+        span {
+            text-decoration: line-through;
+        }
+        /* span에 텍스트 꾸미기 : 취소선으로 설정 */
+        strong {
+            text-decoration: overline;
+        }
+        /* strong에 텍스트 꾸미기 : 윗줄로 설정 */
+        .p1 {
+            text-indent: 3em;
+            text-align: justify;
+        } 
+        /* 클래스가 p1인 태그 3칸만큼 들여쓰기, 양쪽정렬 */
+        .p2 {
+            text-indent: 1em;
+            text-align: center;
+        }
+        /* 클래스가 p2인 태그 1칸만큼 들여쓰기, 가운데 정렬 */
+    </style>
+</head>
+<body>
+    <h3>텍스트 꾸미기</h3> <!--hn(h1 ~ h6) 태그 : 6단계의 구획 제목을 나타내는 태그-->
+    <hr> <!--수평 가로선 그려주는 태그-->
+    <p class="p1">HTML의 태그만으로 기존의 워드 프로세서와 같이
+        들여쓰기, 정렬, 공백, 간격 등과 세밀한 <span>텍스트 제어</span>를
+        할 수 없다.
+    </p> <!--클래스명이 p1인 문단 태그 p 안에 인라인 태그 span이 들어있다-->
+    <p class="p2">그러나, <strong>스타일 시트</strong>는 이를
+    가능하게 한다. 들여쓰기, 정렬에 대해서 알아본다.</p>
+    <!--문단 태그 p--> <!--클래스명이 p2인 문단 태그 p 안에 strong 태그가 들어있다-->
+</body>
+</html>

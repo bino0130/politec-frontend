@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 40 : CSS3 폰트 활용 -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>폰트</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            font-size: large;
+        }
+        /* body의 폰트 크기는 large로 설정하고 폰트체는 Times New Roman으로 설정.
+           Times New Roman이 없으면 serif로 대체한다. */
+           
+        h3 {
+            font: italic bold 40px consolas, sans-serif;
+        }
+        /* h3의 폰트 스타일은 italic, 굵기는 bold, 크기는 40pxm, font-family는 sans-serif로 설정*/
+    </style>
+</head>
+
+<body>
+    <h3>Consolas font</h3> <!--hn(h1 ~ h6) 태그 : 6단계의 구획 제목을 나타내는 태그-->
+    <hr> <!--수평 가로선 그려주는 태그-->
+    <p style="font-weight: 900;">font-weight 900</p>
+    <!--font-weight이(폰트 두께가) 900인 문단 태그 p-->
+    <p style="font-weight: 100;">font-weight 100</p>
+    <!--font-weight이 (폰트 두께가) 100인 문단 태그 p-->
+    <p style="font-style: italic;">Italic Style</p>
+    <!--font-style이(폰트 스타일이) Italic인 문단 태그 p-->
+    <p style="font-style: oblique;">Oblique Style</p>
+    <!--font-style이(폰트 스타일이) oblique인 문단 태그 p-->
+    <p>현재 크기의 <span style="font-size: 1.5em;">1.5배</span>크기로</p>
+    <!--em : 현재 크기의 배수를 나타내는 단위. 부모의 설정값을 물려받는다
+        (ex : 1.5em : 현재 크기에서 1.5배)-->
+    <!--rem : html이 가지고 있는 font-size에 비례해서 크기가 계산된다.
+        (ex : html 기본 font-size가 10px일때 1.5rem : 15px, 2rem : 20px)-->
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 65 : visibility로 텍스트 숨기기 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>visibility 프로퍼티</title>
+    <style>
+        span {
+            visibility: hidden;
+        }
+        /* span 태그의 visibility를 hidden으로 설정 
+        visibility : hidden -> 형태는 있는데 숨겨짐
+        display : none -> 아예 없음. 출력이 안됨*/
+    </style>
+</head>
+<body>
+    <h3>다음 빈 곳에 숨은 단어?</h3> <!--hn(h1 ~ h6) 태그 : 6단계의 구획 제목을 나타내는 태그-->
+    <hr> <!--수평 가로선 그려주는 태그-->
+    <ul> <!-- unlist ul 태그 -->
+        <li>I (<span>love</span>) you.</li>
+        <!-- 괄호 부분이 hidden처리됨 -->
+        <li>CSS is Cascading (<span>Style</span>) Sheet.</li>
+        <!-- 괄호 부분이 hidden처리됨 -->
+        <li>응답하라 (<span>1988</span>).</li>
+        <!-- 괄호 부분이 hidden처리됨 -->
+    </ul>
+</body>
+</html>

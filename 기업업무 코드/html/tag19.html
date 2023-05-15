@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 테이블 19 : 이미지 다루기에 필요한 태그-->
+<!-- &lt : <, &gt : >, &nbsp : 공백, &quot : "(쌍따옴표)-->
+<!-- #eae7de : 회색 헥사코드, align="center" : 가운데 정렬-->
+<!-- rowspan="n" : 해당 셀의 밑으로 n칸만큼 행을 합친다.-->
+<!-- colspan="n" : 해당 셀의 오른쪽으로 n칸만큼 열을 합친다.-->
+<body>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <tr bgcolor="#eae7de">
+            <td style="width: 30%;" align="center"><b>형식</b></td>
+            <td style="width: 30%;" align="center"><b>구성</b></td>
+            <td style="width: 40%;" align="center"><b>내용</b></td>
+        </tr>
+        <tr>
+            <td rowspan="7">&lt;IMG&gt;</td>
+            <td>&lt;IMG&nbsp;SRC=&quot;...&quot;&gt;</td>
+            <td>이미지를&nbsp;정의해&nbsp;줍니다.</td>
+        </tr>
+        <tr>
+            <td>&lt;IMG&nbsp;SRC=&quot;...&quot;&nbsp;ALIGN=...&gt;</td>
+            <td>이미지의&nbsp;정렬&nbsp;상태를&nbsp;나타내&nbsp;줍니다.</td>
+        </tr>
+        <tr>
+            <td>&lt;IMG&nbsp;SRC=&quot;...&quot;&nbsp;WIDTH=&quot;...&quot;&nbsp;
+                HEIGHT=&quot;...&quot;&gt;</td>
+            <td>이미지의&nbsp;크기를&nbsp;조절해&nbsp;줍니다.</td>
+        </tr>
+        <tr>
+            <td>&lt;IMG&nbsp;SRC=&quot;...&quot;&nbsp;LOWSRC=&quot;...&quot;&gt;</td>
+            <td>이미지를&nbsp;JPEG파일로&nbsp;나타내&nbsp;줍니다.</td>
+        </tr>
+        <tr>
+            <td>&lt;IMG&nbsp;SRC=&quot;...&quot;&nbsp;VSPACE=&nbsp;HSPACE=&gt;</td>
+            <td>이미지의&nbsp;여백을&nbsp;조절해&nbsp;줍니다.</td>
+        </tr>
+        <tr>
+            <td>&lt;IMG&nbsp;SRC=&quot;...&quot;&nbsp;BORDER=&quot;...&quot;&gt;</td>
+            <td>이미지의&nbsp;테두리선을&nbsp;조절합니다.</td>
+        </tr>
+        <tr>
+            <td>&lt;IMG&nbsp;SRC=&quot;...&quot;&nbsp;ALT=&quot;...&quot;&gt;</td>
+            <td>이미지가&nbsp;전송되지&nbsp;않았을&nbsp;경우에&nbsp;글자로&nbsp;대처해&nbsp;줍니다.</td>
+        </tr>
+    </table>
+</body>
+</html>

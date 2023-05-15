@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 테이블 14 : 색상 지정하기-->
+<!-- &lt : <, &gt : >, &nbsp : 공백, &quot : "(쌍따옴표)-->
+<!-- #eae7de : 회색 헥사코드, align="center" : 가운데 정렬-->
+<!-- rowspan="n" : 해당 셀의 밑으로 n칸만큼 행을 합친다.-->
+<!-- colspan="n" : 해당 셀의 오른쪽으로 n칸만큼 열을 합친다.-->
+<!-- style="color : " : 글자 색 지정-->
+<body>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <tr bgcolor="#eae7de">
+            <td width="30%" align="center" ><b>형식</b></td>
+            <td width="30%" align="center"><b>구성</b></td>
+            <td width="40%" align="center"><strong>내용</strong></td>
+        </tr>
+        <tr>
+            <td rowspan="4" style="color: red;">&lt;BODY&gt;&nbsp;not&nbsp;supported</td>
+            <td style="color: red;">&lt;BODY&nbsp;TEXT=&quot;#nnnnnn&quot;&gt;...&lt;/BODY&gt;</td>
+            <td style="color: red;">글자색을&nbsp;지정합니다.</td>
+        </tr>
+        <tr>
+            <td style="color: red;">&lt;BODY&nbsp;LINK=&nbsp;&quot;#nnnnnn&quot;...&lt;/BODY&gt;</td>
+            <td style="color: red;">하이퍼링크의&nbsp;색을&nbsp;지정합니다.</td>
+        </tr>
+        <tr>
+            <td style="color: red;">&lt;BODY&nbsp;VLINK=&quot;#nnnnnn&quot;&gt;...&lt;/BODY&gt;</td>
+            <td style="color: red;">한&nbsp;번&nbsp;누른적이&nbsp;있는&nbsp;하이퍼링크의&nbsp;색을&nbsp;지정합니다.
+            </td>
+        </tr>
+        <tr>
+            <td style="color: red;">&lt;BODY&nbsp;ALINK=&quot;#nnnnnn&quot;&gt;...&lt;/BODY&gt;</td>
+            <td style="color: red;">누르고&nbsp;있는&nbsp;동안의&nbsp;색을&nbsp;지정합니다.
+            </td>
+        </tr>
+    </table>
+    
+</body>
+</html>

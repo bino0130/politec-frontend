@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 73 : CSS3 스타일을 응용하여 리스트로 메뉴 만들기 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리스트로 메뉴 만들기</title>
+    <style>
+        #menubar {
+            background: olive;
+        }
+        /* id가 menubar인 태그의 배경 색상을 olive로 설정 */
+        #menubar ul {
+            margin: 0;
+            padding: 0;
+            width: 567px;
+        }
+        /* id가 menubar인 태그의 자식 태그 ul의 margin/padding을 0으로,
+        너비를 567px로 설정 */
+        #menubar ul li {
+            display: inline;
+            list-style-type: none;
+            padding: 0px 15px;
+        }
+        /* id가 menubar인 태그의 자식 태그 ul의 의 자식태그 li의 disply를 inline으로,
+        list-style-type을 none으로, 위 아래 padding은 0px, 좌우 padding은 15px로 설정*/
+        #menubar ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        /* id가 menubar인 태그의 자식 태그 ul의 의 자식태그 li의 자식 태그 a의 글자 색을 white로,
+        text-decoration을 none으로 설정 */
+        #menubar ul li a:hover {
+            color: violet;
+        }
+        /* id가 menubar인 태그의 자식 태그 ul의 의 자식태그 li의 자식 태그 a가 hover 시 색상을 violet으로 설정 */
+    </style>
+</head>
+<body>
+    <nav id="menubar">
+        <!-- nav 태그 : 네비게이션 태그. 같은 페이지나 다른 페이지 안에
+        다른 부분으로 이어주는 네비게이션 링크로 구성된 섹션을 의미한다. -->
+        <ul> <!-- unlist ul 태그 -->
+            <li><a href="#">Home</a></li>
+            <!-- #을 링크로 갖는 a태그를 감싸는 li태그 -->
+            <li><a href="#">Espresso</a></li>
+            <!-- #을 링크로 갖는 a태그를 감싸는 li태그 -->
+            <li><a href="#">Cappuccino</a></li>
+            <!-- #을 링크로 갖는 a태그를 감싸는 li태그 -->
+            <li><a href="#">Cafe Latte</a></li>
+            <!-- #을 링크로 갖는 a태그를 감싸는 li태그 -->
+            <li><a href="#">F.A.Q</a></li>
+            <!-- #을 링크로 갖는 a태그를 감싸는 li태그 -->
+        </ul>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 45 : <div>의 박스 모델 보이기 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박스 모델</title>
+    <style>
+        body {
+            background: ghostwhite;
+        }
+        /* body태그의 배경 색을 ghostwhite로 지정 */
+
+        span {
+            background: deepskyblue;
+        }
+        /* span태그의 배경 색을 deepskyblue로 지정 */
+
+        div.box {
+            background: yellow;
+            border-style: solid;
+            border-color: peru;
+
+            margin: 40px;
+            border-width: 30px;
+            padding: 20px 20px 20px 20px;
+        }
+        /* 클래스 명이 box인 div태그의 배경색깔을 노란색, border-style을 solid,
+        border-color를 peru, 마진을 40px, border-width를 30px, padding을 20px씩 설정한다.*/
+    </style>
+</head>
+<body>
+    <div class="box">
+        <span>DIVDIVDIV</span>
+    </div>
+    <!--클래스명이 box인 블록 태그 div안에 인라인 태그 span 사용-->
+</body>
+</html>

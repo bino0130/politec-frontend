@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!-- 실습 13 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" name="fm">
+        <table width="650" border="1" cellspacing="0" cellpadding="5">
+            <!-- cellspacing : 각 셀들간의 간격
+            cellpadding : 셀 안 내용들의 범위와 셀 경계선과의 간격 -->
+            <tr>
+                <td>
+                    <b>번호</b>
+                </td>
+                <td>
+                    <input type="text" name="id" size="70" maxlength="70"
+                    value="1" readonly>
+                </td>
+            </tr>
+            <!-- row 1 번호 : id라는 name속성을 갖고 칸의 길이는 70, 최대 입력글자 70,
+            값은 1, 읽기만 가능한 속성을 갖고 있다. -->
+            <tr>
+                <td>
+                    <b>성별</b>
+                </td>
+                <td>
+                    <select name="sex">
+                        <option value="M" selected>남자</option>
+                        <option value="W">여자</option>
+                    </select>
+                </td>
+            </tr>
+            <!-- row 2 성별 : 성별을 선택하기 위한 드롭다운 메뉴(select)을 갖고 있다.
+            메뉴에는 남자와 여자라는 2가지 옵션이 있고, 남자가 기본값으로 선택되게끔
+            설정되어있다. -->
+            <tr>
+                <td>
+                    <b>성명</b>
+                </td>
+                <td>
+                    <input type="text" name="name" 
+                    size="70" maxlength="70" value="레이나">
+                </td>
+            </tr>
+            <!-- row 3 성명 : 이름을 입력할 수 있는 칸을 갖고 있다. 기본 값으로 레이나
+            라는 값을 갖게 설정되어 있고 칸 길이 70, 최대 입력 글자 70의 설정도
+            갖고 있다. -->
+            <tr>
+                <td>
+                    <b>주소</b>
+                </td>
+                <td>
+                    <input type="text" name="addr"
+                    size="70" maxlength="70" value="서울시 어딘가">
+                </td>
+            </tr>
+            <!-- row 4 주소 : 주소를 입력할 수 있는 칸을 갖고 있다. 기본 값으로
+            서울시 어딘가를 갖게 설정되어 있고 칸 길이 70, 최대 입력글자 70의
+            설정도 갖고 있다. -->
+            <tr>
+                <td>
+                    <b>전화번호</b>
+                </td>
+                <td>
+                    <input type="text" name="tel" size="70"
+                    maxlength="70" value="">
+                </td>
+            </tr>
+            <!-- row 5 전화번호 : 전화번호를 입력할 수 있는 칸을 갖고 있다. 기본 값을
+            갖고 있지 않고 칸 길이 70, 최대 입력글자 70의 설정도 갖고 있다. 
+            row의 설정마다 있는 name 속성은 서버측에서 입력된 값을 구분하기 위해
+            사용된다. -->
+        </table>
+    </form>
+</body>
+</html>

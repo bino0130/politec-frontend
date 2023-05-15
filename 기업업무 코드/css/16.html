@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 60 : position : relative 상대 배치 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>relative 배치</title>
+    <style>
+        div {
+            display: inline-block;
+            height: 50px;
+            width: 50px;
+            border: 1px solid lightgray;
+            text-align: center;
+            color: white;
+            background: red;
+        }
+        /* div의 display를 inline-block으로, 너비,높이를 50px로,
+        border의 크기는 1px, style은 solid, 색상은 lightgray로 설정하고
+        글자 정렬은 가운데로, 글자 색상은 white, 배경 색은 red로 설정한다. */
+        #down:hover {
+            position: relative;
+            left: 20px;
+            top: 20px;
+            background: green;
+        }
+        /* id가 down인 태그가 hover일 때 position을 relative로,
+        top, left의 마진을 20px씩 주고, 배경 색상을 green으로 설정 */
+        #up:hover {
+            position: relative;
+            right: 20px;
+            bottom: 20px;
+            background: green;
+        }
+        /* id가 up인 태그가 hover일 때 position을 relative로,
+        right, bottom의 마진을 20px씩 주고, 배경 색상을 green으로 설정 */
+    </style>
+    <!-- 자식의 position이 absolute일때, 부모의 속성이 relative or absolute면
+    해당 부모의 기준으로 세팅 영향을 받는다.
+    부모가 static이면 무시하고 position이relative or absolute인 태그를 찾아서
+    계속해서 위로 타고 올라간다.
+    position의 default는 static -->
+</head>
+<body>
+    <h3>상대 배치, relative</h3> <!--hn(h1 ~ h6) 태그 : 6단계의 구획 제목을 나타내는 태그-->
+    <hr> <!--수평 가로선 그려주는 태그-->
+    <div>T</div>
+    <div id="down">h</div>
+    <!-- id가 down인 div 태그 -->
+    <div>a</div>
+    <div>n</div>
+    <div id="up">k</div>
+    <!-- id가 up인 div 태그 -->
+    <div>s</div>
+</body>
+</html>

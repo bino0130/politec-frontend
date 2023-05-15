@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 테이블 17 : 입력 폼 만들기-->
+<!-- &lt : <, &gt : >, &nbsp : 공백, &quot : "(쌍따옴표)-->
+<!-- #eae7de : 회색 헥사코드, align="center" : 가운데 정렬-->
+<!-- rowspan="n" : 해당 셀의 밑으로 n칸만큼 행을 합친다.-->
+<!-- colspan="n" : 해당 셀의 오른쪽으로 n칸만큼 열을 합친다.-->
+<body>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <tr bgcolor="#eae7de">
+            <td style="width: 30%;" align="center"><b>형식</b></td>
+            <td style="width: 30%;" align="center"><b>구성</b></td>
+            <td style="width: 40%;" align="center"><b>내용</b></td>
+        </tr>
+        <tr>
+            <td rowspan="2">&lt;FORM&gt;</td>
+            <td>&lt;FORM&gt;...&lt;/FORM&gt;</td>
+            <td>양식을&nbsp;정의합니다.</td>
+        </tr>
+        <tr>
+            <td>&lt;FORM&nbsp;METHOD=&quot;...&quot;&nbsp;ACTION=&quot;...&quot;&gt;</td>
+            <td>양식의&nbsp;방법을&nbsp;정의합니다.</td>
+        </tr>
+        <tr>
+            <td>&lt;TEXTAREA&gt;</td>
+            <td>&lt;TEXTAREA&nbsp;NAME=&quot;...&quot;&nbsp;ROWS=&quot;...&quot;&gt;</td>
+            <td>글틀&nbsp;상자를&nbsp;정의합니다.</td>
+        </tr>
+        <tr>
+            <td rowspan="5">&lt;INPUT&gt;</td>
+            <td>&lt;INPUT&nbsp;TYPE=&quot;...&quot;&gt;</td>
+            <td>어떤&nbsp;형태로&nbsp;입력할&nbsp;것인지를&nbsp;정의합니다.</td>
+        </tr>
+        <tr>
+            <td>&lt;INPUT&nbsp;TYPE=&quot;RADIO&quot;&gt;</td>
+            <td>라디오&nbsp;단추를&nbsp;만들어줍니다.</td>
+        </tr>
+        <tr>
+            <td>&lt;INPUT&nbsp;TYPE=&quot;CHECKBOX&quot;&gt;</td>
+            <td>체크&nbsp;상자를&nbsp;만들어&nbsp;줍니다.</td>
+        </tr>
+        <tr>
+            <td>&lt;INPUT&nbsp;TYPE=&quot;SUBMIT&quot;&gt;</td>
+            <td>제출&nbsp;버튼을&nbsp;만들어&nbsp;줍니다.</td>
+        </tr>
+        <tr>
+            <td>&lt;INPUT&nbsp;TYPE=&quot;RESET&quot;&gt;</td>
+            <td>취소&nbsp;버튼을&nbsp;만들어&nbsp;줍니다.</td>
+        </tr>
+        <tr>
+            <td>&lt;SELECT&gt;</td>
+            <td>&lt;SELECT&nbsp;NAME=&quot;...&quot;&gt;</td>
+            <td>선택&nbsp;사항&nbsp;상자를&nbsp;만들어줍니다.</td>
+        </tr>
+    </table>
+</body>
+</html>

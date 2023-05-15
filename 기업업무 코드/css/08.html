@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 29 : 셀렉터 활용 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>셀렉터 만들기</title>
+    <style>
+        h3, li { /* 태그 이름 셀렉터 */
+            color: brown;
+        }
+        div > div > strong { /* 자식 셀렉터 */
+            background: yellow;
+        }
+        ul strong { /* 자손 셀렉터 */
+            color: dodgerblue;
+        }
+        .warning { /* class 셀렉터 */
+            color: red;
+        }
+        body.main { /* class 셀렉터 */
+            background: aliceblue;
+        }
+        #list { /* id 셀렉터 */
+            background: mistyrose;
+        }
+        #list span { /* 자손 셀렉터 */
+            color: forestgreen;
+        }
+        h3::first-letter { /* 가상 클래스 셀렉터 */
+            color: red;
+        }
+        li:hover { /* 가상 클래스 셀렉터 */
+            background: yellowgreen;
+        }
+        /* 각각 태그마다 속성을 지정해주는 css */
+    </style>
+</head>
+<body class="main"> <!--body태그에 main이라는 이름으로 class 지정-->
+    <h3>Web Programming</h3> <!--hn(h1 ~ h6) 태그 : 6단계의 구획 제목을 나타내는 태그-->
+    <hr> <!--수평 가로선 그려주는 태그-->
+    <div> <!--block 태그 div-->
+        <div>2학기 <strong>학습 내용</strong>입니다.</div>
+        <!--bold체를 구현해주는 strong 태그-->
+        <ul id="list"> <!--ul 태그에 list라는 고유 id 부여-->
+            <li><span>HTML5</span></li> <!--인라인 태그 span-->
+            <li><strong>CSS</strong></li><!--bold체를 구현해주는 strong 태그-->
+            <li>JAVASCRIPT</li><!--ul태그 안에 li태그 사용-->
+        </ul>
+        <div class="warning">60점 이하는 F</div> <!--div태그에 warning이라는 이름으로 class 지정-->
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 61 : position : absolute 절대 배치 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>절대 배치</title>
+    <style>
+        div {
+            display: inline-block;
+            position: absolute; /* 절대 배치 */
+            border: 1px solid lightgray;
+        }
+        /* div태그의 display를 inline-block으로, position을 absolute로,
+        border의 크기를 1px, style을 solid, 색상을 lightgray로 설정 */
+        div > p {
+            display: inline-block; /* div의 자식 p */
+            position: absolute; /* 절대 배치 */
+            height: 20px;
+            width: 15px;
+            background: lightgray;
+        }
+        /* div 태그의 자식 p 태그의 display를 inline-block, position을 absolute,
+        높이를 20px, 너비를 15px, 배경 색상을 lightgray로 설정*/
+    </style>
+    <!-- 자식의 position이 absolute일때, 부모의 속성이 relative or absolute면
+    해당 부모의 기준으로 세팅 영향을 받는다.
+    부모가 static이면 무시하고 position이relative or absolute인 태그를 찾아서
+    계속해서 위로 타고 올라간다.
+    position의 default는 static -->
+</head>
+<body>
+    <h3>Merry Christmas!</h3> <!--hn(h1 ~ h6) 태그 : 6단계의 구획 제목을 나타내는 태그-->
+    <hr> <!--수평 가로선 그려주는 태그-->
+    <p>예수님이 탄생하셨습니다.</p>
+    <div>
+        <img src="https://static.vecteezy.com/system/resources/previews/011/416/879/original/christmas-tree-cartoon-colored-clipart-free-vector.jpg" width="200" alt="크리스마스 트리">
+        <!-- 크리스마스 트리 img태그 -->
+        <p style="left: 50px; top: 30px;">M</p>
+        <!-- left에 50px, top에 30px의 마진 적용 -->
+        <p style="left: 100px; top: 0px;">E</p>
+        <!-- left에 100px, top에 0px의 마진 적용 -->
+        <p style="left: 100px; top: 80px;">R</p>
+        <!-- left에 100px, top에 80px의 마진 적용 -->
+        <p style="left: 150px; top: 110px;">R</p>
+        <!-- left에 150px, top에 110px의 마진 적용 -->
+        <p style="left: 30px; top: 130px;">Y</p>
+        <!-- left에 30px, top에 130px의 마진 적용 -->
+    </div>
+</body>
+</html>

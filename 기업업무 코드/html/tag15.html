@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 테이블 15 : 표 만들기 태그-->
+<!-- &lt : <, &gt : >, &nbsp : 공백, &quot : "(쌍따옴표)-->
+<!-- #eae7de : 회색 헥사코드, align="center" : 가운데 정렬-->
+<!-- rowspan="n" : 해당 셀의 밑으로 n칸만큼 행을 합친다.-->
+<!-- colspan="n" : 해당 셀의 오른쪽으로 n칸만큼 열을 합친다.-->
+<!-- style="color : " : 글자 색 지정-->
+<body>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <tr bgcolor="#eae7de">
+            <td style="width: 30%;" align="center"><b>형식</b></td>
+            <td style="width: 30%;" align="center"><b>구성</b></td>
+            <td style="width: 40%;" align="center"><b>내용</b></td>
+        </tr>
+        <tr>
+            <td rowspan="6">&lt;TABLE&gt;</td>
+            <td>&lt;TABLE&nbsp;BORDER&gt;...&nbsp;&lt;/TABLE&gt;&nbsp;not&nbsp;supported</td>
+            <td>표의&nbsp;전체&nbsp;형식을&nbsp;나타냅니다.</td>
+        </tr>
+        <tr>
+            <td>&lt;TR&gt;&lt;TD&gt;&lt;/TD&gt;&lt;/TR&gt;</td>
+            <td>표&nbsp;내부에&nbsp;들어갈&nbsp;형식을&nbsp;정의합니다.</td>
+        </tr>
+        <tr>
+            <td>&lt;TD&nbsp;COLSPAN=n&gt;</td>
+            <td>가로칸을&nbsp;n만큼&nbsp;합쳐줍니다.</td>
+        </tr>
+        <tr>
+            <td>&lt;TD&nbsp;ROWSPAN=n&gt;</td>
+            <td>세로칸을&nbsp;n만큼&nbsp;합쳐줍니다.</td>
+        </tr>
+        <tr>
+            <td style="color: red;">&lt;TD&nbsp;ALIGN=...&gt;&nbsp;not&nbsp;supported</td>
+            <td>표안의&nbsp;좌우&nbsp;정렬&nbsp;방식을&nbsp;정의합니다.</td>
+        </tr>
+        <tr>
+            <td style="color: red;">&lt;TD&nbsp;VALIGN=...&gt;&nbsp;not&nbsp;supported</td>
+            <td>표안의&nbsp;상하&nbsp;정렬&nbsp;방식을&nbsp;정의합니다.</td>
+        </tr>
+    </table>
+</body>
+</html>

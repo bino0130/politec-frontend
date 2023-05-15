@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 62 : position : fixed로 브라우저 하단 오른쪽에 고정 배치 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고정 배치</title>
+    <style>
+        #fixed {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 100px;
+            padding: 5px;
+            background: red;
+            color: white;
+        }
+        /* id가 fixed인 태그의 position을 fixed로, bottom/right의 마진을 10px,
+        너비를 100px, 패딩을 상하좌우 5px씩, 배경 색상을 red, 글자 색상을 white로 설정
+        position:fixed는 페이지의 크기가 변경되어도 항상 같은 위치에 고정되있다. */
+    </style>
+</head>
+<body>
+    <h3>Merry Christmas!</h3> <!--hn(h1 ~ h6) 태그 : 6단계의 구획 제목을 나타내는 태그-->
+    <hr> <!--수평 가로선 그려주는 태그-->
+    <img src="https://static.vecteezy.com/system/resources/previews/011/416/879/original/christmas-tree-cartoon-colored-clipart-free-vector.jpg" width="300" height="300" alt="크리스마스 트리">
+    <!-- 크리스마스 트리 img 태그 -->
+    <div id="fixed">예수님이 탄생하셨습니다.</div>
+    <!-- id가 fixed인 블록 태그 div -->
+</body>
+</html>

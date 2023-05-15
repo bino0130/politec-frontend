@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 테이블 6 : 목록을 정리해 주는 태그-->
+<!-- &lt : <, &gt : >, &nbsp : 공백, &quot : "(쌍따옴표)-->
+<!-- #eae7de : 회색 헥사코드, align="center" : 가운데 정렬-->
+<!-- rowspan="n" : 해당 셀의 밑으로 n칸만큼 행을 합친다.-->
+<!-- colspan="n" : 해당 셀의 오른쪽으로 n칸만큼 열을 합친다.-->
+<body>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <tr bgcolor="#eae7de">
+            <td width="30%" align="center" ><b>형식</b></td>
+            <td width="30%" align="center"><b>구성</b></td>
+            <td width="40%" align="center"><strong>내용</strong></td>
+        </tr>
+        <tr>
+            <td rowspan="5">&lt;LI&gt;</td>
+            <td>&lt;UL&gt;...&lt;/UL&gt;</td>
+            <td>순서가&nbsp;없는&nbsp;목록으로&nbsp;일반적인&nbsp;나열을&nbsp;말합니다.</td>
+        </tr>
+        <tr>
+            <td>&lt;OL&gt;...&lt;/OL&gt;</td>
+            <td>순서가&nbsp;있는&nbsp;목록으로&nbsp;위에서부터&nbsp;번호를&nbsp;매깁니다.
+            </td>
+        </tr>
+        <tr>
+            <td>&lt;MENU&gt;...&lt;/MENU&gt;</td>
+            <td>메뉴&nbsp;목록으로&nbsp;그리길지&nbsp;않은&nbsp;문장의&nbsp;열거에&nbsp;사용합니다.
+            </td>
+        </tr>
+        <tr>
+            <td>&lt;DIR&gt;...&lt;/DIR&gt;</td>
+            <td>디렉토리&nbsp;목록으로&nbsp;메뉴&nbsp;목록보다&nbsp;짧은&nbsp;문장을&nbsp;나열합니다.
+            </td>
+        </tr>
+        <tr>
+            <td>&lt;DL&gt;...&lt;/DL&gt;</td>
+            <td>정의&nbsp;목록&nbsp;태그입니다.&nbsp;&lt;LI&gt;가&nbsp;아닌&nbsp;&lt;DT&gt;와&nbsp;&lt;DD&gt;를&nbsp;사용합니다.
+            </td>
+        </tr>
+    </table>
+    
+</body>
+</html>

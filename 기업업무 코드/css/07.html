@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 18 : cascading(스타일 합치기) & overriding(오버라이딩) -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스타일 합치기 및 오버라이딩</title>
+    <link rel="stylesheet" href="external.css" type="text/css">
+    <style>
+        p {
+            color: blue; font-size: 12px;
+        }
+        /* 각각 태그마다 속성을 지정해주는 css */
+    </style>
+</head>
+<body>
+    <h3>p 태그에 중첩된 스타일</h3> <!--hn(h1 ~ h6) 태그 : 6단계의 구획 제목을 나타내는 태그-->
+    <hr> <!--수평 가로선 그려주는 태그-->
+    <p>Hello, students!</p>
+    <p style="font-size: 25px;">안녕하세요 교수님!</p>
+     <!--문단 태그 p 안에 직접 style을 지정해준다.-->
+     <!-- css 적용 우선순위
+     1. 브라우저의 디폴트 스타일
+     2. 스타일 시트 파일에 선언된 스타일(ex.external.css)
+     3. <style></style>태그에 선언된 스타일
+     (ex.<style>
+        p { color : blue; font-size : 12px;}
+     </style>)
+     4. style 속성에 선언된 스타일(ex.<p style></p>) -->
+</body>
+</html>

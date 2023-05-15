@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 57 : Display 프로퍼티로 박스 유형 설정 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>display 프로퍼티</title>
+    <style>
+        div {
+            border: 2px solid yellowgreen;
+            color: blue;
+            background: aliceblue;
+        }
+        /* div의 border 크기를 2px, style을 solid, 색상은 yellowgreen으로,
+            글자 색상은 blue, 배경 색은 aliceblue로 설정 */
+        span {
+            border: 3px dotted red;
+            background: yellow;
+        }
+        /* span의 border 크기를 3px, style을 dotted, 색상은 red로, 배경 색은 yellow로 설정 */
+    </style>
+</head>
+<body>
+    <h3>인라인, 인라인 블록, 블록</h3>
+    <hr>
+    나는 <div style="display: none;">div(none)</div>입니다.
+    <!--display : none을 사용 시 형체가 아예 없음. 출력이 되지 않음-->
+    나는 <div style="display: inline;">div(inline)</div>입니다.
+    <!--display : inline 사용 시 display의 성질이 inline으로 변경됨-->
+    나는 <div style="display: inline-block; height: 50px;">div(inline-block)</div>입니다.
+    <!--display : inlineblock 사용 시 inline과 block의 장점이 두루 섞인 성질을 갖게 됨-->
+    나는 <div>div<span style="display: block;">span(block)</span>입니다.</div>
+    <!--display : block 사용 시 display의 성질이 block으로 변경됨-->
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 테이블 12 : 연결하기 태그-->
+<!-- &lt : <, &gt : >, &nbsp : 공백, &quot : "(쌍따옴표)-->
+<!-- #eae7de : 회색 헥사코드, align="center" : 가운데 정렬-->
+<!-- rowspan="n" : 해당 셀의 밑으로 n칸만큼 행을 합친다.-->
+<!-- colspan="n" : 해당 셀의 오른쪽으로 n칸만큼 열을 합친다.-->
+<body>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <tr bgcolor="#eae7de">
+            <td width="30%" align="center" ><b>형식</b></td>
+            <td width="30%" align="center"><b>구성</b></td>
+            <td width="40%" align="center"><strong>내용</strong></td>
+        </tr>
+        <tr>
+            <td rowspan="2">&lt;A&gt;</td>
+            <td>&lt;A&nbsp;HREF=&quot;...&quot;&gt;...&lt;/A&gt;</td>
+            <td>다른&nbsp;홈페이지와&nbsp;연결시켜&nbsp;줍니다.</td>
+        </tr>
+        <tr>
+            <td>&lt;A&nbsp;NAME=&quot;...&quot;&gt;...&lt;/A&gt;</td>
+            <td>자신의&nbsp;홈페이지&nbsp;내에서&nbsp;연결해&nbsp;줍니다.</td>
+        </tr>
+    </table>
+    
+</body>
+</html>

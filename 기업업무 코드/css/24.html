@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 79 : 마우스가 올라오면 행의 배경색이 변하는 표 만들기 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>표 응용 1</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        /* table 태그의 borde-collapse는 1. seperated, 2. collapsed
+        두 가지 옵션을 가지고 있다. seperated는 분리, collapsed는 상쇄를 뜻한다.
+        seperated는 border 선이 분리되고, collapsed는 border 선이 합쳐진다.*/
+        td, th {
+            text-align: left;
+            padding: 5px;
+            height: 15px;
+            width: 100px;
+        }
+        /* td, th태그의 텍스트 정렬을 왼쪽으로, padding은 5px,
+        높이는 15px, 너비는 100px로 설정한다. */
+        thead, tfoot {
+            background: darkgray;
+            color: yellow;
+        }
+        /* thead, tfoot의 배경 색상을 darkgray, 글자 색상은 yellow로 설정한다. */
+        tbody tr:nth-child(even) {
+            background: aliceblue;
+        }
+        /* tbody의 자식 태그 tr의 짝수번째 태그의 배경 색상을 aliceblue로 설정한다.*/
+        tbody tr:hover {
+            background: pink;
+        }
+        /* tbidt의 자식 태그 tr에 hover 시 배경 색상을 background로 pink로 설정한다. */
+    </style>
+</head>
+<body>
+    <h3>2017년 1학기 성적</h3> <!--hn(h1 ~ h6) 태그 : 6단계의 구획 제목을 나타내는 태그-->
+    <hr> <!--수평 가로선 그려주는 태그-->
+    <table>
+        <thead> <!-- table의 머리 부분을 나타내는 thead 태그-->
+            <tr> <!--첫번째 table row-->
+                <th>이름</th> <!--header cell을 정의하는 th 태그-->
+                <th>HTML</th> <!--header cell을 정의하는 th 태그-->
+                <th>CSS</th> <!--header cell을 정의하는 th 태그-->
+            </tr>
+        </thead>
+        <tfoot> <!-- table의 끝 부분을 나타내는 tfoot 태그-->
+            <tr> <!--마지막 table row-->
+                <th>합</th> <!--header cell을 정의하는 th 태그-->
+                <th>310</th> <!--header cell을 정의하는 th 태그-->
+                <th>249</th> <!--header cell을 정의하는 th 태그-->
+            </tr>
+        </tfoot>
+        <tbody> <!-- table의 몸통 부분을 나타내는 tbody 태그-->
+            <tr> <!--세번째 table row-->
+                <td>황기태</td> <!-- table data를 정의하는 td 태그-->
+                <td>80</td> <!-- table data를 정의하는 td 태그-->
+                <td>70</td> <!-- table data를 정의하는 td 태그-->
+            </tr>
+            <tr> <!--네번째 table row-->
+                <td>이재문</td> <!-- table data를 정의하는 td 태그-->
+                <td>95</td> <!-- table data를 정의하는 td 태그-->
+                <td>99</td> <!-- table data를 정의하는 td 태그-->
+            </tr>
+            <tr> <!--다섯번째 table row-->
+                <td>이병은</td> <!-- table data를 정의하는 td 태그-->
+                <td>85</td> <!-- table data를 정의하는 td 태그-->
+                <td>90</td> <!-- table data를 정의하는 td 태그-->
+            </tr>
+            <tr> <!--여섯번째 table row-->
+                <td>김남윤</td> <!-- table data를 정의하는 td 태그-->
+                <td>50</td> <!-- table data를 정의하는 td 태그-->
+                <td>40</td> <!-- table data를 정의하는 td 태그-->
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

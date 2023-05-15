@@ -1,0 +1,4 @@
+p {
+    background: mistyrose;
+}
+/* 외부 css파일을 작성해서 @import를 통해 불러온다. */
