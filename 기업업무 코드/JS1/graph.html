@@ -1,0 +1,96 @@
+<!doctype html>
+
+<script src="https://rawgit.com/FVANCOP/ChartNew.js/master/ChartNew.js"></script>
+
+<script>
+
+   var charJSPersonnalDefaultOptions = { decimalSeparator: ",", thousandSeparator: ".", roundNumber: "none", graphTitleFontSize: 2 };
+   // 객체를 참조하는 변수. decimalSeparator(소수점 구분 기호)로 쉼표(,)를, thousandSeparator(천 단위 구분 기호)로 마침표(.)를,
+   // roundNumber(반올림 여부)는 none을, graphTitleFontSize(그래프 제목 글꼴 크기)를 2로 설정한다.
+
+   defCanvasWidth = 1200; // 그래프의 넓이를 1200으로 설정
+   defCanvasHeight = 450; // 그래프의 높이를 450으로 설정
+
+   const name = []; // 배열 name 초기화
+   const data = []; // 배열 data 초기화
+
+   for (let i = 1; i < 21; i++) { // 변수 i가 1부터 20까지 + 1씩 증가하는 반복문
+      name.push("홍길동" + i); // name에 홍길동i 대입
+      data.push(Math.floor(Math.random() * (100 - 1 + 1) + 1)); // data에 1~100 사이 정수 대입
+   }
+
+   var mydata1 = { // 중괄호는 객체(obj)을 뜻한다.
+      labels: name, // labels : 그래프의 레이블을 나타내는 속성. 변수 name의 값을 갖는다.
+      datasets: [ // 대괄호는 배열(array)을 뜻한다.
+         {
+            fillColor: "blue", // 그래프의 채우기 색상을 blue로 지정한다.
+            strokeColor: "rgba(220,220,220,1)", // 그래프의 선 색상을 rgba(220,220,220,1)로 지정한다.
+            data: data, // 그래프에 표시할 데이터를 변수 data의 값으로 지정한다.
+            axis: 1, // 그래프의 축을 나타내는 값
+            title: "graph" // 그래프의 제목을 "graph"로 지정한다.
+         }
+      ]
+   }
+
+   let i, j; // 변수 i,j 생성
+   const decal = 0.00; // 상수 decal 0.00으로 초기화
+
+   mydata1.shapesInChart = [];
+
+   let fillColorList1 = ["rgba(0, 9, 39, 1.0)", "rgba(0, 9, 39, 1.0)", "rgba(0, 9, 39, 1.0)", "rgba(0, 9, 39, 1.0)", "rgba(0, 9, 39, 1.0)", "rgba(0, 9, 39, 1.0)", "rgba(0, 9, 39, 1.0)", "rgba(0, 9, 39, 1.0)"];
+   let strokeColorList1 = ["rgba(0,0,0,0)", "rgba(0,0,0,0)", "rgba(0,0,0,0)", "rgba(0,0,0,0)", "rgba(0,0,0,0)", "rgba(0,0,0,0)", "rgba(0,0,0,0)"];
+   for (i = 0; i < mydata1.labels.length; i++) { // mydata1 label의 길이만큼 동작하는 반복문
+      mydata1.shapesInChart[mydata1.shapesInChart.length] = {
+         position: "INCHART", // 도형의 위치를 INCHART로 설정
+         shape: "RECTANGLE", // 도형의 모양을 직사각형으로 설정
+         fillColor: fillColorList1[i], // 채우기 색상을 fillColorList1의 i번째 인덱스 값으로 설정
+         strokeColor: strokeColorList1[i], // 테두리 선 색상을 fillColorList1의 i번째 인덱스 값으로 설정
+         animate: false, // 도형의 애니메이션 비활성화
+         x1: -0.5 + i + decal,
+         y1: -Number.MAX_VALUE,
+         x2: 0.50 + i - decal,
+         y2: Number.MAX_VALUE
+         // x1, y1, x2, y2 :  도형의 위치를 나타내는 좌표 값
+      }
+   };
+
+   function setComplColor(area, ctx, data, statData, posi, posj, othervars) {
+      return (fillColorList2[posj + posi * data.datasets[posi].data.length]);
+   };
+
+
+   var opt1 = {
+      canvasBorders: true, // 캔버스 경계선 표시
+      graphTitle: "third bar", // 그래프 제목을 "third Bar"로 설정
+      legend: true, // 범례 표시
+      inGraphDataShow: true, // 그래프 내에 데이터 값을 표시
+      annotateDisplay: true, // 주석을 나타냄
+      graphTitleFontSize: 18, // 그래프 제목의 글꼴 크기를 18로 설정
+      // endDrawScaleFunction: drawShapes
+   }
+
+</SCRIPT>
+
+<html>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+<head>
+   <title>Demo ChartNew.js</title>
+</head>
+
+<body>
+
+   <center>
+      <FONT SIZE=6><B>Kopo10 Random Graph</B></FONT> <BR>
+
+      <script>
+
+         document.write("<canvas id=\"canvas_Bar1\" height=\"" + defCanvasHeight + "\" width=\"" + defCanvasWidth + "\"></canvas>");
+
+         window.onload = function () {
+            var myBar1 = new Chart(document.getElementById("canvas_Bar1").getContext("2d")).Bar(mydata1, opt1);
+         }
+      </script>
+   </center>
+</body>
+</html>

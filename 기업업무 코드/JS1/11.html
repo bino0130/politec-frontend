@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 19 실습 -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function call(){ // 함수 call 생성
+            let MyString = " Hello World Welcome to my world"; // 변수 MyString 초기화
+            document.write("Test1 : " + MyString.charAt(11) + "<br>");
+            // MyString의 11번째 인덱스에 해당하는 문자 출력
+            document.write("Test2 : " + MyString.indexOf("to") + "<br>");
+            // MyString 중 to의 인덱스 출력
+            document.write("Test3 : " + MyString.lastIndexOf("to") + "<br>");
+            // MyString 중 to의 마지막 인덱스 출력
+            document.write("Test4 : " + MyString.substr(5, 5) + "<br>");
+            // MyString의 5번째 인덱스부터 5개 문자 출력
+            document.write("Test5 : " + "AaBbCc".toLowerCase() + "<br>");
+            // AaBbCc를 모두 소문자로 변경
+            document.write("Test6 : " + "AaBbCc".toUpperCase() + "<br>");
+            // AaBbCc를 모두 대문자로 변경
+        }
+    </script>
+</head>
+
+<body>
+    <script>
+        call(); // 함수 call 호출
+    </script>
+    Good~! <!-- Good~! 출력 -->
+</body>
+
+</html>

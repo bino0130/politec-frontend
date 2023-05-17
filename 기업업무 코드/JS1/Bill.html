@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 26 : 이마트 영수증 실습 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+    <style>
+
+        #emart { /* id가 emart인 태그 셀렉터 */
+            width: 150px; /* 너비를 150px로 설정 */
+            padding-left: 20px; /* padding-left를 20px로 설정 */
+        }
+
+        table { /* table태그 셀렉터 */
+            width: 395px; /* 너비를 395px로 설정 */
+            margin: auto; /* 가운데 정렬 */
+        }
+
+        .right { /* class가 right인 태그 셀렉터 */
+            text-align: right;
+        }
+
+        .center { /* class가 center인 태그 셀렉터 */
+            text-align: center;
+        }
+
+        hr { /* hr 태그 셀렉터 */
+            border-style: dashed;
+        }
+    
+    </style>
+    <script>
+         // 상품명 배열 생성
+         let itemname = new Array("농심 진라면", "오뚜기 중국식 탄탄면", "홀스타일 로제 스파클링", "크림이 가득한 크로와상", "필라델피아 면도크림", "비비고 왕교자",
+            "명품 닭가슴살 하림", "프리미엄 라면 받침대", "농심 신라면 건면", "오리온 포스틱", "꼬북칩 초코맛", "맥심 카페라떼 커피믹스", "왕새우튀김(20개입)",
+            "해태 허니버터칩", "Sony WH-1000XM4", "고농축 다우니 순수향", "리얼 코코볼 밀크티", "호랑이 기운 쑥! 콘푸로스트", "애호박(국산)",
+            "멕시코산 아보카도", "닭도리탕용 토종닭", "돼지고기 650g", "광어 회 3인분", "노르웨이 자반 고등어", "상추(국산)", "바디프렌드 안마의자",
+            "LOGITEC 무선 마우스", "국내산 한돈 삼겹살", "프라푸치노 콜드브루", "롯데 자일리톨"); // %7s
+
+        // 상품별 가격 배열 생성
+        let price = new Array(6000, 2400, 3600, 7000, 8500, 3200, 4300, 5500, 2700, 3560, 5400, 2800, 10000, 40000, 3000000,
+            650000, 54000, 6000, 9500, 1200000, 600, 6700, 3900, 5500, 4600, 190000, 40000, 5600, 8800,
+            99000); // %7d? 여차하면 앞에 - 붙여서 좌측정렬 시켜보자
+
+        // 상품별 수량 배열 생성
+        let amount = new Array(5, 6, 10, 5, 7, 9, 2, 4, 24, 4, 15, 6, 20, 1, 7, 4, 6, 9, 7, 4, 20, 3, 6, 8, 4, 1, 3, 2, 5, 4,
+            6); // %2d
+
+        // 상품별 면세 유무 배열 생성
+        let taxfree = new Array(false, false, false, false, true, false, false, false, false, true, false, false,
+            false, false, true, false, false, false, false, true, false, false, false, false, true, false, false,
+            false, false, true);
+
+        function cutByLen(str, maxByte) { // 글자 자르는 함수
+            for(b=i=0;c=str.charCodeAt(i);) {
+                b+=c>>7?2:1;
+                if (b > maxByte)
+                    break;
+                i++;
+            }
+            return str.substring(0,i);
+        }
+
+        function print_Bill() { // 영수증 출력 함수
+            let tot_cnt = itemname.length; // 총 품목 수량
+
+            let taxFreePrice = 0; // 면세 물품
+            let totalPrice = 0; // 합계, 결제대상금액
+            let tax = 0; // 부가세
+            let taxPrice = 0; // 과세물품
+            let now_Point = 5573; // 기존 포인트
+            let today_Point = 173; // 오늘 발생한 포인트
+            let total_Point = now_Point + today_Point // 총 포인트
+
+            const nowPoint = now_Point.toLocaleString('ko-KR'); // 기존 포인트 컴마 찍은 버전
+            const todayPoint = today_Point.toLocaleString('ko-KR'); // 오늘 발생한 포인트 컴마 찍은 버전
+            const totalPoint = total_Point.toLocaleString('ko-KR'); // 총 포인트 컴마 찍은 버전
+            // toLocaleString() : Number, Date, Array, Object 타입의 객체에서 사용 가능한 함수이다.
+            // 위의 경우에서는 숫자를 알아보기 쉽게 3자리씩 컴마(,)로 끊어서 표현하기 위해 사용하였다.
+
+            document.write("<table>") 
+            for (let i = 0; i < itemname.length; i++) { // 상품명, 단가, 수량, 금액 세부사항 출력하는 반복문
+                document.write("<tr>")
+                const com_price1 = price[i].toLocaleString('ko-KR'); // 가격 콤마붙인 상수
+                const com_price2 = (price[i] * amount[i]).toLocaleString('ko-KR'); // 총액 콤마붙인 상수
+                if (taxfree[i] == false) { // 과세 품목
+                    document.write("<td class='center' colspan='2' style='padding-left: 10.8px;'>" + cutByLen(itemname[i], 14) + "</td>")
+                    document.write("<td class='center' style='width: 80px;'>" + price[i].toLocaleString('ko-KR') + "</td>")
+                    document.write("<td class='center' style='width: 60px;'>" + amount[i] + "</td>")
+                    document.write("<td class='right' style='width: 83px;'>" + (price[i] * amount[i]).toLocaleString('ko-KR') + "</td>")
+                } else if (taxfree[i] == true) { // 면세 품목 (* 붙어있음)
+                    document.write("<td>*</td>")
+                    document.write("<td class='center'>" + cutByLen(itemname[i], 14) + "</td>")
+                    document.write("<td class='center' style='width: 10px;'>" + com_price1 + "</td>")
+                    document.write("<td class='center' style='width: 60px;'>" + amount[i] + "</td>")
+                    document.write("<td class='right' style='width: 83px;'>" + com_price2 + "</td>")
+                    if (i != itemname.length - 1)document.write("<tr><td colspan='6'><hr></td></tr>") // 점선
+                    taxFreePrice += price[i] * amount[i];
+                }
+                document.write("</tr>")
+
+                totalPrice += price[i] * amount[i];
+
+                tax = (totalPrice - taxFreePrice) / 10.0; // 부가세(세금)
+                if (Number.isInteger(tax)) { // 정수여부 확인
+                    tax = Math.floor(tax);
+                } else {
+                    tax = Math.floor(tax) + 1;
+                }
+                taxPrice = totalPrice - tax - taxFreePrice; // 과세물품
+            }
+            document.write("</table>")
+
+            const com_taxFreePrice = taxFreePrice.toLocaleString('ko-KR'); // 면세물품 컴마 찍은 버전
+            const com_taxPrice = taxPrice.toLocaleString('ko-KR'); // 과세물품 컴마 찍은 버전
+            const com_tax = tax.toLocaleString('ko-KR'); // 부가세(세금) 컴마 찍은 버전
+            const com_totalPrice = totalPrice.toLocaleString('ko-KR'); // 합계, 결제대상금액 컴마 찍은 버전
+            
+            document.write("<table>")
+            document.write("<tr><td style='width : 23%;'></td>")
+            document.write("<td class='right' style='width : 34%;'>총 품목 수량</td>") // 총 품목 수량 출력               
+            document.write("<td class='right' style='width : 43%;'>" + tot_cnt + "</td><tr>")
+
+            document.write("<tr><td></td>")
+            document.write("<td class='right'>(*)면&nbsp;세&nbsp;&nbsp;&nbsp;물&nbsp;품</td>") // 면세물품 출력
+            document.write("<td class='right'>" + com_taxFreePrice + "</td></tr>")
+
+            document.write("<tr><td></td>")
+            document.write("<td class='right'>과&nbsp;세&nbsp;&nbsp;&nbsp;물&nbsp;품</td>") // 과세물품 출력
+            document.write("<td class='right'>" + com_taxPrice + "</td></tr>")
+
+            document.write("<tr><td></td>")
+            document.write("<td class='right'>부&nbsp;&nbsp;&nbsp;&nbsp;가&nbsp;&nbsp;&nbsp;&nbsp;세</td>") // 부가세 출력
+            document.write("<td class='right'>" + com_tax + "</td></tr>")
+
+            document.write("<tr><td></td>")
+            document.write("<td class='right'>합&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계</td>") // 합계 출력
+            document.write("<td class='right'>" + com_totalPrice + "</td></tr>")
+
+            document.write("<tr><td colspan='2'>결&nbsp;제&nbsp;&nbsp;대&nbsp;상&nbsp;&nbsp;금&nbsp;&nbsp;액</td>") // 결제대상금액 출력
+            document.write("<td class='right'>" + com_totalPrice + "</td></tr>")
+
+            document.write("<tr><td colspan='3'><hr></td></tr>") // 점선
+            document.write("</table>")
+
+            document.write("<table>")
+            document.write("<tr><td>0041&nbsp;KB&nbsp;국민</td>") // 0041 국민 출력
+            document.write("<td class='right'>541707**0484/35860658</td></tr>") // 카드번호 출력
+
+            document.write("<tr><td>카드결제&nbsp;(IC)</td>") // 카드결제 출력
+            document.write("<td class='right'>일시불&nbsp;&nbsp;/&nbsp;&nbsp;" + com_totalPrice + "</td></tr>")
+            document.write("<tr><td colspan='2'><hr></td></tr>") // 점선
+            document.write("</table>")
+
+            document.write("<table>")
+            document.write("<tr><td class='center' colspan='3'>[신세계포인트&nbsp;적립]</td>") // [신세계포인트 적립]출력
+
+            document.write("<tr><td colspan='3'>남*현 고객님의 포인트 현황입니다.") // 포인트현황 출력
+            
+            document.write("<tr><td>금회발생포인트</td>") // 금화발생포인트 출력
+            document.write("<td class='center'>9310**8416</td>") // 포인트id(?) 출력
+            document.write("<td class='right'>" + todayPoint + "</td></tr>") // 173 출력
+
+            document.write("<tr><td>누계(가용)포인트</td>") // 누계(가용)포인트 출력
+            document.write("<td class='center'>" + totalPoint + "(</td>")
+            document.write("<td class='right'>" + nowPoint + ")</td></tr>")
+
+            document.write("<tr><td colspan='3'>*신세계포인트&nbsp;유효기간은&nbsp;2년입니다.</td></tr>") // 포인트 유효기간 안내문 출력
+            document.write("<tr><td colspan='3'><hr></td></tr>")
+            document.write("</table>")
+
+            document.write("<table>")
+            document.write("<tr><td class='center' colspan='2'>구매금액기준&nbsp;무료주차시간&nbsp;자동부여") // 구매금액기준 무료주차시간 자동부여 출력
+
+            document.write("<tr><td>차량번호&nbsp;&nbsp;:</td>") // 차량번호 출력
+            document.write("<td class='right'>36마****</td></tr>") // 36마**** 출력
+            
+            var d = new Date();
+            let month = (d.getMonth() + 1).toString().padStart(2,'0');
+            let date = d.getDate().toString().padStart(2,'0');
+            let hour = d.getHours().toString().padStart(2,'0');
+            let minute = d.getMinutes().toString().padStart(2,'0');
+            let second = d.getSeconds().toString().padStart(2,'0');
+            // padStart() : 현재 문자열의 시작을 다른 문자열로 채워서
+            // 주어진 길이를 만족하는 새로운 문자열을 리턴한다. 위의 경우에는
+            // 월, 날짜, 시간, 분, 초가 1의 자리일 경우 앞에 0을 붙여주기 위해 사용하였다.
+
+            // padEnd() : 현재 문자열의 끝을 다른 문자열로 채워서 주어진
+            // 길이를 만족하는 새로운 문자열을 리턴한다.
+
+            document.write("<tr><td>입차시간&nbsp;&nbsp;:</td>") // 입차시간 출력
+            document.write("<td class='right'>" + d.getFullYear() +  "/" + month + "/" + date +
+            "  " + hour + ":" + minute + ":" + second +"</td></tr>")
+            document.write("<tr><td colspan='2'><hr></td></tr>")
+            document.write("</table>")
+
+            document.write("<table>")
+            document.write("<tr><td>캐셔:084599&nbsp;양00") // 캐셔 출력
+            document.write("<td></td>")
+            document.write("<td class='right'>1150</td></tr>")
+
+            document.write("<tr><td class='center' colspan='3'>" + 
+                d.getFullYear() + "" + month + "" + date + "/00119861/00164980/31</td></tr>")
+            document.write("</table>")
+        }
+    </script>
+</head>
+
+<body>
+    <table> <!-- 이마트 영수증 상단 부분 출력하는 테이블 -->
+        <tr>
+            <td rowspan="3" id="emart">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emart_Logo.svg/2560px-Emart_Logo.svg.png"
+                    , style="width: 120px;">
+            </td>
+            <td>이마트 죽전점 (031)888-1234</td>
+        </tr>
+        <tr>
+            <td>206-86-50913 김희석</td>
+        </tr>
+        <tr>
+            <td>용인 수지구 포은대로 552</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>영수증 미지참시 교환/환불 불가</td>
+        </tr>
+        <tr>
+            <td>정상제품에 한함, 30일 이내 (신선 7일)</td>
+        </tr>
+        <tr>
+            <td>※일부 브랜드매장 제외 (매장 고지물 참조)</td>
+        </tr>
+        <tr>
+            <td>교환/환불 구매점에서 가능 (결제카드 지참)</td>
+        </tr>
+    </table>
+    <br>
+    <script> // 구매일자, POS기 번호 출력하는 스크립트
+        var d = new Date();
+        let month = (d.getMonth() + 1).toString().padStart(2,'0');
+        let date = d.getDate().toString().padStart(2,'0');
+        let hour = d.getHours().toString().padStart(2,'0');
+        let minute = d.getMinutes().toString().padStart(2,'0');
+        document.write("<table>")
+        document.write("<tr><td>[구 매] " + d.getFullYear() +
+            "/" + month +
+            "/" + date +
+            "  " + hour +
+            ":" + minute +
+            " &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POS : 0011-9861</td></tr>")
+    </script>
+
+    <table> <!-- 상품명, 단가, 수량, 금액 출력하는 테이블 -->
+        <thead>
+            <tr>
+                <td colspan="4">
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td class="center" style="width: 150px; padding-left: 7px;">상 품 명</td>
+                <td class="center" style="width: 90px;">단&nbsp;&nbsp;&nbsp;가</td>
+                <td class="center" style="width: 50px;">수량</td>
+                <td class="right" style="width: 90px;">금&nbsp;&nbsp;&nbsp;액</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <hr>
+                </td>
+            </tr>
+        </thead>
+    </table>
+
+    <script>
+        print_Bill(); // print_Bill 함수 호출
+    </script>
+
+</body>
+
+</html>

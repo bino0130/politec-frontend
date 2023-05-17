@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 12 실습 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let name = "Hello"; // 전역변수 name = Hello라고 초기화
+
+        function call1() { // 함수 call1
+            let name = "World"; // 지역변수 name = World라고 초기화
+            document.write("지역 : " + name);
+            // 지역 : World 출력
+        }
+        
+        function call2() { // 함수 call2
+            document.write("전역 : " + name)
+            // 전역 : Hello 출력
+        }
+    </script>
+</head>
+<body>
+    <script>
+        call1(); // 함수 call1 호출
+    </script>
+
+    <script>
+        call2(); // 함수 call2 호출
+    </script>
+</body>
+
+</html>

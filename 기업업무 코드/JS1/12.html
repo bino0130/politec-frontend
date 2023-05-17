@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 20 실습 -->
+<!-- 아스키코드를 기준으로 정렬되는 값 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+
+<body>
+    <script>
+        let arr = new Array("빨간색", 1010, "deadfire", "Javascript", "XX");
+        // 문자열 4개, 숫자 1개를 요소로 갖는 배열 arr 초기화
+
+        document.write("<h2>Original</h2>"); // Original 출력
+        for(i = 0; i < arr.length; i++) { // i가 0부터 배열의 크기 - 1까지 + 1씩 증가하는 반복문
+            document.write("arr[" + i + "] : " + arr[i] + "<br>");
+            // 순서대로 출력됨
+        }
+
+        arr.sort(); // 배열 arr 오름차순 정렬
+        document.write("<hr><h2>기본정렬</h2>"); // 기본정렬 출력
+        for(i = 0; i < arr.length; i++) { // i가 0부터 배열의 크기 - 1까지 + 1씩 증가하는 반복문
+            document.write("arr[" + i + "] : " + arr[i] + "<br>");
+            // 오름차순 출력
+        }
+
+        function compare(a,b) { // 
+            if (a < b) {
+                return 1;
+            }
+            else if (a > b) {
+                return -1;
+            }
+            else {
+                return 0;
+            }
+        }
+        // compare() : parameter a,b를 비교해서 결과에 따라 1, -1, 0을 리턴하는 함수.
+        // a < b면 1을 리턴하고 a,b의 순서를 바꾼다.
+        // a > b면 -1을 리턴하고 a,b의 순서를 유지한다.
+        // a = b면 0을 리턴한다.
+
+        arr.sort(compare); // 역순정렬에 compare 함수사용
+        document.write("<hr><h2> 역순정렬 </h2>") // 역순정렬 출력
+        for (i = 0; i < arr.length; i++) { // i가 0부터 배열의 크기 - 1까지 + 1씩 증가하는 반복문
+            document.write("arr[" + i + "] : " + arr[i] + "<br>");
+            // 내림차순 출력
+        }
+    </script>
+</body>
+
+</html>

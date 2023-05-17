@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 13 : 이벤트 리스너에서 객체 전달 받기 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 객체 전달받기</title>
+</head>
+<body>
+    <p id="p">마우스를 올려 보세요</p> <!-- id가 p인 문단태그 p -->
+    <button onclick="f(event)">클릭하세요</button>
+    <script>
+        function f(e) { // 메개 변수 e는 현재 발생한 이벤트 객체를 받는다.
+            alert(e.type); // 이벤트 종류 출력
+        }
+        document.getElementById("p").onmouseover = f;
+        // p라는 id를 가진 요소의 onmouseover 리스너로 함수 f 등록
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 15 : 이벤트 객체 프로퍼티 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 객체의 프로퍼티 출력</title>
+</head>
+<body>
+    <h3>이벤트 객체의 프로퍼티 출력</h3> <!-- font크기를 1~6까지 조절하는 hn태그 -->
+    <hr> <!-- 구분선 태그 hr -->
+    <p id="p">버튼을 클릭하면 이벤트 객체를 출력합니다.</p>
+    <button onclick="f(event)">버튼</button>
+    <script>
+        function f(e) { // 매개변수 e는 현재 발생한 이벤트 객체를 받는다.
+            var text = "type: " + e.type + "<br>" // 현재 발생한 이벤트 객체의 타입 e.type
+                    + "target: " + e.target + "<br>" // 현재 이벤트를 발생시킨 객체 e.target
+                    + "currentTarget: " + e.currentTarget + "<br>" // 현재 이벤트 리스너를 실행하고 있는 DOM 객체 e.currentTarget
+                    + "defaultPrevented: " + e.defaultPrevented; // 현재 이벤트의 디폴트 행동을 취소시키는 메소드 e.preventDefault()
+
+            var p = document.getElementById("p"); // p라는 id를 갖고 있는 요소를 찾고 p에 return해준다.
+            p.innerHTML = text; // 이벤트 객체의 프로퍼티 출력
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 15 반복문 예제 -->    
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr = ["가", "나", "다", "라"]
+        for(let i in arr) { // arr의 길이만큼 반복하며 변수 i에 배열 arr의 인덱스값을 할당하는 반복문
+            console.log(i, arr[i]);
+            // 개발자 도구의 콘솔 창에 i, arr의 인덱스 표시
+        }
+        // 반복문 in을 사용하면 index, item 표시
+        // for ... in 반복문 : 객체의 속성을 순회하기 위해 사용한다.
+        // 객체의 속성(property)을 반복하며, 각 반복에서 변수에는 속성 이름(키)가 할당된다.
+        // 배열에도 사용할 수 있지만, 순서가 보장되지 않고, 추가된 속성도 반복될 수 있으므로
+        // 주로 객체에서 사용된다. 상속된 속성도 반복하며, hasOwnProperty 메서드를 사용하여
+        // 속성이 객체 자체의 속성인지 확인하는 것이 일반적이다.
+
+        for (let i of arr) {
+            console.log(i);
+        }
+        // 반복문 of를 사용하면 item만 표시
+        // for ... of 반복문 : 반복 가능한(iterable) 객체를 순회하기 위해 사용한다.
+        // 배열, 문자열, Map, Set 등 순회 가능한 객체에서 사용할 수 있다.
+        // 각 반복에서 변수에는 해당 요소의 값이 할당된다.
+        // for ... of 반복문은 순서가 중요하며, 순회 가능한 객체의 요소를 실제 순서대로 반복한다.
+
+        arr.forEach(function (value, index, array) {
+            console.log(value, index, array);
+        })
+        // forEach : 배열의 각 요소를 순회하면서 주어진 함수를 실행하는 배열 메서드.
+        // 배열의 각 요소에 대해 지정된 함수를 호출한다.
+        // function(value, index, array) : 각 요소의 값, 인덱스, 원본 배열을 매개변수로 받는다.
+
+        let obj = { // 변수 obj를 선언하고 객체를 할당한다.
+            a : "가", // key a와  value "가"
+            b : "나", // key b와 value "나"
+            c : "다" // key c와 value "다"
+        } // 객체는 속성과 해당 값으로 구성되어 있다.
+
+        for (let i in obj) { // 객체 obj를 순회하는 반복문
+            console.log(i)
+        } // 해당 obj의 key인 a,b,c를 순차적으로 출력한다.
+    </script>
+</body>
+</html>

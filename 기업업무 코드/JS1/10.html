@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 18 실습 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var d = new Date();
+        // Date : 1970년 1/1일 자정과의 시간 차이를 밀리초로 나타내는 정수 값을 담는다.
+        document.write(" 년도는 : " + d.getFullYear() + // getFullYear : 현지 시간 기준 연도 리턴
+        " 월은 : " + d.getMonth() + // getMonth : 현지 시간 기준 월(0~11) 리턴
+        " 일은 : " + d.getDate() + // getDate : 현지 시간 기준 일(1~31) 리턴
+        " 요일은 : " + d.getDay() + // getDay : 현지 시간 기준 요일 (0~6) 리턴
+        " 시는 : " + d.getHours() + // getHours : 현지 시간 기준 시 (0~23) 리턴
+        " 분은 : " + d.getMinutes() + // getMinutes : 현지 시간 기준 분 (0~59) 리턴
+        " 초는 : " + d.getSeconds() + // getSeconds : 현지 시간 기준 초 (0~59) 리턴
+        " 밀리초 : " + d.getMilliseconds() + "<hr>"); // getMilliseconds : 현지 시간 기준 밀리초 (0~999) 리턴
+        d.setFullYear(2010); // 2010년으로 연도 지정
+        document.write(d + "<hr>"); // 연도 제외하고 현지 시간 기준으로 출력
+        d.setMonth(7); // 월을 7로(8월로) 지정 -> Date의 month는 0부터 11까지 있기 때문에 7은 8월에 해당한다.
+        document.write(d + "<hr>"); // 연도, 월 제외하고 현지 시간 기준으로 출력
+    </script>
+</body>
+</html>

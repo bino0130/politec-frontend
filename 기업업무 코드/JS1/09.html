@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 17 실습 : 인수를 활용한 함수-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function sum(a, b) { // a,b를 parameter로 갖는 함수 sum
+            return a + b; // a + b 리턴
+        }
+
+        function func() { // 함수 func
+            let sum = 0; // 변수 sum 0으로 초기화
+            for (let i = 0; i < func.arguments.length; i++) { 
+            // i가 0부터 인자의 개수만큼 + 1씩 증가하는 반복문
+                sum += func.arguments[i];
+                // 변수 sum에 i번째 인자 더해줌
+            }
+            return sum; // sum 리턴
+        }
+
+    </script>
+</head>
+
+<body>
+    <script>
+        // alert(func(1)); // 경고창에 1 출력
+        // alert(func(1, 2)); // 경고창에 1,2의 합 3 출력
+
+        // alert(func(1, 2, 3)); // 경고창에 1,2,3의 합 6 출력
+        alert(func(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)); // 경고창에 1 ~ 10의 합 55 출력
+    </script>
+</body>
+
+</html>

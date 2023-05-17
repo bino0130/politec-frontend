@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 9 : addEventListener() 사용 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let p; // 변수 p 선언
+
+        function init(){ // 함수 init()
+            p = document.getElementById("p"); // p라는 id를 갖고 있는 요소를 찾고 p에 return해준다.
+            p.addEventListener("mouseover",over); // 이벤트 리스너 등록
+            p.addEventListener("mouseout", out); // 이벤트 리스너 등록
+        }
+        function over() { // 함수 over()
+            p.style.backgroundColor = "orchid";
+            // id가 p인 태그의 배경 색은 orchid로 설정
+        }
+        function out() {
+            p.style.backgroundColor = "white";
+            // id가 p인 태그의 배경 색은 white로 설정
+        }
+    </script>
+</head>
+<body onload="init()">
+    <!-- <body onload="init()"> : 페이지가 다 로드되고나서 init()을 실행한다. -->
+        <h3>addEventListener()를 이용한 리스너 등록</h3> <!-- font크기를 1~6까지 조절하는 hn태그 -->
+        <hr> <!-- 구분선 태그 hr -->
+        <p id="p">마우스 올리면 orchid색으로 변경</p> <!-- id가 p인 문단태그 p -->
+    </body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 슬라이드 27 : 성적표 실습 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table { /* table 태그 셀렉터 */
+            width : 500px;
+            margin: auto;
+        }
+
+        tr > td { /* tr태그의 자식 td태그 셀렉터 */
+            text-align: center;
+        }
+
+        #korean { /* id가 korean인 태그 셀렉터 */
+            padding-left: 10px;
+        }
+    </style>
+    <script>
+        function header() { // 함수 header -> 성적 집계표, 출력일자 부분을 출력한다.
+            var d = new Date();
+            let month = (d.getMonth() + 1).toString().padStart(2,'0');
+            let date = d.getDate().toString().padStart(2,'0');
+            let hour = d.getHours().toString().padStart(2,'0');
+            let minute = d.getMinutes().toString().padStart(2,'0');
+            let second = d.getSeconds().toString().padStart(2, '0');
+            // padStart() : 현재 문자열의 시작을 다른 문자열로 채워서
+            // 주어진 길이를 만족하는 새로운 문자열을 리턴한다. 위의 경우에는
+            // 월, 날짜, 시간, 분, 초가 1의 자리일 경우 앞에 0을 붙여주기 위해 사용하였다.
+
+            // padEnd() : 현재 문자열의 끝을 다른 문자열로 채워서 주어진
+            // 길이를 만족하는 새로운 문자열을 리턴한다.
+
+            document.write("<table>");
+            document.write("<tr><td></td>");
+            document.write("<td>성적집계표</td>");
+            document.write("<td></td></tr>");
+
+            document.write("<tr><td colspan='3' style='text-align : right'>출력일자 : " + d.getFullYear() + "." + 
+                            month + "." + date + "&nbsp;" + hour + ":" + minute + ":" + second);
+            document.write("</table>");
+        }
+
+        function body() { // 함수 body -> 점선 / 번호, 이름, 국어 ,영어, 수학, 총점, 평균 / 점선을 출력한다.
+            document.write("<table>");
+            document.write("<tr><td colspan='7'><hr style='border-style : dashed'></td></tr>");
+
+            document.write("<tr><td style='text-align : left'>번호</td>");
+            document.write("<td>이름</td>");
+            document.write("<td id='korean'>국어</td>");
+            document.write("<td>영어</td>");
+            document.write("<td>수학</td>");
+            document.write("<td>총점</td>");
+            document.write("<td>평균</td></tr>");
+
+            document.write("<tr><td colspan='7'><hr style='border-style : dashed'></td></tr>");
+        }
+
+        function footer() { // 함수 footer -> 개인별 성적, 과목별 총합, 과목별 평균을 출력한다.
+            let kor = 0; // 변수 kor 초기화
+            let eng = 0; // 변수 eng 초기화
+            let mat = 0; // 변수 mat 초기화
+            let sum = 0; // 변수 sum 초기화
+            let avg = 0; // 변수 avg 초기화
+
+            let kor_sum = 0; // 변수 kor_sum 초기화
+            let eng_sum = 0; // 변수 eng_sum 초기화
+            let mat_sum = 0; // 변수 mat_sum 초기화
+            let sum_sum = 0; // 변수 sum_sum 초기화
+            let avg_sum = 0; // 변수 avg_sum 초기화
+
+            let kor_avg = 0; // 변수 kor_avg 초기화
+            let eng_avg = 0; // 변수 eng_avg 초기화
+            let mat_avg = 0; // 변수 mat_avg 초기화
+            let sum_avg = 0; // 변수 sum_avg 초기화
+            let avg_avg = 0; // 변수 avg_avg 초기화
+
+            document.write("<table>");
+            
+            for(let i = 1; i < 31; i++) {
+                kor = Math.floor(Math.random() * (100 - 1 + 1) + 1); // 1~100사이 점수 국어 점수로 대입
+                eng = Math.floor(Math.random() * (100 - 1 + 1) + 1); // 1~100사이 점수 국어 영어로 대입
+                mat = Math.floor(Math.random() * (100 - 1 + 1) + 1); // 1~100사이 점수 국어 수학로 대입
+                sum = kor + eng + mat; // 총점
+                avg = Math.floor(sum / 3); // 평균
+
+                kor_sum += kor; // 국어 총합 계산
+                eng_sum += eng; // 영어 총합 계산
+                mat_sum += mat; // 수학 총합 계산
+                sum_sum += sum; // 총점 총합 계산
+                avg_sum += avg; // 평균 총합 계산
+
+                document.write("<tr><td style='text-align : left'>" + i.toString().padStart(3, '0')); // 번호 출력
+                document.write("<td>홍길" + i.toString().padStart(2, '0') + "</td>"); // 이름 출력
+                document.write("<td>" + kor + "</td>"); // 국어점수 출력
+                document.write("<td>" + eng + "</td>"); // 영어점수 출력
+                document.write("<td>" + mat + "</td>"); // 수학점수 출력
+                document.write("<td>" + sum + "</td>"); // 총합 점수 출력
+                document.write("<td>" + avg + "</td></tr>"); // 평균 점수 출력
+            }
+            kor_avg = Math.floor(kor_sum / 30); // 국어 평균 계산
+            eng_avg = Math.floor(eng_sum / 30); // 영어 평균 계산
+            mat_avg = Math.floor(mat_sum / 30); // 수학 평균 계산
+            sum_avg = Math.floor(sum_sum / 30); // 총점 평균 계산
+            avg_avg = Math.floor(avg_sum / 30); // 평균의 평균 계산
+
+            document.write("<tr><td colspan='7'><hr style='border-style : dashed'></td></tr>"); // 점선
+
+            document.write("<tr><td colspan='2' style='text-align : left'>합계</td>"); // 합계 출력
+            document.write("<td>" + kor_sum + "</td>"); // 국어 총합 출력
+            document.write("<td>" + eng_sum + "</td>"); // 영어 총합 출력
+            document.write("<td>" + mat_sum + "</td>"); // 수학 총합 출력
+            document.write("<td>" + sum_sum + "</td>"); // 총점 총합 출력
+            document.write("<td>" + avg_sum + "</td></tr>"); // 평균 총합 출력
+
+            document.write("<tr><td colspan='2' style='text-align : left'>평균</td>"); // 평균 출력
+            document.write("<td>" + kor_avg + "</td>"); // 국어 평균 출력
+            document.write("<td>" + eng_avg + "</td>"); // 영어 평균 출력
+            document.write("<td>" + mat_avg + "</td>"); // 수학 평균 출력
+            document.write("<td>" + sum_avg + "</td>"); // 총점 평균 출력
+            document.write("<td>" + avg_avg + "</td></tr>"); // 평균의 평균 출력
+
+            document.write("</table>");
+        }
+    </script>
+</head>
+<body>
+    <script>
+        header(); // 함수 header 호출
+        body(); // 함수 body 호출
+        footer(); // 함수 footer 호출
+    </script>
+</body>
+</html>
