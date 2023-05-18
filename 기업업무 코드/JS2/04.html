@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- 슬라이드 10 : 익명 함수로 이벤트 리스너 작성 -->
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,22 +10,24 @@
     <script>
         function init() { // 함수 init()
             p = document.getElementById("p"); // p라는 id를 갖고 있는 요소를 찾고 p에 return해준다.
-            p.onmouseover = function() { // 익명 함수
+            p.onmouseover = function () { // 익명 함수
                 this.style.backgroundColor = "orchid";
             };
             p.addEventListener("mouseout",
-                function() {this.style.backgroundColor = "white";} // 익명 함수
+                function () { this.style.backgroundColor = "white"; } // 익명 함수
             );
-// 익명함수를 쓰는 이유 : 
-// 함수를 여러번 쓸 목적이라면 함수를 정의해놓고 사용하는게 좋다.
-// 하지만 한번 쓰고 말 함수라면 익명함수를 쓰는것도 나쁘지 않다.
+            // 익명함수를 쓰는 이유 : 
+            // 함수를 여러번 쓸 목적이라면 함수를 정의해놓고 사용하는게 좋다.
+            // 하지만 한번 쓰고 말 함수라면 익명함수를 쓰는것도 나쁘지 않다.
         }
     </script>
 </head>
+
 <body onload="init()">
     <!-- <body onload="init()"> : 페이지가 다 로드되고나서 init()을 실행한다. -->
     <h3>익명 함수로 이벤트 리스너 작성</h3> <!-- font크기를 1~6까지 조절하는 hn태그 -->
     <hr> <!-- 구분선 태그 hr -->
     <p id="p">마우스 올리면 orchid 색으로 변경</p> <!-- id가 p인 문단태그 p -->
 </body>
+
 </html>
