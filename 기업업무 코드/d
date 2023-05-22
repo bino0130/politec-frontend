@@ -1,0 +1,81 @@
+-- 수학 문제별 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a01=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a01=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a01 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a02=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a02=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a02 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a03=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a03=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a03 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a04=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a04=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a04 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a05=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a05=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a05 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a06=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a06=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a06 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a07=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a07=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a07 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a08=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a08=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a08 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a09=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a09=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a09 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a10=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a10=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a10 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a11=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a11=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a11 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a12=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a12=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a12 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a13=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a13=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a13 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a14=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a14=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a14 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a15=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a15=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a15 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a16=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a16=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a16 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a17=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a17=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a17 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a18=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a18=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a18 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a19=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a19=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a19 득점자수, 득점률
+select 
+(select count(*) from scoring where subjectID=3 and a20=1) as 득점자수, 
+(select count(*) from scoring where subjectID=3 and a20=1)/count(*) * 100 as 득점률 
+from scoring where subjectID=3; # 수학 a20 득점자수, 득점률
