@@ -5,10 +5,23 @@
 <html>
 <head>
 <style>
-    th,td {
-        text-align:center;
-        border : 1px solid black;
+    th, td {
+        text-align: center;
+        border: 1px solid black;
         border-collapse: separate;
+    }
+    a {
+        text-decoration-line : none;
+    }
+    a:hover {
+        background-color : lightblue;
+    }
+    a:visited {
+        color: magenta;
+    }
+    table {
+        margin : auto;
+        width : 1000px;
     }
 </style>
 </head>
@@ -22,17 +35,11 @@
     <th>거리</th>
 </tr>
 <% 
-File f= new File("/var/lib/tomcat9/webapps/ROOT/전국무료와이파이표준데이터.txt");
+File f = new File("/var/lib/tomcat9/webapps/ROOT/전국무료와이파이표준데이터.txt");
 BufferedReader br = new BufferedReader(new FileReader(f));
 
 String readtxt;
-String fromPT = request.getParameter("from");
-String cntPT = request.getParameter("cnt");
-String fromPT = request.getParameter("from");
-int from = Integer.parseInt(fromPT);
-int cnt = 10;
-
-if((readtxt=br.readLine())==null) {
+if ((readtxt = br.readLine()) == null) {
     out.println("빈 파일입니다.\n");
     return;
 }
@@ -46,19 +53,36 @@ List<Double> distance = new ArrayList<Double>();
 double lat = 37.3860521;
 double lng = 127.1214038;
 
-int LineCnt = 0;
-while((readtxt = br.readLine()) != null) {
-    String[] field=readtxt.split("\t");
-    double dist=Math.sqrt(Math.pow(Double.parseDouble(field[13])-lat,2)
-                    + Math.pow(Double.parseDouble(field[14])-lng,2));
-    number.add(LineCnt);
+int lineCnt = 0;
+while ((readtxt = br.readLine()) != null) {
+    String[] field = readtxt.split("\t");
+    double dist = Math.sqrt(Math.pow(Double.parseDouble(field[13]) - lat, 2)
+            + Math.pow(Double.parseDouble(field[14]) - lng, 2));
+    number.add(lineCnt);
     address.add(field[9]);
     lati.add(Double.parseDouble(field[13]));
     lngi.add(Double.parseDouble(field[14]));
     distance.add(dist);
-    LineCnt++;
+    lineCnt++;
 }
-for(int i = from; i < from+cnt; i++) {
+String fromPT = request.getParameter("from");
+String cntPT = request.getParameter("cnt");
+int from = 0;
+if (fromPT != null) {
+    from = Integer.parseInt(fromPT);
+    if (Integer.parseInt(fromPT) < 0) {
+        from = 0;
+    } else if (Integer.parseInt(fromPT) > number.size()) {
+        from = (number.size()/10) * 10;
+    }
+}
+
+int cnt = 10;
+if (cntPT != null) {
+    cnt = Integer.parseInt(cntPT);
+}
+
+for (int i = from; i < from + cnt && i < number.size(); i++) {
 %>
 <tr>
 <td><%=number.get(i) + 1%></td>
@@ -73,24 +97,57 @@ br.close();
 %>
 </table>
 <table>
-<%
-for (int i = 0; i < 10; i++){
-%>
 <tr>
-    <%-- <td><a href="wifi2.jsp?from=0&cnt=10"><<</a></td>
-    <td><a href="wifi2.jsp?from=0&cnt=10">1</a></td>
-    <td><a href="wifi2.jsp?from=10&cnt=10">2</a></td>
-    <td><a href="wifi2.jsp?from=20&cnt=10">3</a></td>
-    <td><a href="wifi2.jsp?from=30&cnt=10">4</a></td>
-    <td><a href="wifi2.jsp?from=40&cnt=10">5</a></td>
-    <td><a href="wifi2.jsp?from=50&cnt=10">6</a></td>
-    <td><a href="wifi2.jsp?from=60&cnt=10">7</a></td>
-    <td><a href="wifi2.jsp?from=70&cnt=10">8</a></td> --%>
-
-    
-    <td><a href="wifi2.jsp?from=i*10"&cnt=10">i+1</a></td>
-</tr>
+<%
+if (from==0) {
+%>
+<td><a href="wifi3.jsp?from=0&cnt=<%=cnt%>"><<</a></td>
+<td><a href="wifi3.jsp?from=0&cnt=<%=cnt%>"><</a></td>
+<%
+} else if (from!=0) {
+%>
+<td><a href="wifi3.jsp?from=0&cnt=<%=cnt%>"><<</a></td>
+<td><a href="wifi3.jsp?from=<%=from-cnt%>&cnt=<%=cnt%>"><</a></td>
 <%
 }
+int totpageNum = (int) Math.ceil((double) number.size() / cnt);
+int showPageNum = 10;
+
+int currentPage = 1;
+if (cnt > 0) {
+    currentPage = (from / cnt) + 1;
+}
+int startPage = ((currentPage - 1) / showPageNum) * showPageNum + 1;
+int endPage = startPage + showPageNum - 1;
+if (endPage > totpageNum) {
+    endPage = totpageNum;
+}
+
+for (int i = startPage; i <= endPage; i++) {
+    int nowFrom = (i - 1) * cnt;
+    int nowPage = i;
+if (nowPage == currentPage) {
 %>
+    <td><a href="wifi3.jsp?from=<%=nowFrom%>&cnt=<%=cnt%>" style="background-color:red; color:white"><%=nowPage%></a></td>
+<%
+    } else {
+%>
+    <td><a href="wifi3.jsp?from=<%=nowFrom%>&cnt=<%=cnt%>"><%=nowPage%></a></td>
+<%
+    }
+%>
+<%  
+}
+int nextPage = from + (cnt * 10);
+if (nextPage > number.size()) {
+    nextPage = (number.size() / cnt) * cnt;
+}
+%>
+<td><a href="wifi3.jsp?from=<%=nextPage%>&cnt=<%=cnt%>">></a></td>
+<td><a href="wifi3.jsp?from=<%=(number.size()/cnt)*cnt%>&cnt=<%=cnt%>">>></a></td>
+</tr>
 </table>
+</body>
+</html>
+<%-- <td><a href="wifi3.jsp?from=14820&cnt=<%=cnt%>">></a></td>
+<td><a href="wifi3.jsp?from=<%=(number.size()/10)*10%>&cnt=<%=cnt%>">>></a></td> --%>
