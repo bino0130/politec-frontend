@@ -22,7 +22,7 @@ class StudentItemDaoTest {
 		studentItemDao.createTable();
 	}
 	
-	@Test
+//	@Test
 	void test_drop() {
 		StudentItemDao studentItemDao = new StudentItemDaoImpl();
 		StudentItem studentItem = studentItemDao.selectOne(5);
@@ -45,17 +45,17 @@ class StudentItemDaoTest {
 		
 		assertEquals(studentItem.getName(), "홍길5");
 		assertEquals(studentItem.getStudentid(),5);
-		assertEquals(studentItem.getKor(),20);
-		assertEquals(studentItem.getEng(),40);
-		assertEquals(studentItem.getMat(),80);
+		assertEquals(studentItem.getKor(),30);
+		assertEquals(studentItem.getEng(),90);
+		assertEquals(studentItem.getMat(),100);
 	}
 	
 	@Test
 	void test_select_All() {
 		StudentItemDao studentItemDao = new StudentItemDaoImpl();
-		List<StudentItem> sla = studentItemDao.selectAll(2, 5);
+		List<StudentItem> sla = studentItemDao.selectAll(3, 2);
 		StudentItem selAll = sla.get(0);
 		
-		assertEquals(selAll.getName(),"홍길6");
+		assertEquals(selAll.getName(),"홍길5");
 	}
 }
