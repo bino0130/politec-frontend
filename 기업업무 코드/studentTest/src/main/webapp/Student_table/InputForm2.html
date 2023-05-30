@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+	table {
+		width : 400px;
+	}
+	
+	p {
+		text-align : center;
+	}
+	
+	.one {
+		width : 100px;
+	}
+	
+	.two {
+		width : 200px;
+	}
+	
+	.three {
+		width : 300px;
+	}
+</style>
+</head>
+<body>
+<h1>성적 조회후 정정/삭제</h1>
+<form method='post' action="showREC.jsp">
+	<table cellspacing=1 border=0>
+		<tr>
+			<td class="one"><p>조회할 학번</p></td>
+			<td class="two"><p><input type='text' name='searchID' value=''></p></td>
+			<td class="one"><input type="submit" value="조회"></td>
+		</tr>
+	</table>
+</form>
+<form>
+	<table cellspacing=1 border=1>
+		<tr>
+			<td class="one"><p>이름</p></td>
+			<td class="three"><p><input type='text' name='name' value=''></p></td>
+		</tr>
+		<tr>
+			<td class="one"><p>학번</p></td>
+			<td class="three"><p></p></td>
+		</tr>
+		<tr>
+			<td class="one"><p>국어</p></td>
+			<td class="three"><p><input type='text' name='korean' value=''></p></td>
+		</tr>
+		<tr>
+			<td class="one"><p>영어</p></td>
+			<td class="three"><p><input type='text' name='english' value=''></p></td>
+		</tr>
+		<tr>
+			<td class="one"><p>수학</p></td>
+			<td class="three"><p><input type='text' name='math' value=''></p></td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>
