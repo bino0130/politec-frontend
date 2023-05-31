@@ -15,7 +15,7 @@
 		Statement stmt = conn.createStatement(); // sql쿼리를 실행하기위한 객체 stmt 생성
 		stmt.execute("create table anotherTwice ("+ 
 				"name varchar(20)," +
-				"studentid int auto_increment primary key,"+
+				"studentid int primary key,"+
 				"kor int," +
 				"eng int," +
 				"mat int) default charset=utf8;"); // 괄호 안의 쿼리문 실행

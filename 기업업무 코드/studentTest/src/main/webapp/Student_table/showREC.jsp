@@ -11,7 +11,7 @@ String searchID = request.getParameter("searchID"); // input받은 searchID 값 
 <meta charset="UTF-8">
 <style type="text/css">
 	table {
-		width : 400px;
+		width : 600px;
 	}
 	
 	p {
@@ -37,7 +37,44 @@ String searchID = request.getParameter("searchID"); // input받은 searchID 값 
 	.right {
 		text-align : right;
 	}
+	
+	input {
+		text-align : center
+	}
 </style>
+<script>
+// 특수문자 입력 방지
+function characterCheck(obj) {
+  var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
+  var hanExp = /[ㄱ-ㅎㅏ-ㅣ]/g;
+  var engExp = /[a-zA-Z]/g;
+  var numExp = /^[0-9]+$/; // 숫자 패턴 추가
+  var num = parseInt(obj.value);
+
+  if (regExp.test(obj.value)) {
+    alert("특수문자는 입력하실 수 없습니다.");
+    obj.value = obj.value.replace(regExp, ""); // 특수문자 제거
+  } else if (hanExp.test(obj.value)) {
+    alert("한글은 사용하실 수 없습니다.");
+    obj.value = obj.value.replace(hanExp, ""); // 한글 제거
+  } else if (engExp.test(obj.value)) {
+    alert("영어는 사용하실 수 없습니다.");
+    obj.value = obj.value.replace(engExp, ""); // 영어 제거
+  } else if (obj.value !== "" && (!numExp.test(obj.value) || num < 0 || num > 100)) {
+    alert("숫자는 0부터 100 사이의 값을 입력해야 합니다.");
+    obj.value = "";
+  }
+}
+
+function nameCheck(obj) {
+	  var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=0-9]/gi;
+	  
+	  if (regExp.test(obj.value)) {
+	    alert("이름에는 특수문자와 숫자를 사용할 수 없습니다.");
+	    obj.value = obj.value.replace(regExp, ""); // 특수문자와 숫자 제거
+	  }
+	}
+</script>
 </head>
 <body>
 <%
@@ -66,17 +103,19 @@ String searchID = request.getParameter("searchID"); // input받은 searchID 값 
 	
 	if (LineCnt == 0) {
 %>
+<form method='post' action="showREC.jsp">
 	<table cellspacing=1 border=0>
 		<tr>
 			<td class="one"><p>조회할 학번</p></td>
-			<td class="two"><p><input type='text' name='searchID' value='해당학번없음' readonly></p></td>
+			<td class="two"><p><input type='text' name='searchID' value='' ></p></td>
 			<td class="one"><input type="submit" value="조회"></td>
 		</tr>
 	</table>
+</form>
 	<table cellspacing=1 border=1>
 		<tr>
 			<td class="one"><p>이름</p></td>
-			<td class="three"><p><input class="gray" type='text' name='' value='' readonly></p></td>
+			<td class="three"><p><input class="gray" type='text' name='' value='해당학번없음' readonly></p></td>
 		</tr>
 		<tr>
 			<td class="one"><p>학번</p></td>
@@ -95,15 +134,10 @@ String searchID = request.getParameter("searchID"); // input받은 searchID 값 
 			<td class="three"><p><input class="gray" type='text' name='math' value='' readonly></p></td>
 		</tr>
 	</table>
-	<table border=0>
-		<tr class="right">
-			<td><input type="submit" value="수정"></td>
-			<td><input type="submit" value="삭제"></td>
-		</tr>
-	</table>
 <%
 	} else if (LineCnt != 0) {
 %>
+<form method='post' action="showREC.jsp">
 	<table cellspacing=1 border=0>
 		<tr>
 			<td class="one"><p>조회할 학번</p></td>
@@ -111,36 +145,46 @@ String searchID = request.getParameter("searchID"); // input받은 searchID 값 
 			<td class="one"><input type="submit" value="조회"></td>
 		</tr>
 	</table>
+</form>
+<form method='post'>
 	<table cellspacing=1 border=1>
 		<tr>
 			<td class="one"><p>이름</p></td>
-			<td class="three"><p><input type='text' name='name' value='<%=name%>'></p></td>
+			<td class="three"><p><input type='text' name='name' value='<%=name%>' onkeyup="nameCheck(this)" onkeydown="nameCheck(this)" required></p></td>
 		</tr>
 		<tr>
 			<td class="one"><p>학번</p></td>
-			<td class="three"><p><input type='text' name='studentID' value='<%=id%>'></p></td>
+			<td class="three"><p><input type='text' name='studentID' value='<%=id%>' readonly></p></td>
 		</tr>
 		<tr>
 			<td class="one"><p>국어</p></td>
-			<td class="three"><p><input type='text' name='korean' value='<%=kor%>'></p></td>
+			<td class="three"><p><input type='text' name='korean' value='<%=kor%>' onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></p></td>
 		</tr>
 		<tr>
 			<td class="one"><p>영어</p></td>
-			<td class="three"><p><input type='text' name='english' value='<%=eng%>'></p></td>
+			<td class="three"><p><input type='text' name='english' value='<%=eng%>' onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></p></td>
 		</tr>
 		<tr>
 			<td class="one"><p>수학</p></td>
-			<td class="three"><p><input type='text' name='math' value='<%=mat%>'></p></td>
+			<td class="three"><p><input type='text' name='math' value='<%=mat%>' onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></p></td>
 		</tr>
 	</table>
 	<table border=0>
 		<tr class="right">
-			<td><input type="submit" value="수정"></td>
-			<td><input type="submit" value="삭제"></td>
+			<td style="width : 70%;">
+				<input type="submit" value="수정" formaction="./updateDB.jsp"/>
+			</td>
+			<td style="width : 30%;">
+				<input type="submit" value="삭제" formaction="./deleteDB.jsp"/>
+			</td>
 		</tr>
 	</table>
+</form>	
 <%
 	}
+	rset.close();
+	stmt.close(); // 리소스 정리
+	conn.close(); // 리소스 정리
 %>
 </body>
 </html>

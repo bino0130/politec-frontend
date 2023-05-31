@@ -14,15 +14,16 @@ try {
     
     String deleteQuery = "DELETE FROM anotherTwice WHERE studentid > 0;";
     stmt.executeUpdate(deleteQuery);
+    int x = 209900;
     
     for (int i = 1; i <= 50; i++) {
         String name = "홍길" + i;
-        int id = i;
-        int kor = (int) (Math.random()*10) * 10 + 10;
-        int eng = (int) (Math.random()*10) * 10 + 10;
-        int mat = (int) (Math.random()*10) * 10 + 10;
+        int id = x + i;
+        int kor = (int) (Math.random() * 100) + 1;
+        int eng = (int) (Math.random() * 100) + 1;
+        int mat = (int) (Math.random() * 100) + 1;
         
-        String insertQuery = "INSERT INTO anotherTwice (name, kor, eng, mat) VALUES ('" + name + "', " + kor + ", " + eng + ", " + mat + ");";
+        String insertQuery = "INSERT INTO anotherTwice VALUES ('" + name + "', " + id + "," + kor + ", " + eng + ", " + mat + ");";
         stmt.executeUpdate(insertQuery);
     }
     
