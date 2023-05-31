@@ -1,6 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ page contentType="text/html; charset=utf-8"%>
-<%@ page import="java.sql.*, javax.sql.*,java.io.*"%>
+<%@ page import="java.sql.*, javax.sql.*,java.io.*,java.util.*"%>
 <%
 request.setCharacterEncoding("utf-8");
 String name = request.getParameter("name"); // input받은 username 값 변수에 저장
@@ -44,36 +44,30 @@ input {
 	// getConnection 안의 url을 사용해서 DriverManager클래스의 getConnection 메소드를 호출
 	Statement stmt = conn.createStatement(); // sql쿼리를 실행하기위한 객체 stmt 생성
 	
-	int MaxId = 0;
-	String findMaxId = "select max(studentid) from anotherTwice";
-	ResultSet rset1 = stmt.executeQuery(findMaxId);
+	String searchID = "select studentid from anotherTwice";
+	ResultSet rset1 = stmt.executeQuery(searchID);
+	List<Integer> id = new ArrayList<Integer>();
+	int studentid = 0;
 	while(rset1.next()) {
-		MaxId = Integer.parseInt(rset1.getString("studentid"));
-	}
-
-	int studentId = 0;
-	String findEmptyId = "SELECT studentid FROM anotherTwice WHERE studentid BETWEEN 209901 AND 209950 ORDER BY studentid";
-	ResultSet rset2 = stmt.executeQuery(findEmptyId);
-
-	// 비어있는 학번 찾기
-	int expectedId = 209901; // 시작 학번
-	while (rset2.next()) {
-	    int currentId = Integer.parseInt(rset2.getString("studentid"));
-	    if (currentId != expectedId) {
-	        studentId = expectedId; // 비어있는 학번 설정
-	        break;
-	    }
-	    expectedId++; // 다음 예상 학번
-	}
-
-	// 비어있는 학번이 없을 경우 가장 마지막 학번 + 1 사용
-	if (studentId == 0) {
-	    studentId = MaxId + 1;
+		id.add(rset1.getInt(1));
 	}
 	
-	String insertQuery = String.format("insert into anotherTwice values ('%s', %d, %d, %d, %d)", name, studentId, Integer.parseInt(kor), Integer.parseInt(eng), Integer.parseInt(mat));
+	int min = Collections.min(id);
+	int max = Collections.max(id);
+	
+	while (min < max) {
+		min++;
+		if(!(id.contains(min))){ 
+			studentid = min;
+			break;
+		}
+	}
+	
+	if(min == max) studentid = max + 1;
+	out.println(studentid);
+	
+	String insertQuery = String.format("insert into anotherTwice values ('%s', %d, %d, %d, %d)", name, studentid, Integer.parseInt(kor), Integer.parseInt(eng), Integer.parseInt(mat));
 	stmt.executeUpdate(insertQuery);
-	
 	%>
 <form method="post" action="InputForm1.html">
 	<table cellspacing=1 border=0>
@@ -92,7 +86,7 @@ input {
 		</tr>
 		<tr>
 			<td class="one"><p>학번</p></td>
-			<td class="three"><p><%=studentId%></p></td>
+			<td class="three"><p><%=studentid%></p></td>
 		</tr>
 		<tr>
 			<td class="one"><p>국어</p></td>

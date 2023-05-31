@@ -31,6 +31,31 @@
 		text-align : center;
 	}
 </style>
+<script>
+//특수문자 입력 방지
+function characterCheck(event) {
+	var obj = event.target;
+  var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
+  var hanExp = /[ㄱ-ㅎㅏ-ㅣ]/g;
+  var engExp = /[a-zA-Z]/g;
+  var numExp = /^[0-9]+$/; // 숫자 패턴 추가
+  var num = parseInt(obj.value);
+
+  if (regExp.test(obj.value)) {
+    alert("특수문자는 입력하실 수 없습니다.");
+    obj.value = obj.value.replace(regExp, ""); // 특수문자 제거
+  } else if (hanExp.test(obj.value)) {
+    alert("한글은 사용하실 수 없습니다.");
+    obj.value = obj.value.replace(hanExp, ""); // 한글 제거
+  } else if (engExp.test(obj.value)) {
+    alert("영어는 사용하실 수 없습니다.");
+    obj.value = obj.value.replace(engExp, ""); // 영어 제거
+  } else if (obj.value !== "" && (!numExp.test(obj.value) || num <= 999999 || num > 209899)) {
+    alert("학번은 209900부터 입니다.");
+    obj.value = "";
+  }
+}
+</script>
 </head>
 <body>
 <h1>성적 조회후 정정/삭제</h1>
@@ -38,7 +63,8 @@
 	<table cellspacing=1 border=0>
 		<tr>
 			<td class="one"><p>조회할 학번</p></td>
-			<td class="two"><p><input type='text' name='searchID' value='' style="background-color:white";></p></td>
+			<td class="two"><p><input type="text" pattern="^(?:999999|[1-9][0-9]{0,8}?|0)$" name='searchID' 
+            value='' title="0~999999까지의 정수를 입력하세요" style="background-color:white"; required></p></td>
 			<td class="one"><input type="submit" value="조회"></td>
 		</tr>
 	</table>
