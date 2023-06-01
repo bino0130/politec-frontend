@@ -3,12 +3,13 @@
 
 <html>
 <head>
-<%
+<%!
 String call1() {
     String a = "abc";
     String b = "efg";
     return a + b;
 }
+
 int call2() {
 	int a = 1;
 	int b = 2;
