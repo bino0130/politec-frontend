@@ -12,7 +12,7 @@
 	<div style="display: flex; width: 100%;"> <!-- div 태그에 display : flex, width : 100% 적용 -->
         <iframe src="./menu.html" style="height: 100vh; width: 30%; border: 0;">
             aaa</iframe>
-        <iframe src="./intro.html" name="content" style="width: 1000px;  height: 100vh; flex-grow: 1; 
+        <iframe src="./intro.jsp" name="content" style="width: 1000px;  height: 100vh; flex-grow: 1; 
         border: 0;">bbb</iframe>
     </div>
     <!-- 큰 틀에서 한 쪽 구역은 menu.html을, 다른 한 쪽에서는 intro.html을 호출하다가 

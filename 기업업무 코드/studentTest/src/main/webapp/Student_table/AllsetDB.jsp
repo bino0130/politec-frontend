@@ -16,7 +16,7 @@ try {
     stmt.executeUpdate(deleteQuery);
     int x = 209900;
     
-    for (int i = 1; i <= 50; i++) {
+    for (int i = 1; i <= 300; i++) {
         String name = "홍길" + i;
         int id = x + i;
         int kor = (int) (Math.random() * 100) + 1;

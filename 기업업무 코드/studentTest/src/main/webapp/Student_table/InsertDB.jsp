@@ -64,7 +64,6 @@ input {
 	}
 	
 	if(min == max) studentid = max + 1;
-	out.println(studentid);
 	
 	String insertQuery = String.format("insert into anotherTwice values ('%s', %d, %d, %d, %d)", name, studentid, Integer.parseInt(kor), Integer.parseInt(eng), Integer.parseInt(mat));
 	stmt.executeUpdate(insertQuery);
