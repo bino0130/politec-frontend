@@ -3,11 +3,34 @@
 <%@ page import = "java.sql.*, javax.sql.*,java.io.*,java.util.*" %>
 <%
 request.setCharacterEncoding("utf-8");
-String name = request.getParameter("name");
-String changeID = request.getParameter("studentID"); // input받은 searchID 값 변수에 저장
-String kor = request.getParameter("korean");
-String eng = request.getParameter("english");
-String mat = request.getParameter("math");
+int Nullcheck = request.getParameter("studentID") != null ? 1 : 0;
+
+String name = "";
+int studentID = 0;
+int korean = 0;
+int english = 0;
+int math = 0;
+
+if(Nullcheck != 0){
+   name = request.getParameter("name");
+   studentID = Integer.parseInt(request.getParameter("studentID"));
+   korean = Integer.parseInt(request.getParameter("korean"));
+   english = Integer.parseInt(request.getParameter("english"));
+   math = Integer.parseInt(request.getParameter("math"));
+
+   // 세션에 값저장
+   session.setAttribute("name", name);
+   session.setAttribute("studentID", studentID);
+   session.setAttribute("korean", korean);
+   session.setAttribute("english", english);
+   session.setAttribute("math", math);
+}else{
+   name = (String) session.getAttribute("name");
+   studentID = (int) session.getAttribute("studentID");
+   korean = (int) session.getAttribute("korean");
+   english = (int) session.getAttribute("english");
+   math = (int) session.getAttribute("math");
+}
 %>
 <!DOCTYPE html>
 <html>
@@ -68,7 +91,7 @@ String mat = request.getParameter("math");
 		List<Integer> stuRnk = new ArrayList<Integer>();
 		
 		String Querytxt1 = String.format("update anotherTwice set name='%s', kor=%d, eng=%d, mat=%d where studentid=%d"
-				,name,Integer.parseInt(kor),Integer.parseInt(eng),Integer.parseInt(mat),Integer.parseInt(changeID));
+				,name,korean,english,math,studentID);
 				stmt.execute(Querytxt1);
 		
 		String Querytxt2 = "select *, kor + eng + mat as sum , (kor + eng + mat) / 3 as avg , " +
@@ -111,10 +134,10 @@ String mat = request.getParameter("math");
 		}
 		
 		for (int i = from; i < from + cnt && i < stuName.size(); i++) { // i가 from부터 from + cnt - 1까지 +1씩 증가하는 반복문
-			if (Integer.parseInt(changeID) == stuId.get(i)) { // 수정한 학번과 출력하는 학번이 같으면
+			if (studentID == stuId.get(i)) { // 수정한 학번과 출력하는 학번이 같으면
 %>
 				<tr style="background-color:yellow;"> <%-- table row 노란색으로 색칠 --%>
-					<td><%=stuName.get(i)%></td> <%-- stuName의 i번째 인덱스 + 1 --%>
+					<td><p><a href='OneviewDB.jsp?key=<%=stuName.get(i)%>'><%=stuName.get(i)%></a></p></td>
 					<td><%=stuId.get(i)%></td> <%-- stuId의 i번째 인덱스 --%>
 					<td><%=stuKor.get(i)%></td> <%-- stuKor의 i번째 인덱스 --%>
 					<td><%=stuEng.get(i)%></td> <%-- stuEng의 i번째 인덱스 --%>
@@ -127,7 +150,7 @@ String mat = request.getParameter("math");
 			} else { // 수정한 학번과 출력하는 학번이 다르면
 %>
 				<tr> <%-- table row --%>
-					<td><%=stuName.get(i)%></td> <%-- stuName의 i번째 인덱스 + 1 --%>
+					<td><p><a href='OneviewDB.jsp?key=<%=stuName.get(i)%>'><%=stuName.get(i)%></a></p></td>
 					<td><%=stuId.get(i)%></td> <%-- stuId의 i번째 인덱스 --%>
 					<td><%=stuKor.get(i)%></td> <%-- stuKor의 i번째 인덱스 --%>
 					<td><%=stuEng.get(i)%></td> <%-- stuEng의 i번째 인덱스 --%>
@@ -161,14 +184,15 @@ String mat = request.getParameter("math");
 		// <<, < 계산, 출력하는 부분
 		if (from == 0) { // from이 0이라면
 		%>
+
 	<tr>
-		<td><a href="AllviewDB.jsp?from=0&cnt=<%=cnt%>">&lt;&lt;</a></td> <%-- << : 1페이지로 이동 --%>
-		<td><a href="AllviewDB.jsp?from=0&cnt=<%=cnt%>">&lt;</a></td>  <%-- < : 1페이지로 이동 --%>
+		<td><a href="updateDB.jsp?from=0&cnt=<%=cnt%>">&lt;&lt;</a></td> <%-- << : 1페이지로 이동 --%>
+		<td><a href="updateDB.jsp?from=0&cnt=<%=cnt%>">&lt;</a></td>  <%-- < : 1페이지로 이동 --%>
 		<%
 		} else if (from!=0) { // from이 0이 아니면
 		%>
-		<td><a href="AllviewDB.jsp?from=0&cnt=<%=cnt%>">&lt;&lt;</a></td> <%-- << : 1페이지로 이동 --%>
-		<td><a href="AllviewDB.jsp?from=<%=beforePage%>&cnt=<%=cnt%>">&lt;</a></td> <%-- << : 1페이지 앞으로 이동 --%>
+		<td><a href="updateDB.jsp?from=0&cnt=<%=cnt%>">&lt;&lt;</a></td> <%-- << : 1페이지로 이동 --%>
+		<td><a href="updateDB.jsp?from=<%=beforePage%>&cnt=<%=cnt%>">&lt;</a></td> <%-- << : 1페이지 앞으로 이동 --%>
 		<%
 		}
 		if (endPage > totpageNum) { // endPage가 totpageNum보다 크다면
@@ -180,12 +204,12 @@ String mat = request.getParameter("math");
 		    int nowPage = i; // nowPage = i
 		if (nowPage == currentPage) { // nowPage가 현재페이지와 같다면
 		%>
-		    <td><a href="AllviewDB.jsp?from=<%=nowFrom%>&cnt=<%=cnt%>" style="background-color:red; color:white"><%=nowPage%></a></td>
+		    <td><a href="updateDB.jsp?from=<%=nowFrom%>&cnt=<%=cnt%>" style="background-color:red; color:white"><%=nowPage%></a></td>
 		    <%--현재 페이지 출력하고 알아볼 수 있게 css 입힘--%>
 		<%
 		    } else { // nowPage가 현재페이지와 다르다면
 		%>
-		    <td><a href="AllviewDB.jsp?from=<%=nowFrom%>&cnt=<%=cnt%>"><%=nowPage%></a></td>
+		    <td><a href="updateDB.jsp?from=<%=nowFrom%>&cnt=<%=cnt%>"><%=nowPage%></a></td>
 		    <%-- 페이지 출력 --%>
 		<%
 		    }
@@ -201,10 +225,9 @@ String mat = request.getParameter("math");
 	    //	nextPage = (stuName.size() / cnt) * cnt - cnt;
 		//}		
 		%>
-		<td><a href="AllviewDB.jsp?from=<%=nextPage%>&cnt=<%=cnt%>">&gt;</a></td> <%-- > 출력 --%>
-		<td><a href="AllviewDB.jsp?from=<%=(stuName.size()/cnt)*cnt%>&cnt=<%=cnt%>">&gt;&gt;</a></td> <%-- >> 출력 --%>
+		<td><a href="updateDB.jsp?from=<%=nextPage%>&cnt=<%=cnt%>">&gt;</a></td> <%-- > 출력 --%>
+		<td><a href="updateDB.jsp?from=<%=(stuName.size()/cnt)*cnt%>&cnt=<%=cnt%>">&gt;&gt;</a></td> <%-- >> 출력 --%>
 	</tr>
-		
 <%
 		rset.close(); // 리소스 정리
 		stmt.close(); // 리소스 정리

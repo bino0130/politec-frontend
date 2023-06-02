@@ -99,7 +99,7 @@
 		for (int i = from; i < from + cnt && i < stuName.size(); i++) { // i가 from부터 from + cnt - 1까지 +1씩 증가하는 반복문
 %>
 			<tr> <%-- table row --%>
-			<td><%=stuName.get(i)%></td> <%-- stuName의 i번째 인덱스 + 1 --%>
+			<td><p><a href='OneviewDB.jsp?key=<%=stuName.get(i)%>'><%=stuName.get(i)%></a></p></td>
 			<td><%=stuId.get(i)%></td> <%-- stuId의 i번째 인덱스 --%>
 			<td><%=stuKor.get(i)%></td> <%-- stuKor의 i번째 인덱스 --%>
 			<td><%=stuEng.get(i)%></td> <%-- stuEng의 i번째 인덱스 --%>

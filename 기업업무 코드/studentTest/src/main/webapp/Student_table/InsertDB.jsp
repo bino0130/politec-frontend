@@ -46,26 +46,15 @@ input {
 	
 	String searchID = "select studentid from anotherTwice";
 	ResultSet rset1 = stmt.executeQuery(searchID);
-	List<Integer> id = new ArrayList<Integer>();
-	int studentid = 0;
-	while(rset1.next()) {
-		id.add(rset1.getInt(1));
+	
+	int min = 0;
+	ResultSet settotal = stmt.executeQuery("select min(studentid) as minNum from anotherTwice where (studentid+1) not in (select studentid from anotherTwice);");
+	while(settotal.next()) {
+		min = settotal.getInt(1) + 1;
 	}
+
 	
-	int min = Collections.min(id);
-	int max = Collections.max(id);
-	
-	while (min < max) {
-		min++;
-		if(!(id.contains(min))){ 
-			studentid = min;
-			break;
-		}
-	}
-	
-	if(min == max) studentid = max + 1;
-	
-	String insertQuery = String.format("insert into anotherTwice values ('%s', %d, %d, %d, %d)", name, studentid, Integer.parseInt(kor), Integer.parseInt(eng), Integer.parseInt(mat));
+	String insertQuery = String.format("insert into anotherTwice values ('%s', %d, %d, %d, %d)", name, min, Integer.parseInt(kor), Integer.parseInt(eng), Integer.parseInt(mat));
 	stmt.executeUpdate(insertQuery);
 	%>
 <form method="post" action="InputForm1.html">
@@ -85,7 +74,7 @@ input {
 		</tr>
 		<tr>
 			<td class="one"><p>학번</p></td>
-			<td class="three"><p><%=studentid%></p></td>
+			<td class="three"><p><%=min%></p></td>
 		</tr>
 		<tr>
 			<td class="one"><p>국어</p></td>
