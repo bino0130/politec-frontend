@@ -6,6 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.blue1 {
+		width : 600px;
+	}
+	
+	#up {
+		width : 700px;
+		height : 350px;
+		border : 1px solid green;
+	}
+</style>
 </head>
 <body>
 <%
@@ -15,13 +26,15 @@
 	// getConnection 안의 url을 사용해서 DriverManager클래스의 getConnection 메소드를 호출
 	Statement stmt = conn.createStatement(); // sql쿼리를 실행하기위한 객체 stmt 생성
 	
-	
 %>
-
-	<table>
+<div id=up>
+	<table class="blue1">
 		<tr>
-			<td>
+			<td style="text-align:center;">후보등록</td>
+			<td style="text-align:center;">투표</td>
+			<td style="text-align:center;";>개표결과</td>
 		</tr>
 	</table>
+</div>
 </body>
 </html>
