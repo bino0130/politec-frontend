@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>후보등록 - 등록</title>
+<title>개표결과 - 득표율</title>
 <style>
 .table-row {
 	border-bottom : 1px solid black;
@@ -64,9 +64,9 @@
 		<form  method='post'>
 			<table class="blue1">
 				<tr>
-					<td><input class="menu" style='background-color: yellow; cursor: pointer;' type='submit' value='후보등록' formaction="./A_01.jsp" /></td>
+					<td><input class="menu" style='background-color: white; cursor: pointer;' type='submit' value='후보등록' formaction="./A_01.jsp" /></td>
 					<td><input class="menu" style='background-color: white; cursor: pointer;' type='submit' value='투표' formaction="./B_01.jsp" /></td>
-					<td><input class="menu" style='background-color: white; cursor: pointer;' type='submit' value='개표결과' formaction="./C_01.jsp" /></td>
+					<td><input class="menu" style='background-color: yellow; cursor: pointer;' type='submit' value='개표결과' formaction="./C_01.jsp" /></td>
 				</tr>
 			</table>
 		</form>

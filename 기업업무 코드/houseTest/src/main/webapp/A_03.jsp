@@ -3,14 +3,14 @@
 <%@ page import = "java.sql.*, javax.sql.*,java.io.*,java.util.*" %>
 <%
 request.setCharacterEncoding("utf-8");
-String name = request.getParameter("deleteName"); // input받은 name 값 변수에 저장
-String id = request.getParameter("deleteId"); // input받은 id 값 변수에 저장
+String name = request.getParameter("addName"); // input받은 name 값 변수에 저장
+String id = request.getParameter("addId"); // input받은 id 값 변수에 저장
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>후보등록 - 등록결과(삭제)</title>
+<title>후보등록 - 등록결과(추가)</title>
 <style>
 .blue1 {
 	width: 350px;
@@ -41,7 +41,7 @@ String id = request.getParameter("deleteId"); // input받은 id 값 변수에 �
 	// localhost : 서버 IP주소, 3306 : 포트번호, kopo10 : DB 이름, root : user, kopoctc : passwd 
 	// getConnection 안의 url을 사용해서 DriverManager클래스의 getConnection 메소드를 호출
 	Statement stmt = conn.createStatement(); // sql쿼리를 실행하기위한 객체 stmt 생성
-	String Querytxt = String.format("delete from kiho where id = %d",Integer.parseInt(id));
+	String Querytxt = String.format("insert into kiho value (%d, '%s')",Integer.parseInt(id), name);
 	stmt.execute(Querytxt);
 	%>
 	<div style="border:1px solid black; width : 900px; height : 800px; margin: auto;">
@@ -59,7 +59,7 @@ String id = request.getParameter("deleteId"); // input받은 id 값 변수에 �
 		
 		<span style="margin-left: 140px;">
 		<%
-			out.println("후보등록 결과 : 기호 " + id + "번 " + name + " 후보가 삭제되었습니다.");
+			out.println("후보등록 결과 : 기호 " + id + "번 " + name + " 후보가 추가되었습니다.");
 		%>
 		</span>
 		</div>
