@@ -89,16 +89,15 @@
 					<td style='display: flex; justify-content: flex-end;'><input style='cursor:pointer;' class='button' type='submit' value='삭제' formaction='./A_02.jsp'/></td>
 					</tr>
 					</form>
-		<form>
 				<%
 				}
 				%>
+		<form>
 				<tr>
-					<td style='width: 100px;'>기호번호 : <input type='text' name='addId' value='' style='width: 50px;'></td>
+					<td style='width: 140px;'>기호번호 : <input type='text' name='addId' value='' style='width: 50px;'></td>
 					<td colspan='3' style='width: 180px;'>후보명 : <input type='text' name='addName' value='' style='width: 100px;'></td>
 					<td style='display: flex; justify-content: flex-end;'><input style='cursor:pointer;' class='button' type='submit' value='추가' formaction='./A_03.jsp'/></td>
 				</tr>
-				
 		</form>
 			</table>
 		

@@ -58,7 +58,7 @@ select {
 	// getConnection 안의 url을 사용해서 DriverManager클래스의 getConnection 메소드를 호출
 	Statement stmt = conn.createStatement(); // sql쿼리를 실행하기위한 객체 stmt 생성
 	%>
-	<div style="border:1px solid black; width : 900px; height : 800px;">
+	<div style="border:1px solid black; width : 900px; height : 800px; margin: auto;">
 		<div id=up>
 		
 		<form  method='post'>
@@ -92,15 +92,15 @@ select {
 					</td>
 					<td style="text-align : center;">
 						<select name="age" required>
-							<option value="10대">10대</option>
-							<option value="20대">20대</option>
-							<option value="30대">30대</option>
-							<option value="40대">40대</option>
-							<option value="50대">50대</option>
-							<option value="60대">60대</option>
-							<option value="70대">70대</option>
-							<option value="80대">80대</option>
-							<option value="90대">90대</option>
+							<option value="10">10대</option>
+							<option value="20">20대</option>
+							<option value="30">30대</option>
+							<option value="40">40대</option>
+							<option value="50">50대</option>
+							<option value="60">60대</option>
+							<option value="70">70대</option>
+							<option value="80">80대</option>
+							<option value="90">90대</option>
 						</select>
 					</td>
 					<td style="text-align : center;"><input style='cursor:pointer;' class="button" type="submit"  value='투표하기' formaction="./B_02.jsp"/></td>

@@ -30,7 +30,6 @@ String id = request.getParameter("addId"); // input받은 id 값 변수에 저�
 	height: 100px;
 	border: 1px solid green;
 	margin : auto;
-	margin-top: 600px;
 }
 </style>
 </head>

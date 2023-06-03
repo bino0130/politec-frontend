@@ -3,8 +3,8 @@
 <%@ page import = "java.sql.*, javax.sql.*,java.io.*,java.util.*" %>
 <%
 request.setCharacterEncoding("utf-8");
-String name = request.getParameter("addName"); // input받은 name 값 변수에 저장
-String id = request.getParameter("addId"); // input받은 id 값 변수에 저장
+String hubo = request.getParameter("hubo"); // input받은 name 값 변수에 저장
+String age = request.getParameter("age"); // input받은 id 값 변수에 저장
 %>
 <!DOCTYPE html>
 <html>
@@ -30,7 +30,6 @@ String id = request.getParameter("addId"); // input받은 id 값 변수에 저�
 	height: 100px;
 	border: 2px solid green;
 	margin : auto;
-	margin-top: 600px;
 }
 </style>
 </head>
@@ -41,10 +40,10 @@ String id = request.getParameter("addId"); // input받은 id 값 변수에 저�
 	// localhost : 서버 IP주소, 33060 : 포트번호, kopo10 : DB 이름, root : user, kopoctc : passwd 
 	// getConnection 안의 url을 사용해서 DriverManager클래스의 getConnection 메소드를 호출
 	Statement stmt = conn.createStatement(); // sql쿼리를 실행하기위한 객체 stmt 생성
-	//String Querytxt = String.format("insert into kiho value (%d, '%s')",Integer.parseInt(id), name);
-	//stmt.execute(Querytxt);
+	String Querytxt = String.format("insert into tupyo value (%d, %d)",Integer.parseInt(hubo), Integer.parseInt(age));
+	stmt.execute(Querytxt);
 	%>
-	<div style="border:1px solid black; width : 900px; height : 800px;">
+	<div style="border:1px solid black; width : 900px; height : 800px; margin: auto;}">
 		<div id=down>
 		
 		<form method='post'>
@@ -57,7 +56,7 @@ String id = request.getParameter("addId"); // input받은 id 값 변수에 저�
 			</table>
 		</form>
 		
-		<span style="margin-left: 140px;">
+		<span style="margin-left: 250px;">
 		<%
 			out.println("투표 결과 : 투표하였습니다.");
 		%>
