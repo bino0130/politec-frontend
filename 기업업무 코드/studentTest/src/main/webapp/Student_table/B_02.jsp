@@ -28,7 +28,7 @@ String age = request.getParameter("age"); // input받은 id 값 변수에 저장
 #down {
 	width: 700px;
 	height: 100px;
-	border: 2px solid green;
+	border: 1px solid green;
 	margin : auto;
 }
 </style>

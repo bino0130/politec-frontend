@@ -67,17 +67,23 @@ function characterCheck(obj) {
 }
 
 function nameCheck(obj) {
-	  var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=0-9]/gi;
-	  
-	  if (regExp.test(obj.value)) {
-	    alert("이름에는 특수문자와 숫자를 사용할 수 없습니다.");
-	    obj.value = obj.value.replace(regExp, ""); // 특수문자와 숫자 제거
+	  var regExp = /[~`!@#$%^&*()\-_=+[{\]}\\|;:'",<.>/?]/gi;
+
+	  if (obj.value.length > 10) {
+	    alert("이름은 최대 10자까지 입력할 수 있습니다.");
+	    obj.value = obj.value.substring(0, 10); // 최대 길이만큼 잘라내기
 	  }
-	}
+
+	  if (regExp.test(obj.value)) {
+	    alert("이름에는 특수문자를 사용할 수 없습니다.");
+	    obj.value = obj.value.replace(regExp, ""); // 특수문자 제거
+	  }
+}
 </script>
 </head>
 <body>
 <%
+	try {
 	Class.forName("com.mysql.cj.jdbc.Driver");// Mysql의 버전이 8.0이므로 JDBC 이렇게 작성
 	Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:33060/kopo10", "root", "kopoctc");
 	// localhost : 서버 IP주소, 33060 : 포트번호, kopo10 : DB 이름, root : user, kopoctc : passwd 
@@ -141,7 +147,7 @@ function nameCheck(obj) {
 	<table cellspacing=1 border=0>
 		<tr>
 			<td class="one"><p>조회할 학번</p></td>
-			<td class="two"><p><input type='text' name='searchID' value='<%=searchID%>'></p></td>
+			<td class="two"><p><input type='text' name='searchID' value='<%=searchID%>' onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></p></td>
 			<td class="one"><input type="submit" value="조회"></td>
 		</tr>
 	</table>
@@ -185,6 +191,9 @@ function nameCheck(obj) {
 	rset.close();
 	stmt.close(); // 리소스 정리
 	conn.close(); // 리소스 정리
+	} catch (SQLSyntaxErrorException e) {
+		out.println("테이블이 생성되지 않았습니다. 테이블을 생성해주세요.");
+	}
 %>
 </body>
 </html>

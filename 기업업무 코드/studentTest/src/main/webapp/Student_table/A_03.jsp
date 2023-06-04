@@ -35,6 +35,7 @@ String id = request.getParameter("addId"); // input받은 id 값 변수에 저�
 </head>
 <body>
 	<%
+	try {
 	Class.forName("com.mysql.cj.jdbc.Driver");// Mysql의 버전이 8.0이므로 JDBC 이렇게 작성
 	Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:33060/kopo10", "root", "kopoctc");
 	// localhost : 서버 IP주소, 33060 : 포트번호, kopo10 : DB 이름, root : user, kopoctc : passwd 
@@ -43,7 +44,7 @@ String id = request.getParameter("addId"); // input받은 id 값 변수에 저�
 	String Querytxt = String.format("insert into kiho value (%d, '%s')",Integer.parseInt(id), name);
 	stmt.execute(Querytxt);
 	%>
-	<div style="border:1px solid black; width : 900px; height : 800px;">
+	<div style="border:1px solid black; width : 900px; height : 800px; margin: auto;">
 		<div id=down>
 		
 		<form method='post'>
@@ -59,6 +60,9 @@ String id = request.getParameter("addId"); // input받은 id 값 변수에 저�
 		<span style="margin-left: 140px;">
 		<%
 			out.println("후보등록 결과 : 기호 " + id + "번 " + name + " 후보가 추가되었습니다.");
+	} catch (SQLIntegrityConstraintViolationException e) {
+	    out.println("중복된 기호번호입니다. 다른 기호번호를 선택해주세요.");
+	}
 		%>
 		</span>
 		</div>

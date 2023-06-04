@@ -43,7 +43,7 @@ String id = request.getParameter("deleteId"); // input받은 id 값 변수에 �
 	String Querytxt = String.format("delete from kiho where id = %d",Integer.parseInt(id));
 	stmt.execute(Querytxt);
 	%>
-	<div style="border:1px solid black; width : 900px; height : 800px;">
+	<div style="border:1px solid black; width : 900px; height : 800px; margin: auto;">
 		<div id=down>
 		
 		<form method='post'>

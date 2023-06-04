@@ -40,7 +40,7 @@
 
 #up {
 	width: 700px;
-	height: 600px;
+	height: 650px;
 	border: 1px solid green;
 	margin: auto;
 }
@@ -89,30 +89,32 @@
 				</table>
 			</form>
 
-			<span>후보 별 득표율</span>
-			<table class="printVote">
-				<%
-				while (rset.next()) {
-					id = rset.getInt(1);
-					name = rset.getString(2);
-					countId = rset.getInt(3);
-					printPercent = rset.getDouble(4);
-				%>
-				<tr style="border-bottom: 1px solid black;">
-					<td style="width: 20%; border: 1px solid black;">
-						<p><%=id%><%=name%></p> <input type="hidden" name="<%=id%>">
-					</td>
-					<td style="width: 80%;">
-						<div style="display: inline-block; width: 80%;">
-							<img src="bar1.jpg" alt="bar"
-								style="width:<%=printPercent%>%; height: 20px;">
-						</div> <span><%=countId%> (<%=printPercent%>%) 
-					</td>
-				</tr>
-				<%
-				}
-				%>
-			</table>
+			<br><span style="margin-left: 50px;">후보 별 득표율</span><br><br>
+			<form action="C_02.jsp">
+				<table class="printVote">
+					<%
+					while (rset.next()) {
+						id = rset.getInt(1);
+						name = rset.getString(2);
+						countId = rset.getInt(3);
+						printPercent = rset.getDouble(4);
+					%>
+					<tr style="border-bottom: 1px solid black;">
+						<td style="width: 20%; border: 1px solid black;">
+							<p><a style="text-decoration:none; color:black;" href="C_02.jsp?id=<%=id%>&name=<%=name%>"><%=id%>. <%=name%></a></p>
+						</td>
+						<td style="width: 80%;">
+							<div style="display: flex; align-items: center;">
+                    	 <p style="background-color: #ff0000; width: <%=printPercent%>%; height:20px; margin: 0;"></p>
+                    	 <span style="margin-left: 10px;"><%=countId%>(<%=printPercent%>%)</span>
+                    	 </div>
+						</td>
+					</tr>
+					<%
+						}
+					%>
+				</table>
+			</form>
 
 		</div>
 	</div>
