@@ -58,7 +58,7 @@
 	// getConnection 안의 url을 사용해서 DriverManager클래스의 getConnection 메소드를 호출
 	Statement stmt = conn.createStatement(); // sql쿼리를 실행하기위한 객체 stmt 생성
 	%>
-	<div style="border:1px solid black; width : 900px; height : 800px;">
+	<div style="border:1px solid black; width : 900px; height : 800px; margin: auto;">
 		<div id=up>
 		
 		<form  method='post'>

@@ -16,7 +16,7 @@
 .menu {
 	width: 100%;
 	height: 35px;
-	border: 2px solid blue;
+	border: 1px solid blue;
 	font-size: 25px;
 }
 

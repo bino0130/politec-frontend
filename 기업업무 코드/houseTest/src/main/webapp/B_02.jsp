@@ -28,9 +28,8 @@ String age = request.getParameter("age"); // input받은 id 값 변수에 저장
 #down {
 	width: 700px;
 	height: 100px;
-	border: 2px solid green;
+	border: 1px solid green;
 	margin : auto;
-	margin-top: 600px;
 }
 </style>
 </head>
@@ -41,7 +40,7 @@ String age = request.getParameter("age"); // input받은 id 값 변수에 저장
 	// localhost : 서버 IP주소, 3306 : 포트번호, kopo10 : DB 이름, root : user, kopoctc : passwd 
 	// getConnection 안의 url을 사용해서 DriverManager클래스의 getConnection 메소드를 호출
 	Statement stmt = conn.createStatement(); // sql쿼리를 실행하기위한 객체 stmt 생성
-	String Querytxt = String.format("insert into voteTable value (%d, %d)",Integer.parseInt(hubo), Integer.parseInt(age));
+	String Querytxt = String.format("insert into tupyo value (%d, %d)",Integer.parseInt(hubo), Integer.parseInt(age));
 	stmt.execute(Querytxt);
 	%>
 	<div style="border:1px solid black; width : 900px; height : 800px; margin: auto;}">
