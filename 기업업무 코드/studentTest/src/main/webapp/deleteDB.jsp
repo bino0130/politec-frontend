@@ -62,7 +62,7 @@ String mat = request.getParameter("math"); // input받은 math 값 변수에 저
 		
 		// 전달받은 학번과 일치하는 데이터를 찾아 삭제하는 쿼리
 		String Querytxt1 = String.format("delete from anotherTwice where studentid=%d",Integer.parseInt(changeID));
-		stmt.execute(Querytxt1); // 쿼리 시랳ㅇ
+		stmt.execute(Querytxt1); // 쿼리 실행
 		
 		// 데이터 삭제 후 나머지 전체 데이터 출력하는 쿼리
 		String Querytxt2 = "select *, kor + eng + mat as sum , (kor + eng + mat) / 3 as avg , " +
@@ -171,17 +171,16 @@ String mat = request.getParameter("math"); // input받은 math 값 변수에 저
 		%>
 		<%  
 		}
+		// 데이터 개수 % cnt의 나머지가 0이면 maxPage를 데이터 개수 / cnt로 설정하고, 0이 아니면 데이터 개수 / cnt + 1로 설정한다.
+		int maxPage = (stuName.size() % cnt == 0) ? (stuName.size() / cnt) : (stuName.size() / cnt) + 1;
+				
 		int nextPage = from + (cnt * 10); // 다음 페이지 구하는 변수 nextPage
-		if (nextPage > stuName.size()) { // nextPage가 총 데이터 개수보다 크다면
-		    nextPage = (stuName.size() / cnt) * cnt; // nextPage = (numbersize / 10) * 10
-		}
-		//int nextPage = from + (cnt * 10) - cnt; // 다음 페이지 구하는 변수 nextPage
-		//if (nextPage >= stuName.size()) {
-	    //	nextPage = (stuName.size() / cnt) * cnt - cnt;
-		//}		
+		if (nextPage > (maxPage - 1) * cnt) { // 다음 페이지가 최대 페이지보다 클때
+			nextPage = (maxPage - 1) * cnt; // 다음 페이지를 최대 페이지로 설정
+		}	
 		%>
 		<td><a href="AllviewDB.jsp?from=<%=nextPage%>&cnt=<%=cnt%>">&gt;</a></td> <%-- > 출력 --%>
-		<td><a href="AllviewDB.jsp?from=<%=(stuName.size()/cnt)*cnt%>&cnt=<%=cnt%>">&gt;&gt;</a></td> <%-- >> 출력 --%>
+		<td><a href="AllviewDB.jsp?from=<%=maxPage * cnt - cnt%>&cnt=<%=cnt%>">&gt;&gt;</a></td> <%-- >> 출력 --%>
 	</tr>
 <%
 		rset.close(); // 리소스 정리

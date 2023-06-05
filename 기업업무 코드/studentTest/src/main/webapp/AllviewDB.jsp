@@ -165,17 +165,16 @@
 		%>
 		<%  
 		}
+		// 데이터 개수 % cnt의 나머지가 0이면 maxPage를 데이터 개수 / cnt로 설정하고, 0이 아니면 데이터 개수 / cnt + 1로 설정한다.
+		int maxPage = (stuName.size() % cnt == 0) ? (stuName.size() / cnt) : (stuName.size() / cnt) + 1;
+		
 		int nextPage = from + (cnt * 10); // 다음 페이지 구하는 변수 nextPage
-		if (nextPage > stuName.size()) { // nextPage가 총 데이터 개수보다 크다면
-		    nextPage = (stuName.size() / cnt) * cnt; // nextPage = (numbersize / 10) * 10
+		if (nextPage > (maxPage - 1) * cnt) { // 다음 페이지가 최대 페이지보다 클때
+			nextPage = (maxPage - 1) * cnt; // 다음 페이지를 최대 페이지로 설정
 		}
-		//int nextPage = from + (cnt * 10) - cnt; // 다음 페이지 구하는 변수 nextPage
-		//if (nextPage >= stuName.size()) {
-	    	//nextPage = (stuName.size() / cnt) * cnt - cnt;
-		//}		
 		%>
 		<td><a href="AllviewDB.jsp?from=<%=nextPage%>&cnt=<%=cnt%>">&gt;</a></td> <%-- > 출력 --%>
-		<td><a href="AllviewDB.jsp?from=<%=(stuName.size()/cnt)*cnt%>&cnt=<%=cnt%>">&gt;&gt;</a></td> <%-- >> 출력 --%>
+		<td><a href="AllviewDB.jsp?from=<%=maxPage * cnt - cnt%>&cnt=<%=cnt%>">&gt;&gt;</a></td> <%-- >> 출력 --%>
 	</tr>
 		
 <%

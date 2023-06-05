@@ -166,10 +166,10 @@
 		<%  
 		}
 		int nextPage = from + (cnt * 10); // 다음 페이지 구하는 변수 nextPage
+		//int nextPage = from + (cnt * 10) - cnt; // 다음 페이지 구하는 변수 nextPage
 		if (nextPage > stuName.size()) { // nextPage가 총 데이터 개수보다 크다면
 		    nextPage = (stuName.size() / cnt) * cnt; // nextPage = (numbersize / 10) * 10
 		}
-		//int nextPage = from + (cnt * 10) - cnt; // 다음 페이지 구하는 변수 nextPage
 		//if (nextPage >= stuName.size()) {
 	    	//nextPage = (stuName.size() / cnt) * cnt - cnt;
 		//}		

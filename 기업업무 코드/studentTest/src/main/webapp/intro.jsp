@@ -16,19 +16,19 @@
 	// getConnection 안의 url을 사용해서 DriverManager클래스의 getConnection 메소드를 호출
 	Statement stmt = conn.createStatement(); // sql쿼리를 실행하기위한 객체 stmt 생성
 	
-	String Querytxt1 = "select * from countTable";
-	int cnt = 0;
-	ResultSet rset1 = stmt.executeQuery(Querytxt1);
-	while(rset1.next()) {
-		cnt = rset1.getInt(1);
+	String Querytxt1 = "select * from countTable"; // 방문자 수를 조회하는 쿼리
+	int cnt = 0; // int 변수 cnt = 0으로 초기화
+	ResultSet rset1 = stmt.executeQuery(Querytxt1); // 쿼리 실행
+	while(rset1.next()) { // rset이 있으면
+		cnt = rset1.getInt(1); // cnt에 getInt(1)값 대입
 	}
 	
-	cnt++;
+	cnt++; // cnt + 1
 	
-	out.println("현재 페이지 방문자 수 : " + cnt + "명 입니다");
+	out.println("현재 페이지 방문자 수 : " + cnt + "명 입니다"); // 안내 메세지 출력
 	
-	String Querytxt2 = String.format("insert into countTable value (%d)", cnt);
-	stmt.execute(Querytxt2);
+	String Querytxt2 = String.format("insert into countTable value (%d)", cnt); // cnt + 1된 데이터 테이블에 입력하는 쿼리
+	stmt.execute(Querytxt2); // 쿼리 실행
 %>
 </body>
 </html>

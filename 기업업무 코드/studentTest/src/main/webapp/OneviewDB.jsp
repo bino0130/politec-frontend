@@ -58,7 +58,7 @@
 		stmt.close(); // 리소스 정리
 		conn.close(); // 리소스 정리
 	} catch (Exception e) {
-		
+		out.println("에러가 발생했습니다. 다시 시도해주세요."); // 에러 발생시 메세지 출력
 	}
 %>
 </table>

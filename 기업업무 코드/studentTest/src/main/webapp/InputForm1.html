@@ -55,9 +55,9 @@ input { /* input 태그 셀렉터로 css 지정 */
    			 // 특수문자 및 공백 입력 방지
     		var regExp = /[~`!@#$%^&*()\-_=+[{\]}\\|;:'",<.>/?\s]/gi;
 
-    		if (obj.value.length > 10) {
+    		if (obj.value.length > 10) { // 만약 길이가 10보다 크면
     		    alert("이름은 최대 10자까지 입력할 수 있습니다.");
-    		    obj.value = obj.value.substring(0, 10); // 최대 길이만큼 잘라내기
+    		    obj.value = ""; // 이름 초기화
     		}
 	
    			if (regExp.test(obj.value)) {
@@ -69,7 +69,7 @@ input { /* input 태그 셀렉터로 css 지정 */
 </head>
 
 <body>
-	<h1>성적입력추가</h1>
+	<h1>성적입력추가</h1> <!-- h1 태그 사용 -->
 	<!-- h1태그 사용 -->
 	<form method='post' action="InsertDB.jsp">
 		<!-- InsertDB.jsp파일에 post방식으로 전달 -->
@@ -96,8 +96,7 @@ input { /* input 태그 셀렉터로 css 지정 */
 				<td class="three">
 					<!-- class명이 three인 td 태그 --> <!-- p태그 안에 name을 전달하는 input태그 추가 -->
 					<p>
-						<input type='text' name='name' value='' onkeyup="nameCheck(this)"
-							onkeydown="nameCheck(this)" required>
+						<input type='text' name='name' value='' onkeyup="nameCheck(this)" onkeydown="nameCheck(this)" required> <!-- 이름을 입력하는 input태그, required -->
 					</p>
 				</td>
 				<!-- onkeydown : 키를 눌렀을때 이벤트이다 (shift, alt, controll, capslock 등의 모든 키에 동작한다. 단 한영변환, 한자 등의 특수키는 인식 못한다). -->
@@ -122,11 +121,9 @@ input { /* input 태그 셀렉터로 css 지정 */
 				<td class="three">
 					<!-- class명이 three인 td 태그 --> <!-- p태그 안에 korean을 전달하는 input태그 추가 -->
 					<p>
-						<input type='text' name='korean' value=''
-							onkeyup="characterCheck(this)" onkeydown="characterCheck(this)"
-							required>
+						<input type='text' name='korean' value='' onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required> <!-- 국어를 입력하는 input태그, required -->
 					</p> <!-- onkeydown : 키를 눌렀을때 이벤트이다 (shift, alt, controll, capslock 등의 모든 키에 동작한다. 단 한영변환, 한자 등의 특수키는 인식 못한다). -->
-					<!-- onkeyup : 키를 눌렀다가 땠을 때 이벤트이다 (onkeydown 에서 인식하는 키들을 인식 한다). -->
+						 <!-- onkeyup : 키를 눌렀다가 땠을 때 이벤트이다 (onkeydown 에서 인식하는 키들을 인식 한다). -->
 				</td>
 			</tr>
 			<tr>
@@ -138,23 +135,19 @@ input { /* input 태그 셀렉터로 css 지정 */
 				<td class="three">
 					<!-- class명이 three인 td 태그 --> <!-- p태그 안에 english를 전달하는 input태그 추가 -->
 					<p>
-						<input type='text' name='english' value=''
-							onkeyup="characterCheck(this)" onkeydown="characterCheck(this)"
-							required>
+						<input type='text' name='english' value='' onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required> <!-- 영어를 입력하는 input태그, required -->
 					</p> <!-- onkeydown : 키를 눌렀을때 이벤트이다 (shift, alt, controll, capslock 등의 모든 키에 동작한다. 단 한영변환, 한자 등의 특수키는 인식 못한다). -->
 					<!-- onkeyup : 키를 눌렀다가 땠을 때 이벤트이다 (onkeydown 에서 인식하는 키들을 인식 한다). -->
 				</td>
 			</tr>
 			<tr>
 				<td class="one">
-					<p>수학</p>
+					<p>수학</p> <!-- 수학 -->
 				</td>
 				<td class="three">
 					<!-- p태그 안에 math를 전달하는 input태그 추가 -->
 					<p>
-						<input type='text' name='math' value=''
-							onkeyup="characterCheck(this)" onkeydown="characterCheck(this)"
-							required>
+						<input type='text' name='math' value='' onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required> <!-- 수학을 입력하는 input태그, required -->
 					</p> <!-- onkeydown : 키를 눌렀을때 이벤트이다 (shift, alt, controll, capslock 등의 모든 키에 동작한다. 단 한영변환, 한자 등의 특수키는 인식 못한다). -->
 					<!-- onkeyup : 키를 눌렀다가 땠을 때 이벤트이다 (onkeydown 에서 인식하는 키들을 인식 한다). -->
 				</td>

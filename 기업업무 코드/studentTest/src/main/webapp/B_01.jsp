@@ -79,27 +79,28 @@ select { /* select 태그에 스타일 적용 */
 
 		while (rset1.next()) { // rset의 다음 데이터가 있으면
 			int id = rset1.getInt(1); // id = rset1.getInt(1)
-			String name = rset1.getString(2);
+			String name = rset1.getString(2); // name = rset1.getString(2)
 	%>
-								<option value="<%=id%>"><%=id%>번 <%=name%></option>
+								<option value="<%=id%>"><%=id%>번 <%=name%></option> <!-- 0번 000 출력 -->
 	<%
 		}
 	%>
 						</select>
 					</td>
 					<td style="text-align : center;">
-						<select name="age" required>
-							<option value="10">10대</option>
-							<option value="20">20대</option>
-							<option value="30">30대</option>
-							<option value="40">40대</option>
-							<option value="50">50대</option>
-							<option value="60">60대</option>
-							<option value="70">70대</option>
-							<option value="80">80대</option>
-							<option value="90">90대</option>
+						<select name="age" required> <%-- select 태그에 required 적용해서 비어있으면 넘어가지 않게 설정 --%>
+							<option value="10">10대</option> <!-- 10대 -->
+							<option value="20">20대</option> <!-- 20대 -->
+							<option value="30">30대</option> <!-- 30대 -->
+							<option value="40">40대</option> <!-- 40대 -->
+							<option value="50">50대</option> <!-- 50대 -->
+							<option value="60">60대</option> <!-- 60대 -->
+							<option value="70">70대</option> <!-- 70대 -->
+							<option value="80">80대</option> <!-- 80대 -->
+							<option value="90">90대</option> <!-- 90대 -->
 						</select>
 					</td>
+					<!-- B_02에 데이터를 전달하는 투표하기 버튼 input 태그 -->
 					<td style="text-align : center;"><input style='cursor:pointer;' class="button" type="submit"  value='투표하기' formaction="./B_02.jsp"/></td>
 					</tr>
 				</table>
