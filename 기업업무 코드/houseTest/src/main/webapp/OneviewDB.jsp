@@ -33,7 +33,7 @@
 	try {
 		Class.forName("com.mysql.cj.jdbc.Driver");// Mysql의 버전이 8.0이므로 JDBC 이렇게 작성
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kopo10","root","kopoctc");
-		// localhost : 서버 IP주소, 3306 : 포트번호, kopo10 : DB 이름, root : user, kopoctc : passwd 
+		// localhost : 서버 IP주소, 33060 : 포트번호, kopo10 : DB 이름, root : user, kopoctc : passwd 
 		// getConnection 안의 url을 사용해서 DriverManager클래스의 getConnection 메소드를 호출
 		Statement stmt = conn.createStatement(); // sql쿼리를 실행하기위한 객체 stmt 생성
 		
@@ -58,7 +58,7 @@
 		stmt.close(); // 리소스 정리
 		conn.close(); // 리소스 정리
 	} catch (Exception e) {
-		
+		out.println("에러가 발생했습니다. 다시 시도해주세요."); // 에러 발생시 메세지 출력
 	}
 %>
 </table>

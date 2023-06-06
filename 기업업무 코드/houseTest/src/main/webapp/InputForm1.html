@@ -1,103 +1,166 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<style type="text/css">
-	table {
-		width : 400px;
-	}
-	
-	.one {
-		width : 100px;
-	}
-	
-	.three {
-		width : 300px;
-	}
-	
-	p {
-		text-align : center;
-		margin : auto;
-	}
-	
-	
-	input {
-		text-align : center
-	}
-</style>
-<script>
-// 특수문자 입력 방지
-function characterCheck(obj) {
-  var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
-  var hanExp = /[ㄱ-ㅎㅏ-ㅣ]/g;
-  var engExp = /[a-zA-Z]/g;
-  var numExp = /^[0-9]+$/; // 숫자 패턴 추가
-  var num = parseInt(obj.value);
+	<meta charset="UTF-8">
+	<style type="text/css">
+		table {
+			/* talbe 태그 셀렉터로 css 지정 */
+			width: 400px;
+		}
 
-  if (regExp.test(obj.value)) {
-    alert("특수문자는 입력하실 수 없습니다.");
-    obj.value = obj.value.replace(regExp, ""); // 특수문자 제거
-  } else if (hanExp.test(obj.value)) {
-    alert("한글은 사용하실 수 없습니다.");
-    obj.value = obj.value.replace(hanExp, ""); // 한글 제거
-  } else if (engExp.test(obj.value)) {
-    alert("영어는 사용하실 수 없습니다.");
-    obj.value = obj.value.replace(engExp, ""); // 영어 제거
-  } else if (obj.value !== "" && (!numExp.test(obj.value) || num < 0 || num > 100)) {
-    alert("숫자는 0부터 100 사이의 값을 입력해야 합니다.");
-    obj.value = "";
-  }
-}
+		.one {
+			/* class="one" 태그 셀렉터로 css 지정 */
+			width: 100px;
+		}
 
-function nameCheck(obj) {
-	  var regExp = /[~`!@#$%^&*()\-_=+[{\]}\\|;:'",<.>/?]/gi;
+		.three {
+			/* class="three" 태그 셀렉터로 css 지정 */
+			width: 300px;
+		}
 
-	  if (obj.value.length > 10) {
-	    alert("이름은 최대 10자까지 입력할 수 있습니다.");
-	    obj.value = obj.value.substring(0, 10); // 최대 길이만큼 잘라내기
-	  }
+		p {
+			/* p 태그 셀렉터로 css 지정 */
+			text-align: center;
+			margin: auto;
+		}
 
-	  if (regExp.test(obj.value)) {
-	    alert("이름에는 특수문자를 사용할 수 없습니다.");
-	    obj.value = obj.value.replace(regExp, ""); // 특수문자 제거
-	  }
-}
-</script>
+		input {
+			/* input 태그 셀렉터로 css 지정 */
+			text-align: center
+		}
+	</style>
+	<script>
+		// 특수문자, 한글, 영어 입력 방지하는 함수 characterCheck
+		function characterCheck(obj) {
+			// 특수문자 입력 방지
+			var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
+			var hanExp = /[ㄱ-ㅎㅏ-ㅣ]/g; // 한글 입력 방지
+			var engExp = /[a-zA-Z]/g; // 영어 입력 방지
+			var numExp = /^[0-9]+$/; // 숫자 입력 방지
+			var num = parseInt(obj.value); // 입력받은 문자형 숫자를 int형으로 변환
+
+			if (regExp.test(obj.value)) {
+				alert("특수문자는 입력하실 수 없습니다.");
+				obj.value = obj.value.replace(regExp, ""); // 특수문자 제거
+			} else if (hanExp.test(obj.value)) {
+				alert("한글은 사용하실 수 없습니다.");
+				obj.value = obj.value.replace(hanExp, ""); // 한글 제거
+			} else if (engExp.test(obj.value)) {
+				alert("영어는 사용하실 수 없습니다.");
+				obj.value = obj.value.replace(engExp, ""); // 영어 제거
+			} else if (obj.value !== "" && (!numExp.test(obj.value) || num < 0 || num > 100)) {
+				alert("숫자는 0부터 100 사이의 값을 입력해야 합니다.");
+				obj.value = ""; // 숫자 제거
+			}
+		}
+
+		// 특수문자 입력 방지하고 최대길이 설정하는 함수 nameCheck
+		function nameCheck(obj) {
+			// 특수문자 및 공백 입력 방지
+			var regExp = /[~`!@#$%^&*()\-_=+[{\]}\\|;:'",<.>/?\s]/gi;
+
+			if (regExp.test(obj.value)) {
+				alert("이름에는 특수문자와 공백을 사용할 수 없습니다.");
+				obj.value = obj.value.replace(regExp, ""); // 특수문자와 공백 제거
+			}
+		}
+	</script>
 </head>
+
 <body>
-<h1>성적입력추가</h1>
-<form method='post' action="InsertDB.jsp"> <!-- insertDB.jsp파일에 post방식으로 전달 -->
-	<table cellspacing=1 border=0>
-		<tr>
-			<td class="three"></td>
-			<td class="one"><input type="submit" value="추가"></td>
-		</tr>
-	</table>
-	
-	<table cellspacing=1 border=1px solid black>
-		<tr>
-			<td class="one"><p>이름</p></td>
-			<td class="three"><p><input type='text' name='name' value='' onkeyup="nameCheck(this)" onkeydown="nameCheck(this)" required></p></td>
-			<!-- onkeydown : 키를 눌렀을때 이벤트이다 (shift, alt, controll, capslock 등의 모든 키에 동작한다. 단 한영변환, 한자 등의 특수키는 인식 못한다). -->
-			<!-- onkeyup : 키를 눌렀다가 땠을 때 이벤트이다 (onkeydown 에서 인식하는 키들을 인식 한다). -->
-		</tr>
-		<tr>
-			<td class="one"><p>학번</p></td>
-			<td class="three"><p>자동부여</p></td>
-		</tr>
-		<tr>
-			<td class="one"><p>국어</p></td>
-			<td class="three"><p><input type='text' name='korean' value='' onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></p></td>
-		</tr>
-		<tr>
-			<td class="one"><p>영어</p></td>
-			<td class="three"><p><input type='text' name='english' value='' onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></p></td>
-		</tr>
-		<tr>
-			<td class="one"><p>수학</p></td>
-			<td class="three"><p><input type='text' name='math' value='' onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></p></td>
-		</tr>
-	</table>
-</form>
+	<h1>성적입력추가</h1> <!-- h1 태그 사용 -->
+	<!-- h1태그 사용 -->
+	<form method='post' action="InsertDB.jsp">
+		<!-- InsertDB.jsp파일에 post방식으로 전달 -->
+		<table cellspacing=1 border=0>
+			<!-- table 태그 오픈 -->
+			<tr>
+				<!-- table row -->
+				<td class="three"></td>
+				<!-- class명이 three인 td태그 -->
+				<td class="one"><input type="submit" value="추가"></td>
+				<!-- class명이 one인 td 태그 안에 버튼 형식 input태그 -->
+			</tr>
+		</table>
+		<!-- 테이블 태그 닫음 -->
+
+		<table cellspacing=1 border=1px solid black>
+			<!-- table 태그 오픈 -->
+			<tr>
+				<!-- table row -->
+				<td class="one">
+					<!-- class명이 one인 td 태그 -->
+					<p>이름</p> <!-- 이름 -->
+				</td>
+				<td class="three">
+					<!-- class명이 three인 td 태그 --> <!-- p태그 안에 name을 전달하는 input태그 추가 -->
+					<p>
+						<input type='text' name='name' value='' onkeyup="nameCheck(this)" maxlength="10" required>
+						<!-- 이름을 입력하는 input태그, required -->
+					</p>
+				</td>
+				<!-- onkeydown : 키를 눌렀을때 이벤트이다 (shift, alt, controll, capslock 등의 모든 키에 동작한다. 단 한영변환, 한자 등의 특수키는 인식 못한다). -->
+				<!-- onkeyup : 키를 눌렀다가 땠을 때 이벤트이다 (onkeydown 에서 인식하는 키들을 인식 한다). -->
+			</tr>
+			<tr>
+				<td class="one">
+					<!-- class명이 one인 td 태그 -->
+					<p>학번</p> <!-- 학번 -->
+				</td>
+				<td class="three">
+					<!-- class명이 three인 td 태그 -->
+					<p>자동부여</p> <!-- 자동부여 -->
+				</td>
+			</tr>
+			<tr>
+				<!-- table row -->
+				<td class="one">
+					<!-- 클래스명이 one인 td 태그 -->
+					<p>국어</p> <!-- 국어 -->
+				</td>
+				<td class="three">
+					<!-- class명이 three인 td 태그 --> <!-- p태그 안에 korean을 전달하는 input태그 추가 -->
+					<p>
+						<input type='text' name='korean' value='' onkeyup="characterCheck(this)" required>
+						<!-- 국어를 입력하는 input태그, required -->
+					</p>
+					<!-- onkeydown : 키를 눌렀을때 이벤트이다 (shift, alt, controll, capslock 등의 모든 키에 동작한다. 단 한영변환, 한자 등의 특수키는 인식 못한다). -->
+					<!-- onkeyup : 키를 눌렀다가 땠을 때 이벤트이다 (onkeydown 에서 인식하는 키들을 인식 한다). -->
+				</td>
+			</tr>
+			<tr>
+				<!-- table row -->
+				<td class="one">
+					<!-- 클래스명이 one인 td 태그 -->
+					<p>영어</p> <!-- 영어 -->
+				</td>
+				<td class="three">
+					<!-- class명이 three인 td 태그 --> <!-- p태그 안에 english를 전달하는 input태그 추가 -->
+					<p>
+						<input type='text' name='english' value='' onkeyup="characterCheck(this)" required>
+						<!-- 영어를 입력하는 input태그, required -->
+					</p>
+					<!-- onkeydown : 키를 눌렀을때 이벤트이다 (shift, alt, controll, capslock 등의 모든 키에 동작한다. 단 한영변환, 한자 등의 특수키는 인식 못한다). -->
+					<!-- onkeyup : 키를 눌렀다가 땠을 때 이벤트이다 (onkeydown 에서 인식하는 키들을 인식 한다). -->
+				</td>
+			</tr>
+			<tr>
+				<td class="one">
+					<p>수학</p> <!-- 수학 -->
+				</td>
+				<td class="three">
+					<!-- p태그 안에 math를 전달하는 input태그 추가 -->
+					<p>
+						<input type='text' name='math' value='' onkeyup="characterCheck(this)" required>
+						<!-- 수학을 입력하는 input태그, required -->
+					</p>
+					<!-- onkeydown : 키를 눌렀을때 이벤트이다 (shift, alt, controll, capslock 등의 모든 키에 동작한다. 단 한영변환, 한자 등의 특수키는 인식 못한다). -->
+					<!-- onkeyup : 키를 눌렀다가 땠을 때 이벤트이다 (onkeydown 에서 인식하는 키들을 인식 한다). -->
+				</td>
+			</tr>
+		</table>
+	</form>
 </body>
+
 </html>

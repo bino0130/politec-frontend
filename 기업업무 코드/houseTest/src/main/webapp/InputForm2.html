@@ -1,95 +1,124 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<style>
-	table {
-		width : 400px;
-	}
-	
-	p {
-		text-align : center;
-	}
-	
-	.one {
-		width : 100px;
-	}
-	
-	.two {
-		width : 200px;
-	}
-	
-	.three {
-		width : 300px;
-	}
-	
-	td > p > input {
-		background-color : lightgray;
-	}
-	
-	input {
-		text-align : center;
-	}
-</style>
-<script>
-//특수문자 입력 방지
-function characterCheck(event) {
-	var obj = event.target;
-  var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
-  var hanExp = /[ㄱ-ㅎㅏ-ㅣ]/g;
-  var engExp = /[a-zA-Z]/g;
-  var numExp = /^[0-9]+$/; // 숫자 패턴 추가
-  var num = parseInt(obj.value);
 
-  if (regExp.test(obj.value)) {
-    alert("특수문자는 입력하실 수 없습니다.");
-    obj.value = obj.value.replace(regExp, ""); // 특수문자 제거
-  } else if (hanExp.test(obj.value)) {
-    alert("한글은 사용하실 수 없습니다.");
-    obj.value = obj.value.replace(hanExp, ""); // 한글 제거
-  } else if (engExp.test(obj.value)) {
-    alert("영어는 사용하실 수 없습니다.");
-    obj.value = obj.value.replace(engExp, ""); // 영어 제거
-  } else if (obj.value !== "" && (!numExp.test(obj.value) || num <= 999999 || num > 209899)) {
-    alert("학번은 209900부터 입니다.");
-    obj.value = "";
-  }
-}
-</script>
+<head>
+	<meta charset="UTF-8"> <!-- 인코딩 utf-8 -->
+	<style>
+		table { /* talbe 태그 셀렉터로 css 지정 */
+			width: 400px;
+		}
+
+		p { /* p 태그 셀렉터로 css 지정 */
+			text-align: center;
+		}
+
+		.one { /* class="one" 태그 셀렉터로 css 지정 */
+			width: 100px;
+		}
+
+		.two { /* class="two" 태그 셀렉터로 css 지정 */
+			width: 200px;
+		}
+
+		.three { /* class="three" 태그 셀렉터로 css 지정 */
+			width: 300px;
+		}
+
+		td>p>input { /* td 태그의 자식  > p 태그의 자식 > input태그 셀렉터로 css 지정 */
+			background-color: lightgray;
+		}
+
+		input { /* input 태그 셀렉터로 css 지정 */
+			text-align: center;
+		}
+	</style>
+	<script>
+		// 특수문자, 한글, 영어 입력 방지하는 함수 characterCheck
+		function characterCheck(event) {
+			// 특수문자 입력 방지
+			var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
+			var hanExp = /[ㄱ-ㅎㅏ-ㅣ]/g; // 한글 입력 방지
+			var engExp = /[a-zA-Z]/g; // 영어 입력 방지
+			var numExp = /^[0-9]+$/; // 숫자 패턴 추가
+			var num = parseInt(obj.value); // 입력받은 문자형 숫자를 int형으로 변환
+
+			if (regExp.test(obj.value)) {
+				alert("특수문자는 입력하실 수 없습니다.");
+				obj.value = obj.value.replace(regExp, ""); // 특수문자 제거
+			} else if (hanExp.test(obj.value)) {
+				alert("한글은 사용하실 수 없습니다.");
+				obj.value = obj.value.replace(hanExp, ""); // 한글 제거
+			} else if (engExp.test(obj.value)) {
+				alert("영어는 사용하실 수 없습니다.");
+				obj.value = obj.value.replace(engExp, ""); // 영어 제거
+			} else if (obj.value !== "" && (!numExp.test(obj.value) || num <= 999999 || num > 209899)) {
+				alert("학번은 209900부터 입니다.");
+				obj.value = ""; // 숫자 제거
+			}
+		}
+	</script>
 </head>
+
 <body>
-<h1>성적 조회후 정정/삭제</h1>
-<form method='post' action="showREC.jsp">
-	<table cellspacing=1 border=0>
-		<tr>
-			<td class="one"><p>조회할 학번</p></td>
-			<td class="two"><p><input type="text" pattern="^(?:999999|[1-9][0-9]{0,8}?|0)$" name='searchID' 
-            value='' title="0~999999까지의 정수를 입력하세요" style="background-color:white"; required></p></td>
-			<td class="one"><input type="submit" value="조회"></td>
-		</tr>
-	</table>
-</form>
-	<table cellspacing=1 border=1>
-		<tr>
-			<td class="one"><p>이름</p></td>
-			<td class="three"><p><input type='text' name='name' value='' readonly></p></td>
-		</tr>
-		<tr>
-			<td class="one"><p>학번</p></td>
-			<td class="three"><p></p></td>
-		</tr>
-		<tr>
-			<td class="one"><p>국어</p></td>
-			<td class="three"><p><input type='text' name='korean' value='' readonly></p></td>
-		</tr>
-		<tr>
-			<td class="one"><p>영어</p></td>
-			<td class="three"><p><input type='text' name='english' value='' readonly></p></td>
-		</tr>
-		<tr>
-			<td class="one"><p>수학</p></td>
-			<td class="three"><p><input type='text' name='math' value='' readonly></p></td>
-		</tr>
+	<h1>성적 조회후 정정/삭제</h1> <!-- h1태그 사용 -->
+	<form method='post' action="showREC.jsp"> <!-- showREC.jsp파일에 post방식으로 전달 -->
+		<table cellspacing=1 border=0> <!-- table 태그 오픈 -->
+			<tr> <!-- table row -->
+				<td class="one"> <!-- class명이 one인 td태그 --> 
+					<p>조회할 학번</p> <!-- 조회할 학번 -->
+				</td>
+				<td class="two"> <!-- class명이 two인 td태그 -->
+					<!-- input 태그 안에 pattern을 사용해서 입력한 학번을 0이상 999999 이하 정수로 제한 -->
+					<p><input type="text" pattern="^(?:999999|[1-9][0-9]{0,8}?|0)$" name='searchID' value=''
+							title="0~999999까지의 정수를 입력하세요" style="background-color:white" ; required></p>
+				</td>
+				<td class="one"><input type="submit" value="조회"></td> <!-- class명이 one인 td 태그 안에 input태그로 조회 버튼 추가 -->
+			</tr> <!-- table row -->
+		</table> <!-- table 닫음 -->
+	</form>
+	
+	<table cellspacing=1 border=1> <!-- table 오픈 -->
+		<tr> <!-- table row -->
+			<td class="one"> <!-- class명이 one인 td태그 --> 
+				<p>이름</p> <!-- 이름 -->
+			</td>
+			<td class="three"> <!-- class명이 three인 td태그 --> 
+				<p><input type='text' name='name' value='' readonly></p> <!-- readonly인 input 태그 추가 -->
+			</td>
+		</tr> <!-- table row -->
+		<tr> <!-- table row -->
+			<td class="one">
+				<p>학번</p> <!-- 학번 -->
+			</td>
+			<td class="three">
+				<p></p>
+			</td>
+		</tr> <!-- table row -->
+		<tr> <!-- table row -->
+			<td class="one">
+				<p>국어</p> <!-- 국어 -->
+			</td>
+			<td class="three">
+				<p><input type='text' name='korean' value='' readonly></p> <!-- readonly인 input 태그 추가 -->
+			</td>
+		</tr> <!-- table row -->
+		<tr> <!-- table row -->
+			<td class="one">
+				<p>영어</p> <!-- 영어 -->
+			</td>
+			<td class="three">
+				<p><input type='text' name='english' value='' readonly></p> <!-- readonly인 input 태그 추가 -->
+			</td>
+		</tr> <!-- table row -->
+		<tr> <!-- table row -->
+			<td class="one">
+				<p>수학</p> <!-- 수학 -->
+			</td>
+			<td class="three">
+				<p><input type='text' name='math' value='' readonly></p> <!-- readonly인 input 태그 추가 -->
+			</td>
+		</tr> <!-- table row -->
 	</table>
 </body>
+
 </html>

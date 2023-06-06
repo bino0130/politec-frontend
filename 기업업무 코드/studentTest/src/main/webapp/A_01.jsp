@@ -52,12 +52,7 @@ function nameCheck(obj) {
 	// 특수문자 및 공백 입력 방지
 	var regExp = /[~`!@#$%^&*()\-_=+[{\]}\\|;:'",<.>/?\s0-9]/gi;
 
-	if (obj.value.length > 10) { // 이름 길이가 10이 넘으면
-	    alert("이름은 최대 10자까지 입력할 수 있습니다."); // 안내메세지 출력
-	    obj.value = ""; // 이름 초기화
-	}
-
-		if (regExp.test(obj.value)) { // 특수문자, 공백 또는 숫자가 입력되면
+	if (regExp.test(obj.value)) { // 특수문자, 공백 또는 숫자가 입력되면
 		alert("이름에는 한글과 영어만 입력할 수 있습니다."); // 안내메세지 출력
 		obj.value = obj.value.replace(regExp, ""); // 특수문자, 공백, 숫자 제거
 	}
@@ -120,7 +115,7 @@ function nameCheck(obj) {
 							name='addId' value='자동입력' style='width: 50px; font-size: 12px;' readonly></td> <!-- 기호번호 --> <!-- A_03에서 계산 후 자동입력됨 -->
 						<td colspan='3' style='width: 180px;'>후보명 : <input
 							type='text' name='addName' value='' style='width: 100px;'
-							onkeyup="nameCheck(this)" onkeydown="nameCheck(this)" required></td> <!-- 후보명 --> <!-- addName을 전달하는 input태그 -->
+							onkeyup="nameCheck(this)" maxlength="10" required></td> <!-- 후보명 --> <!-- addName을 전달하는 input태그 -->
 						<td style='display: flex; justify-content: flex-end;'><input
 							style='cursor: pointer;' class='button' type='submit' value='추가'
 							formaction='./A_03.jsp' /></td> <!-- A_03파일에 데이터를 전달하는 추가 버튼 input 태그 -->

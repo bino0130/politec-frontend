@@ -10,44 +10,44 @@ String searchID = request.getParameter("searchID"); // input받은 searchID 값 
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-	table {
+	table { /* table 태그 셀렉터로 css 지정 */
 		width : 600px;
 	}
 	
-	p {
+	p { /* p 태그 셀렉터로 css 지정 */
 		text-align : center;
 	}
 	
-	.one {
+	.one { /* 클래스명이 one인 태그에 css 지정 */
 		width : 100px;
 	}
 	
-	.two {
+	.two { /* 클래스명이 two인 태그에 css 지정 */
 		width : 200px;
 	}
 	
-	.three {
+	.three { /* 클래스명이 three인 태그에 css 지정 */
 		width : 300px;
 	}
 	
-	.gray {
+	.gray { /* 클래스명이 gray인 태그에 css 지정 */
 		background-color : lightgray;
 	}
 	
-	.right {
+	.right { /* 클래스명이 right인 태그에 css 지정 */
 		text-align : right;
 	}
 	
-	input {
+	input { /* input태그 셀렉터로 css 지정 */
 		text-align : center
 	}
 </style>
 <script>
-// 특수문자 입력 방지
+// 특수문자, 한글, 영어 입력 방지
 function characterCheck(obj) {
   var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
-  var hanExp = /[ㄱ-ㅎㅏ-ㅣ]/g;
-  var engExp = /[a-zA-Z]/g;
+  var hanExp = /[ㄱ-ㅎㅏ-ㅣ]/g; // 한글 입력 방지
+  var engExp = /[a-zA-Z]/g; // 영어 입력 방지
   var numExp = /^[0-9]+$/; // 숫자 패턴 추가
   var num = parseInt(obj.value);
 
@@ -62,22 +62,18 @@ function characterCheck(obj) {
     obj.value = obj.value.replace(engExp, ""); // 영어 제거
   } else if (obj.value !== "" && (!numExp.test(obj.value) || num < 0 || num > 100)) {
     alert("숫자는 0부터 100 사이의 값을 입력해야 합니다.");
-    obj.value = "";
+    obj.value = ""; // 숫자 제거
   }
 }
 
 function nameCheck(obj) {
-	  var regExp = /[~`!@#$%^&*()\-_=+[{\]}\\|;:'",<.>/?]/gi;
+	// 특수문자 및 공백 입력 방지
+	var regExp = /[~`!@#$%^&*()\-_=+[{\]}\\|;:'",<.>/?\s]/gi;
 
-	  if (obj.value.length > 10) {
-	    alert("이름은 최대 10자까지 입력할 수 있습니다.");
-	    obj.value = obj.value.substring(0, 10); // 최대 길이만큼 잘라내기
-	  }
-
-	  if (regExp.test(obj.value)) {
-	    alert("이름에는 특수문자를 사용할 수 없습니다.");
-	    obj.value = obj.value.replace(regExp, ""); // 특수문자 제거
-	  }
+	if (regExp.test(obj.value)) { // 특수문자나 공백이 입력되면
+		alert("이름에는 특수문자와 공백을 사용할 수 없습니다."); // 안내메세지 출력
+		obj.value = obj.value.replace(regExp, ""); // 특수문자와 공백 제거
+	}
 }
 </script>
 </head>
@@ -89,101 +85,111 @@ function nameCheck(obj) {
 	// localhost : 서버 IP주소, 3306 : 포트번호, kopo10 : DB 이름, root : user, kopoctc : passwd 
 	// getConnection 안의 url을 사용해서 DriverManager클래스의 getConnection 메소드를 호출
 	Statement stmt = conn.createStatement(); // sql쿼리를 실행하기위한 객체 stmt 생성
-	String Querytxt = String.format("select * from anotherTwice where studentid = %d", Integer.parseInt(searchID));
-	ResultSet rset = stmt.executeQuery(Querytxt);
-	int LineCnt = 0;
-	String name = "";
-	int id = 0;
-	int kor = 0;
-	int eng = 0;
-	int mat = 0;
 	
-	while (rset.next()) {
-		name = rset.getString(1);
-		id = rset.getInt(2);
-		kor = rset.getInt(3);
-		eng = rset.getInt(4);
-		mat = rset.getInt(5);
-		LineCnt++;
+	// 학번이 serachID와 일치하는 데이터 출력하는 쿼리
+	String Querytxt = String.format("select * from anotherTwice where studentid = %d", Integer.parseInt(searchID));
+	ResultSet rset = stmt.executeQuery(Querytxt); // 쿼리 실행
+	int LineCnt = 0; // lineCnt = 0으로 초기화
+	String name = ""; // name = ""으로 초기화
+	int id = 0; // id = 0으로 초기화
+	int kor = 0; // kor = 0으로 초기화
+	int eng = 0; // eng = 0으로 초기화
+	int mat = 0; // mat = 0으로 초기화
+	
+	while (rset.next()) { // rset이 있으면
+		name = rset.getString(1); // name에 getString(1) 저장
+		id = rset.getInt(2); // id에 getInt(2) 저장
+		kor = rset.getInt(3); // kor에 getInt(3) 저장
+		eng = rset.getInt(4); // eng에 getInt(4) 저장
+		mat = rset.getInt(5); // mat에 getInt(5) 저장
+		LineCnt++; // LineCnt + 1
 	}
 	
-	if (LineCnt == 0) {
+	if (LineCnt == 0) { // LineCnt가 0이면 (조회한 학번이 없으면)
 %>
-<form method='post' action="showREC.jsp">
+<form method='post' action="showREC.jsp"> <!-- 입력받은 데이터를 post형식으로 showREC에 전달 -->
 	<table cellspacing=1 border=0>
-		<tr>
-			<td class="one"><p>조회할 학번</p></td>
-			<td class="two"><p><input type='text' name='searchID' value='' ></p></td>
-			<td class="one"><input type="submit" value="조회"></td>
-		</tr>
+		<tr> <!-- table row -->
+			<td class="one"><p>조회할 학번</p></td> <!-- 조회할 학번 -->
+			<td class="two"><p><input type="text" pattern="^(?:999999|[1-9][0-9]{0,8}?|0)$" name='searchID' value=''
+							title="0~999999까지의 정수를 입력하세요" style="background-color:white" ; required></p></td> <!-- searchID값을 전달하는 input태그 -->
+			<td class="one"><input type="submit" value="조회"></td> <!-- 조회 버튼 형태의 input 태그 -->
+		</tr> <!-- table row -->
 	</table>
 </form>
 	<table cellspacing=1 border=1>
-		<tr>
-			<td class="one"><p>이름</p></td>
-			<td class="three"><p><input class="gray" type='text' name='' value='해당학번없음' readonly></p></td>
-		</tr>
-		<tr>
-			<td class="one"><p>학번</p></td>
-			<td class="three"><p><input class="gray" type='text' name='' value='' readonly></p></td>
-		</tr>
-		<tr>
-			<td class="one"><p>국어</p></td>
-			<td class="three"><p><input class="gray" type='text' name='korean' value='' readonly></p></td>
-		</tr>
-		<tr>
-			<td class="one"><p>영어</p></td>
-			<td class="three"><p><input class="gray" type='text' name='english' value='' readonly></p></td>
-		</tr>
-		<tr>
-			<td class="one"><p>수학</p></td>
-			<td class="three"><p><input class="gray" type='text' name='math' value='' readonly></p></td>
-		</tr>
+		<tr> <!-- table row -->
+			<td class="one"><p>이름</p></td> <!-- 이름 -->
+			<td class="three"><p><input class="gray" type='text' name='' value='해당학번없음' readonly></p></td> <!-- value로 해당학번없음을 출력하는 input태그 (readonly) -->
+		</tr> <!-- table row -->
+		<tr> <!-- table row -->
+			<td class="one"><p>학번</p></td> <!-- 학번 -->
+			<td class="three"><p><input class="gray" type='text' name='' value='' readonly></p></td> <!-- 아무것도 출력되지않음 -->
+		</tr> <!-- table row -->
+		<tr> <!-- table row -->
+			<td class="one"><p>국어</p></td> <!-- 국어 -->
+			<td class="three"><p><input class="gray" type='text' name='korean' value='' readonly></p></td> <!-- 아무것도 출력되지않음 -->
+		</tr> <!-- table row -->
+		<tr> <!-- table row -->
+			<td class="one"><p>영어</p></td> <!-- 영어 -->
+			<td class="three"><p><input class="gray" type='text' name='english' value='' readonly></p></td> <!-- 아무것도 출력되지않음 -->
+		</tr> <!-- table row -->
+		<tr> <!-- table row -->
+			<td class="one"><p>수학</p></td> <!-- 수학 -->
+			<td class="three"><p><input class="gray" type='text' name='math' value='' readonly></p></td> <!-- 아무것도 출력되지않음 -->
+		</tr> <!-- table row -->
 	</table>
 <%
-	} else if (LineCnt != 0) {
+	} else if (LineCnt != 0) { // LineCnt가 0이 아니면 (조회한 학번이 존재하면)
 %>
-<form method='post' action="showREC.jsp">
+<form method='post' action="showREC.jsp"> <!-- 입력받은 데이터를 post형식으로 showREC에 전달 -->
 	<table cellspacing=1 border=0>
-		<tr>
-			<td class="one"><p>조회할 학번</p></td>
-			<td class="two"><p><input type='text' name='searchID' value='<%=searchID%>' onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></p></td>
-			<td class="one"><input type="submit" value="조회"></td>
-		</tr>
+		<tr> <!-- table row -->
+			<td class="one"><p>조회할 학번</p></td> <!-- 조회할 학번 -->
+			<!-- parameter로 받은 searchID를 출력하고 searchID 값을 전달하는 input태그 (required) -->
+			<td class="two"><p><input type="text" pattern="^(?:999999|[1-9][0-9]{0,8}?|0)$" name='searchID' value=''
+							title="0~999999까지의 정수를 입력하세요" style="background-color:white" ; required></p></td>
+			<td class="one"><input type="submit" value="조회"></td> <!-- 조회 버튼 형태의 input 태그 -->
+		</tr> <!-- table row -->
 	</table>
 </form>
 <form method='post'>
 	<table cellspacing=1 border=1>
-		<tr>
-			<td class="one"><p>이름</p></td>
-			<td class="three"><p><input type='text' name='name' value='<%=name%>' onkeyup="nameCheck(this)" onkeydown="nameCheck(this)" required></p></td>
-		</tr>
-		<tr>
-			<td class="one"><p>학번</p></td>
+		<tr> <!-- table row -->
+			<td class="one"><p>이름</p></td> <!-- 이름 -->
+			<!-- parameter로 받은 name을 출력하고 name 값을 전달하는 input태그 (required) -->
+			<td class="three"><p><input type='text' name='name' value='<%=name%>' onkeyup="nameCheck(this)" maxlength="10" required></p></td>
+		</tr> <!-- table row -->
+		<tr> <!-- table row -->
+			<td class="one"><p>학번</p></td> <!-- 학번 -->
+			<!-- parameter로 받은 id를 출력하고 studentID 값을 전달하는 input태그 (readonly) -->
 			<td class="three"><p><input type='text' name='studentID' value='<%=id%>' readonly></p></td>
-		</tr>
-		<tr>
-			<td class="one"><p>국어</p></td>
-			<td class="three"><p><input type='text' name='korean' value='<%=kor%>' onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></p></td>
-		</tr>
-		<tr>
-			<td class="one"><p>영어</p></td>
-			<td class="three"><p><input type='text' name='english' value='<%=eng%>' onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></p></td>
-		</tr>
-		<tr>
-			<td class="one"><p>수학</p></td>
-			<td class="three"><p><input type='text' name='math' value='<%=mat%>' onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></p></td>
-		</tr>
+		</tr> <!-- table row -->
+		<tr> <!-- table row -->
+			<td class="one"><p>국어</p></td> <!-- 국어 -->
+			<!-- parameter로 받은 korean을 출력하고 korean 값을 전달하는 input태그 (required) -->
+			<td class="three"><p><input type='text' name='korean' value='<%=kor%>' onkeyup="characterCheck(this)" required></p></td>
+		</tr> <!-- table row -->
+		<tr> <!-- table row -->
+			<td class="one"><p>영어</p></td> <!-- 영어 -->
+			<!-- parameter로 받은 english를 출력하고 english 값을 전달하는 input태그 (required) -->
+			<td class="three"><p><input type='text' name='english' value='<%=eng%>' onkeyup="characterCheck(this)" required></p></td>
+		</tr> <!-- table row -->
+		<tr> <!-- table row -->
+			<td class="one"><p>수학</p></td> <!-- 수학 -->
+			<!-- parameter로 받은 math를 출력하고 math 값을 전달하는 input태그 (required) -->
+			<td class="three"><p><input type='text' name='math' value='<%=mat%>' onkeyup="characterCheck(this)" required></p></td>
+		</tr> <!-- table row -->
 	</table>
 	<table border=0>
-		<tr class="right">
-			<td style="width : 70%;">
-				<input type="submit" value="수정" formaction="./updateDB.jsp"/>
+		<tr class="right"> <!-- table row -->
+			<td style="width : 70%;"> <!-- 너비 70% td 태그 -->
+				<input type="submit" value="수정" formaction="./updateDB.jsp"/> <!-- updateDB에 값을 전달하는 수정 버튼 input태그 -->
 			</td>
-			<td style="width : 30%;">
-				<input type="submit" value="삭제" formaction="./deleteDB.jsp"/>
+			<td style="width : 30%;"> <!-- 너비 30% td 태그 -->
+				<input type="submit" value="삭제" formaction="./deleteDB.jsp"/> <!-- deleteDB에 값을 전달하는 삭제 버튼 input태그 -->
 			</td>
-		</tr>
+		</tr> <!-- table row -->
 	</table>
 </form>	
 <%
@@ -192,7 +198,7 @@ function nameCheck(obj) {
 	stmt.close(); // 리소스 정리
 	conn.close(); // 리소스 정리
 	} catch (SQLSyntaxErrorException e) {
-		out.println("테이블이 생성되지 않았습니다. 테이블을 생성해주세요.");
+		out.println("테이블이 생성되지 않았습니다. 테이블을 생성해주세요."); // 에러발생시 에러 메세지 출력
 	}
 %>
 </body>

@@ -70,12 +70,7 @@ function nameCheck(obj) {
 	// 특수문자 및 공백 입력 방지
 	var regExp = /[~`!@#$%^&*()\-_=+[{\]}\\|;:'",<.>/?\s]/gi;
 
-	if (obj.value.length > 10) { // 이름이 10자 이상이면
-	    alert("이름은 최대 10자까지 입력할 수 있습니다."); // 안내 메세지 출력
-	    obj.value = ""; // 이름 초기화
-	}
-
-		if (regExp.test(obj.value)) { // 특수문자나 공백이 입력되면
+	if (regExp.test(obj.value)) { // 특수문자나 공백이 입력되면
 		alert("이름에는 특수문자와 공백을 사용할 수 없습니다."); // 안내메세지 출력
 		obj.value = obj.value.replace(regExp, ""); // 특수문자와 공백 제거
 	}
@@ -116,7 +111,8 @@ function nameCheck(obj) {
 	<table cellspacing=1 border=0>
 		<tr> <!-- table row -->
 			<td class="one"><p>조회할 학번</p></td> <!-- 조회할 학번 -->
-			<td class="two"><p><input type='text' name='searchID' value='' ></p></td> <!-- searchID값을 전달하는 input태그 -->
+			<td class="two"><p><input type="text" pattern="^(?:999999|[1-9][0-9]{0,8}?|0)$" name='searchID' value=''
+							title="0~999999까지의 정수를 입력하세요" style="background-color:white" ; required></p></td> <!-- searchID값을 전달하는 input태그 -->
 			<td class="one"><input type="submit" value="조회"></td> <!-- 조회 버튼 형태의 input 태그 -->
 		</tr> <!-- table row -->
 	</table>
@@ -151,7 +147,8 @@ function nameCheck(obj) {
 		<tr> <!-- table row -->
 			<td class="one"><p>조회할 학번</p></td> <!-- 조회할 학번 -->
 			<!-- parameter로 받은 searchID를 출력하고 searchID 값을 전달하는 input태그 (required) -->
-			<td class="two"><p><input type='text' name='searchID' value='<%=searchID%>' onkeyup="nameCheck(this)" onkeydown="nameCheck(this)" required></p></td>
+			<td class="two"><p><input type="text" pattern="^(?:999999|[1-9][0-9]{0,8}?|0)$" name='searchID' value=''
+							title="0~999999까지의 정수를 입력하세요" style="background-color:white" ; required></p></td>
 			<td class="one"><input type="submit" value="조회"></td> <!-- 조회 버튼 형태의 input 태그 -->
 		</tr> <!-- table row -->
 	</table>
@@ -161,7 +158,7 @@ function nameCheck(obj) {
 		<tr> <!-- table row -->
 			<td class="one"><p>이름</p></td> <!-- 이름 -->
 			<!-- parameter로 받은 name을 출력하고 name 값을 전달하는 input태그 (required) -->
-			<td class="three"><p><input type='text' name='name' value='<%=name%>' onkeyup="nameCheck(this)" onkeydown="nameCheck(this)" required></p></td>
+			<td class="three"><p><input type='text' name='name' value='<%=name%>' onkeyup="nameCheck(this)" maxlength="10" required></p></td>
 		</tr> <!-- table row -->
 		<tr> <!-- table row -->
 			<td class="one"><p>학번</p></td> <!-- 학번 -->
@@ -171,17 +168,17 @@ function nameCheck(obj) {
 		<tr> <!-- table row -->
 			<td class="one"><p>국어</p></td> <!-- 국어 -->
 			<!-- parameter로 받은 korean을 출력하고 korean 값을 전달하는 input태그 (required) -->
-			<td class="three"><p><input type='text' name='korean' value='<%=kor%>' onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></p></td>
+			<td class="three"><p><input type='text' name='korean' value='<%=kor%>' onkeyup="characterCheck(this)" required></p></td>
 		</tr> <!-- table row -->
 		<tr> <!-- table row -->
 			<td class="one"><p>영어</p></td> <!-- 영어 -->
 			<!-- parameter로 받은 english를 출력하고 english 값을 전달하는 input태그 (required) -->
-			<td class="three"><p><input type='text' name='english' value='<%=eng%>' onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></p></td>
+			<td class="three"><p><input type='text' name='english' value='<%=eng%>' onkeyup="characterCheck(this)" required></p></td>
 		</tr> <!-- table row -->
 		<tr> <!-- table row -->
 			<td class="one"><p>수학</p></td> <!-- 수학 -->
 			<!-- parameter로 받은 math를 출력하고 math 값을 전달하는 input태그 (required) -->
-			<td class="three"><p><input type='text' name='math' value='<%=mat%>' onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></p></td>
+			<td class="three"><p><input type='text' name='math' value='<%=mat%>' onkeyup="characterCheck(this)" required></p></td>
 		</tr> <!-- table row -->
 	</table>
 	<table border=0>
