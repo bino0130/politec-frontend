@@ -12,7 +12,7 @@
 		text-align : center;
 	}
 	
-	table {
+	table { /* table 셀렉터 : width 600, border 1px solid black */
 		width : 600px;
 		border : 1px solid black;
 	}
@@ -48,22 +48,24 @@
 		// localhost : 서버 IP주소, 3306 : 포트번호, kopo10 : DB 이름, root : user, kopoctc : passwd 
 		// getConnection 안의 url을 사용해서 DriverManager클래스의 getConnection 메소드를 호출
 		Statement stmt = conn.createStatement(); // sql쿼리를 실행하기위한 객체 stmt 생성
-		List<String> stuName = new ArrayList<String>();
-		List<Integer> stuId = new ArrayList<Integer>();
-		List<Integer> stuKor = new ArrayList<Integer>();
-		List<Integer> stuEng = new ArrayList<Integer>();
-		List<Integer> stuMat = new ArrayList<Integer>();
-		List<Integer> stuSum = new ArrayList<Integer>();
-		List<Integer> stuAvg = new ArrayList<Integer>();
-		List<Integer> stuRnk = new ArrayList<Integer>();
+		
+		List<String> stuName = new ArrayList<String>(); // 이름 담는 리스트 stuName 
+		List<Integer> stuId = new ArrayList<Integer>(); // 학번 담는 리스트 stuId
+		List<Integer> stuKor = new ArrayList<Integer>(); // 국어 담는 리스트 stuKor
+		List<Integer> stuEng = new ArrayList<Integer>(); // 영어 담는 리스트 stuEng
+		List<Integer> stuMat = new ArrayList<Integer>(); // 수학 담는 리스트 stuMat
+		List<Integer> stuSum = new ArrayList<Integer>(); // 총합 담는 리스트 stuSum
+		List<Integer> stuAvg = new ArrayList<Integer>(); // 평균 담는 리스트 stuAvg
+		List<Integer> stuRnk = new ArrayList<Integer>(); // 등수 담는 리스트 stuRnk
 		
 		String Querytxt1 = "select *, kor + eng + mat as sum , (kor + eng + mat) / 3 as avg , " +
                 "(select count(*) + 1 from anotherTwice as r1 where r1.kor+r1.eng+r1.mat > r.kor + r.eng + r.mat) as rnk " +
-                "from anotherTwice as r order by rnk";
+                "from anotherTwice as r order by rnk"; // 이름 ~ 등수까지 출력하는 쿼리
 		ResultSet rset1 = stmt.executeQuery(Querytxt1);
 		// 해당 쿼리를 실행하기 위해 executeQuery를 호출하고 그 결과를 rset에 저장한다.
+		
 		while(rset1.next()){ // rset이 있으면
-			stuName.add(rset1.getString(1));
+			stuName.add(rset1.getString(1)); // 이름 ~ 등수 리스트에 해당 값 저장
 			stuId.add(rset1.getInt(2));
 			stuKor.add(rset1.getInt(3));
 			stuEng.add(rset1.getInt(4));
@@ -73,10 +75,10 @@
 			stuRnk.add(rset1.getInt(8));
 		}
 		
-		String fromPT = request.getParameter("from");
-		String cntPT = request.getParameter("cnt");
+		String fromPT = request.getParameter("from"); // 페이지네이션 시 필요한 from 받아오는 변수 fromPT
+		String cntPT = request.getParameter("cnt"); // 페이지네이션 시 필요한 cnt 받아오는 변수 cntPT
 		
-		int from = 0;
+		int from = 0; // from = 0으로 초기화
 		if (fromPT != null) { // fromPT값이 null 이 아니면
 		    from = Integer.parseInt(fromPT); // from은 fromPT의 정수 형변환 값
 		    if (Integer.parseInt(fromPT) < 0) { // fromPT가 0보다 작으면
@@ -99,7 +101,7 @@
 		for (int i = from; i < from + cnt && i < stuName.size(); i++) { // i가 from부터 from + cnt - 1까지 +1씩 증가하는 반복문
 %>
 			<tr> <%-- table row --%>
-			<td><p><a href='OneviewDB.jsp?key=<%=stuName.get(i)%>'><%=stuName.get(i)%></a></p></td>
+			<td><p><a href='OneviewDB.jsp?key=<%=stuName.get(i)%>'><%=stuName.get(i)%></a></p></td> <%-- stuName의 i번째 인덱스 --%>
 			<td><%=stuId.get(i)%></td> <%-- stuId의 i번째 인덱스 --%>
 			<td><%=stuKor.get(i)%></td> <%-- stuKor의 i번째 인덱스 --%>
 			<td><%=stuEng.get(i)%></td> <%-- stuEng의 i번째 인덱스 --%>
@@ -114,7 +116,7 @@
 </table>
 <table>
 <%
-		int totpageNum = (int) Math.ceil((double)stuName.size() / cnt);
+		int totpageNum = (int) Math.ceil((double)stuName.size() / cnt); // 총 페이지 수 구하는 변수 totpageNum
 		int showPageNum = 10; // 페이지 번호 보여주는 범위 : 10
 		int currentPage = 1; // 현재 페이지 : 1로 초기화
 		if (cnt > 0) { // cnt가 0보다 크다면
@@ -124,9 +126,9 @@
 		// startPage부터 endPage까지 계산, 출력하기
 		int startPage = ((currentPage - 1) / showPageNum) * showPageNum + 1; // 시작 페이지 구하는 변수 startPage
 		int endPage = startPage + showPageNum - 1; // 끝 페이지 구하는 변수 endPage
-		int beforePage = from - (cnt * 10);
-	    if (beforePage < 0) {
-	        beforePage = 0;
+		int beforePage = from - (cnt * 10); // 이전 페이지 구하는 변수 beforePage
+	    if (beforePage < 0) { // beforePage가 0보다 작으면
+	        beforePage = 0; // 0으로 설정
 	}
 		
 		// <<, < 계산, 출력하는 부분
@@ -163,17 +165,16 @@
 		%>
 		<%  
 		}
+		// 데이터 개수 % cnt의 나머지가 0이면 maxPage를 데이터 개수 / cnt로 설정하고, 0이 아니면 데이터 개수 / cnt + 1로 설정한다.
+		int maxPage = (stuName.size() % cnt == 0) ? (stuName.size() / cnt) : (stuName.size() / cnt) + 1;
+		
 		int nextPage = from + (cnt * 10); // 다음 페이지 구하는 변수 nextPage
-		if (nextPage > stuName.size()) { // nextPage가 총 데이터 개수보다 크다면
-		    nextPage = (stuName.size() / cnt) * cnt; // nextPage = (numbersize / 10) * 10
+		if (nextPage > (maxPage - 1) * cnt) { // 다음 페이지가 최대 페이지보다 클때
+			nextPage = (maxPage - 1) * cnt; // 다음 페이지를 최대 페이지로 설정
 		}
-		//int nextPage = from + (cnt * 10) - cnt; // 다음 페이지 구하는 변수 nextPage
-		//if (nextPage >= stuName.size()) {
-	    	//nextPage = (stuName.size() / cnt) * cnt - cnt;
-		//}		
 		%>
 		<td><a href="AllviewDB.jsp?from=<%=nextPage%>&cnt=<%=cnt%>">&gt;</a></td> <%-- > 출력 --%>
-		<td><a href="AllviewDB.jsp?from=<%=(stuName.size()/cnt)*cnt%>&cnt=<%=cnt%>">&gt;&gt;</a></td> <%-- >> 출력 --%>
+		<td><a href="AllviewDB.jsp?from=<%=maxPage * cnt - cnt%>&cnt=<%=cnt%>">&gt;&gt;</a></td> <%-- >> 출력 --%>
 	</tr>
 		
 <%
@@ -181,9 +182,8 @@
 		stmt.close(); // 리소스 정리
 		conn.close(); // 리소스 정리
 
-		//int totpageNum = 
 	} catch (Exception e) {
-		e.printStackTrace();	
+		e.printStackTrace(); // Exception 발생 시 에러 출력
 	}
 %>
 </table>

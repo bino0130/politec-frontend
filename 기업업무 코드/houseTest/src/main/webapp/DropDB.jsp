@@ -13,11 +13,11 @@
 		// localhost : 서버 IP주소, 3306 : 포트번호, kopo10 : DB 이름, root : user, kopoctc : passwd 
 		// getConnection 안의 url을 사용해서 DriverManager클래스의 getConnection 메소드를 호출
 		Statement stmt = conn.createStatement(); // sql쿼리를 실행하기위한 객체 stmt 생성
-		stmt.execute("drop table if exists anotherTwice;"); // 괄호 안의 쿼리문 실행
+		stmt.execute("drop table if exists anotherTwice;"); // 테이블 삭제하는 쿼리문 실행
 		stmt.close(); // 리소스 정리
 		conn.close(); // 리소스 정리
 	} catch (ClassNotFoundException | SQLException e) {
-		e.printStackTrace();
+		e.printStackTrace(); // 에러 발생 시 에러 출력
 	}
 %>
 </body>

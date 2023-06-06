@@ -13,34 +13,34 @@ try {
     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kopo10", "root", "kopoctc");
     Statement stmt = conn.createStatement();
     
- 	// 학번 데이터가 존재하는지 확인
-    String searchID = "SELECT MAX(studentid) FROM anotherTwice";
-    ResultSet rset = stmt.executeQuery(searchID);
-    rset.next();
-    int maxID = rset.getInt(1);
+    String searchID = "SELECT MAX(studentid) FROM anotherTwice"; // anotherTwice테이블의 비어있는 학번, 최대 학번 구하기
+    ResultSet rset = stmt.executeQuery(searchID); // 쿼리 실행
+    rset.next(); 
+    int maxID = rset.getInt(1); // maxID 설정
     // 시작 학번 설정
-    int startID = 0;
-    if (maxID > 0) {
-        startID = maxID;
-    } else {
-        startID = 209900;
+    int startID = 0; // startID=0으로 초기화
+    if (maxID > 0) { // maxiD가 0보다 크면
+        startID = maxID; // startID = maxID
+    } else { // 값이 없으면
+        startID = 209900; // 학번은 209900부터 시작 
     }
     
-    for (int i = startID + 1; i < startID + 301; i++) {
-        String name = "홍길" + (i - 209900);
-        int id = i;
-        int kor = (int) (Math.random() * 100) + 1;
-        int eng = (int) (Math.random() * 100) + 1;
-        int mat = (int) (Math.random() * 100) + 1;
+    for (int i = startID + 1; i < startID + 301; i++) { // 학번이 존재한다면 학번의 최대값 +1부터 300개의 데이터를 입력
+        String name = "홍길" + (i - 209900); // 이름은 홍길00
+        int id = i; // 학번은 i
+        int kor = (int) (Math.random() * 100) + 1; // 국어
+        int eng = (int) (Math.random() * 100) + 1; // 영어
+        int mat = (int) (Math.random() * 100) + 1; // 수학
         
+        // 테이블에 데이터 입력
         String insertQuery = "INSERT INTO anotherTwice VALUES ('" + name + "', " + id + "," + kor + ", " + eng + ", " + mat + ");";
-        stmt.executeUpdate(insertQuery);
+        stmt.executeUpdate(insertQuery); // 쿼리 실행
     }
     
-    stmt.close();
-    conn.close();
-} catch (ClassNotFoundException | SQLException e) {
-    e.printStackTrace();
+    stmt.close(); // 리소스 누수 방지
+    conn.close(); // 리소스 누수 방지
+} catch (ClassNotFoundException | SQLException e) { // ClassNotFoundException, SQLException 처리
+    e.printStackTrace(); // 에러 출력
 }
 %>
 

@@ -5,7 +5,7 @@
 <head>
 </head>
 <body>
-<h1>트와이스 테이블만들기 OK</h1>
+<h1>트와이스 테이블만들기 OK</h1> <%-- h1태그 사용 --%>
 <%
 	try {
 		Class.forName("com.mysql.cj.jdbc.Driver");// Mysql의 버전이 8.0이므로 JDBC 이렇게 작성
@@ -18,11 +18,11 @@
 				"studentid int primary key,"+
 				"kor int," +
 				"eng int," +
-				"mat int) default charset=utf8;"); // 괄호 안의 쿼리문 실행
+				"mat int) default charset=utf8;"); // anotherTwice 테이블 생성하는 쿼리문 실행
 				stmt.close(); // 리소스 정리
 				conn.close(); // 리소스 정리
 	} catch (ClassNotFoundException | SQLException e) {
-		e.printStackTrace();
+		e.printStackTrace(); // 에러 발생 시 에러문구 출력
 	}
 %>
 </body>
