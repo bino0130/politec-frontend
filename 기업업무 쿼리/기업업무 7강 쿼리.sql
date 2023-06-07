@@ -16,7 +16,10 @@ create table if not exists product (
 id int not null primary key auto_increment,
 name varchar(30),
 num int,
-checkdate date,
+checkDate date,
 registerDate date,
 content text)
 default charset = utf8mb4;
+
+insert into product (name, num, checkDate, registerDate, content) values ('사과', 10, '2019-09-06', '2019-09-06', '맛있는 사과');
+select * from product;
