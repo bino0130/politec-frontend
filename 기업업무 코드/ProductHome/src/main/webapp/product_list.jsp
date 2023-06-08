@@ -32,14 +32,26 @@ td {
 	text-align: center;
 }
 
-p {
+#all {
+	width : 800px;
+	height : 800px;
+	border : 1px solid black;
+	border-collapse : collapse;
+	margin-top : 30px;
+	margin-left : 75px;
+}
+
+#twice {
+	width : 100%;
 	text-align : center;
+	border-bottom : 1px solid black;
+	font-weight : 600
 }
 </style>
 </head>
 <body>
-<div style="width:800px; height:800px; border:1px solid black; border-collapse:collapse;">
-	<div id="twice" style="width:100%;  border-bottom:1px solid black;"><p>(주)트와이스 재고 현황 - 전체현황</p></div>
+<div id="all">
+	<div id="twice"><p>(주)트와이스 재고 현황 - 전체현황</p></div>
 	<div style="width:100%; height:80%;">
 		<%
 		Class.forName("com.mysql.cj.jdbc.Driver");// Mysql의 버전이 8.0이므로 JDBC 이렇게 작성
@@ -86,8 +98,8 @@ p {
 		    	stmt.close();
 				%>
 			</table>
-			<table style="border:0px; margin-top:30px; margin-left:75px;">
-				<tr><td style="border:0px; text-align:right;"><input type="submit" value='신규등록' formaction="gongji_insert.jsp"></td></tr>
+			<table style="border:0px; margin-top:10px; margin-left:75px;">
+				<tr><td style="border:0px; text-align:right;"><input type="submit" value='신규등록' formaction="product_insert.jsp"></td></tr>
 			</table>
 		</form>
 	</div>
