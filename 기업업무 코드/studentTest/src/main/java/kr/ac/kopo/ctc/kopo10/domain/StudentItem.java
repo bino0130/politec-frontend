@@ -6,7 +6,6 @@ public class StudentItem {
 	 private int kor;
 	 private int eng;
 	 private int mat;
-	   // 학번이랑 등등 알아서 넣으시고~
 	   
 //	 public int getId() {
 //	      return id;

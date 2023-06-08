@@ -1,12 +1,8 @@
 package kr.ac.kopo.ctc.kopo10.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
+import java.util.*;
+import java.io.*;
 
 import kr.ac.kopo.ctc.kopo10.domain.StudentItem;
 

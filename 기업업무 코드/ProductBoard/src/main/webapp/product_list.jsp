@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 리스트 페이지</title>
+<title>(주)트와이스 전체현황</title>
 <style>
 table {
 	width: 600px;
@@ -15,37 +15,17 @@ table {
 
 td {
 	border: 1px solid black;
+	padding-left: 15px;
 }
 
-.one {
-	width: 10%;
-	text-align: center;
-}
-
-.seven {
-	width: 70%;
-}
-
-.two {
-	width: 20%;
-	text-align: center;
-}
-
-
-div{
-	position: relative;/* 부모요소에 relative */
-	width:100%; height:20%;
-}
 p {
-	position: absolute;left: 50%;top: 50%;
-	transform: translate(-50%,-50%) /* 자식요소에 translate 값 주기*/
+	text-align : center;
 }
-
 </style>
 </head>
 <body>
 <div style="width:800px; height:800px; border:1px solid black; border-collapse:collapse;">
-	<div id="twice" style="width:100%;  border:1px solid black;"><p>(주)트와이스 재고 현황 - 전체현황</p></div>
+	<div id="twice" style="width:100%;  border-bottom:1px solid black;"><p>(주)트와이스 재고 현황 - 전체현황</p></div>
 	<div style="width:100%; height:80%;">
 		<%
 		Class.forName("com.mysql.cj.jdbc.Driver");// Mysql의 버전이 8.0이므로 JDBC 이렇게 작성
@@ -57,10 +37,10 @@ p {
 		ResultSet rset = stmt.executeQuery("select * from product");
 		%>
 		<form method="post">
-			<table>
+			<table style="margin-top:30px; margin-left:75px;">
 				<tr>
 					<td>상품번호</td>
-					<td>상품명</td>
+					<td style="width: 150px;">상품명</td>
 					<td>현재 재고수</td>
 					<td>재고 파악일</td>
 					<td>상품 등록일</td>
@@ -92,8 +72,8 @@ p {
 		    	stmt.close();
 				%>
 			</table>
-			<table style="border:0px">
-				<tr><td style="border:0px; text-align:right;"><input type="submit" value='신규등록' formaction="gongji_insert.jsp"></td></tr>
+			<table style="border:0px; margin-top:30px; margin-left:75px;">
+				<tr><td style="border:0px; text-align:right;"><input type="submit" value='신규등록' formaction="product_insert.jsp"></td></tr>
 			</table>
 		</form>
 	</div>
