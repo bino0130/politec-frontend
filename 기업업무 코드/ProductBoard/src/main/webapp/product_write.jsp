@@ -7,19 +7,24 @@ java.text.*, com.oreilly.servlet.MultipartRequest, com.oreilly.servlet.multipart
 <head>
 <meta charset="UTF-8">
 <title>등록 완료</title>
+<style>
+table {
+	border-collapse : collapse;
+	border : 1px solid black;
+	width : 500px;
+	height : 400px;
+	margin-top : 30px;
+	margin-left : 75px;
+}
+
+td {
+	border : 1px solid black;
+}
+</style>
 </head>
 <body>
 <%
 try {
-	int sizeLimit = 100 * 500 * 500;
-	String path = "./image";
-	String directory = request.getServletContext().getRealPath(path);
-	MultipartRequest multi = new MultipartRequest(request, directory, sizeLimit, "UTF-8", new DefaultFileRenamePolicy());
-	
-	//product_insert로부터 "newId"를 parameter로 받는 String 변수 id 생성
-	request.setCharacterEncoding("utf-8"); // 인코딩 utf-8로 설정
-	String newId = multi.getParameter("newId");
-	
 	//product_update로부터 "updateId"를 parameter로 받는 int형 변수 printId 생성
 	String updateId = request.getParameter("updateId");
 
@@ -30,6 +35,14 @@ try {
 	Statement stmt = conn.createStatement(); // sql쿼리를 실행하기위한 객체 stmt 생성
 	
 	if (updateId == null) {
+		int sizeLimit = 100 * 500 * 500;
+		String path = "./image";
+		String directory = request.getServletContext().getRealPath(path);
+		MultipartRequest multi = new MultipartRequest(request, directory, sizeLimit, "UTF-8", new DefaultFileRenamePolicy());
+		
+		//product_insert로부터 "newId"를 parameter로 받는 String 변수 id 생성
+		String newId = multi.getParameter("newId");
+		
 		String file = multi.getFilesystemName("imgFile");
 		String filename = multi.getFilesystemName("imgFile");
 		
@@ -37,12 +50,6 @@ try {
 		String itemName = multi.getParameter("itemName");
 		String checkDay = multi.getParameter("checkDay");
 		String itemDescribe = multi.getParameter("itemDescribe");
-		
-		out.println(newId);
-		out.println(itemCount);
-		out.println(itemName);
-		out.println(checkDay);
-		out.println(path);
 		
 		String Querytxt = String.format("insert into product values (%d, '%s', %d, '%s', '%s', '%s', '%s')"
 		,Integer.parseInt(newId),itemName, itemCount, checkDay, checkDay, itemDescribe, "./"+filename);
@@ -53,32 +60,34 @@ try {
 <form method="post" action="product_list.jsp">
 	<table>
 		<tr>
-			<td style="height : 20%;"><p style="text-align : center;">신규 상품 등록</p></td>
+			<td style="height : 10%;"><p style="text-align : center; font-weight: 600;">신규 상품 등록</p></td>
 		</tr>
 		<tr>
-			<td style="text-align : center;"><div style="margin-bottom : 10px;">신규 상품이 등록되었습니다</div>
-										<input type="submit" value="목록으로 이동"></td>
+			<td style="text-align : center;"><div style="margin-bottom : 10px; font-weight: 600;"><%=newId%>번 신규 상품 <%=itemName%>이(가) 등록되었습니다</div>
+										<input type="submit" value="재고 현황"></td>
 		</tr>
 	</table>
 </form>
 <%
 	} else if (updateId != null) {
-		String updateTitle = request.getParameter("updateTitle");
-		String updateContent = request.getParameter("updateContent");
+		String updateCount = request.getParameter("updateCount");
+		String updateCheckDate = request.getParameter("updateCheckDate");
+		String updateRegiDate = request.getParameter("updateRegiDate");
+		String updateItemName = request.getParameter("itemName");
 		
-		String Querytxt = String.format("update product set title='%s', content='%s' where id=%d"
-										, updateTitle, updateContent, Integer.parseInt(updateId));
+		String Querytxt = String.format("update product set num=%d, checkDate='%s', registerDate='%s' where id=%d"
+								, Integer.parseInt(updateCount), updateCheckDate, updateRegiDate, Integer.parseInt(updateId));
 		stmt.executeUpdate(Querytxt);
 		
 %>
-<form method="post" action="gongji_list.jsp">
+<form method="post" action="product_list.jsp">
 	<table>
 		<tr>
-			<td style="height : 20%;"><p style="text-align : center;">상품 수정</p></td>
+			<td style="height : 10%;"><p style="text-align : center;">상품 수정</p></td>
 		</tr>
 		<tr>
-			<td style="text-align : center;"><div style="margin-bottom : 10px;">상품이 수정되었습니다.</div>
-										<input type="submit" value="게시판으로 이동"></td>
+			<td style="text-align : center;"><div style="margin-bottom : 10px; font-weight: 600;"><%=updateId%>번 상품 <%=updateItemName%>이(가) 수정되었습니다.</div>
+										<input type="submit" value="재고 현황"></td>
 		</tr>
 	</table>
 </form>
