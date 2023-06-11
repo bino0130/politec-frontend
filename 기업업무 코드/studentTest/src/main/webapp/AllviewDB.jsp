@@ -129,7 +129,7 @@
 		int beforePage = from - (cnt * 10); // 이전 페이지 구하는 변수 beforePage
 	    if (beforePage < 0) { // beforePage가 0보다 작으면
 	        beforePage = 0; // 0으로 설정
-	}
+		}
 		
 		// <<, < 계산, 출력하는 부분
 		if (from == 0) { // from이 0이라면

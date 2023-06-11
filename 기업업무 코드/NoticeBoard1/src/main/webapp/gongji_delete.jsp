@@ -12,6 +12,8 @@
 		height : 400px;
 		border : 1px solid black;
 		border-collapse : collapse;
+		margin-top : 30px;
+		margin-left : 50px;
 	}
 	
 	td {
@@ -23,6 +25,7 @@
 <%
 	request.setCharacterEncoding("utf-8"); // 인코딩 utf-8로 설정
 	int updateId = Integer.parseInt(request.getParameter("updateId")); // "id"를 parameter로 받는 int형 변수 id 생성
+	String updateTitle = request.getParameter("updateTitle");
 	
 	Class.forName("com.mysql.cj.jdbc.Driver");// Mysql의 버전이 8.0이므로 JDBC 이렇게 작성
 	Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:33060/kopo10", "root", "kopoctc");
@@ -42,7 +45,7 @@
 			<td style="height : 20%;"><p style="text-align : center;">게시글 삭제</p></td>
 		</tr>
 		<tr>
-			<td style="text-align : center;"><div style="margin-bottom : 10px;">게시글이 삭제되었습니다.</div>
+			<td style="text-align : center;"><div style="margin-bottom : 10px;"><%=updateId%>번 <%=updateTitle%> 게시글이 삭제되었습니다.</div>
 										<input type="submit" value="게시판으로 이동"></td>
 		</tr>
 	</table>

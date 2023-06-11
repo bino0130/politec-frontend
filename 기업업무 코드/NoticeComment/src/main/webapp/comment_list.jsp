@@ -25,8 +25,8 @@ td {
 	text-align: center;
 }
 
-.seven {
-	width: 70%;
+.six {
+	width: 60%;
 }
 
 .two {
@@ -51,17 +51,20 @@ a:visited { /* 방문한 적 있는 a 태그 */
 	// getConnection 안의 url을 사용해서 DriverManager클래스의 getConnection 메소드를 호출
 	Statement stmt = conn.createStatement(); // sql쿼리를 실행하기위한 객체 stmt 생성
 
-	ResultSet rset = stmt.executeQuery("select id, title, date from gongji");
+	ResultSet rset = stmt.executeQuery("select id, title, date, recnt, viewcnt from comment order by rootid desc, recnt asc");
 	
 	List<Integer> gongjiId = new ArrayList<Integer>(); // id 담는 리스트 gongjiId
 	List<String> gongjiName = new ArrayList<String>(); // 이름 리스트 gongjiName
 	List<String> registerDateList = new ArrayList<String>(); // 등록일 담는 리스트 checkDateList
+	List<Integer> recntList = new ArrayList<Integer>();
+	List<Integer> viewcntList = new ArrayList<Integer>();
 	%>
 	<form method="post">
 		<table>
 			<tr>
 				<td class="one">번호</td>
 				<td class="seven" style="text-align: center;">제목</td>
+				<td class="one">조회수</td>
 				<td class="two">등록일</td>
 			</tr>
 
@@ -70,6 +73,8 @@ a:visited { /* 방문한 적 있는 a 태그 */
 					gongjiId.add(rset.getInt(1));
 					gongjiName.add(rset.getString(2));
 					registerDateList.add(rset.getString(3));
+					recntList.add(rset.getInt(4));
+					viewcntList.add(rset.getInt(5));
 				}
 				String fromPT = request.getParameter("from"); // 페이지네이션 시 필요한 from 받아오는 변수 fromPT
 				String cntPT = request.getParameter("cnt"); // 페이지네이션 시 필요한 cnt 받아오는 변수 cntPT
@@ -98,7 +103,8 @@ a:visited { /* 방문한 적 있는 a 태그 */
 			%>
 			<tr>
 				<td class="one"><%=gongjiId.get(i)%></td>
-				<td class="seven"><a href='gongji_view.jsp?key=<%=gongjiId.get(i)%>'><%=gongjiName.get(i)%></a></td>
+				<td class="seven"><a href='comment_view.jsp?key=<%=gongjiId.get(i)%>'><%=gongjiName.get(i)%></a></td>
+				<td class="one"><%=viewcntList.get(i)%></td>
 				<td class="two"><%=registerDateList.get(i)%></td>
 			</tr>
 			<%
@@ -106,7 +112,7 @@ a:visited { /* 방문한 적 있는 a 태그 */
 			%>
 		</table>
 		<table style="border:0px">
-			<tr><td style="border:0px; text-align:right;"><input type="submit" value='신규' formaction="gongji_insert.jsp"></td></tr>
+			<tr><td style="border:0px; text-align:right;"><input type="submit" value='신규' formaction="comment_insert.jsp"></td></tr>
 		</table>
 	</form>
 		<table>
@@ -130,14 +136,14 @@ a:visited { /* 방문한 적 있는 a 태그 */
 				if (from == 0) { // from이 0이라면
 			%>
 				<tr>
-					<td><a href="gongji_list.jsp?from=0&cnt=<%=cnt%>">&lt;&lt;</a></td> <%-- << : 1페이지로 이동 --%>
-					<td><a href="gongji_list.jsp?from=0&cnt=<%=cnt%>">&lt;</a></td>  <%-- < : 1페이지로 이동 --%>
+					<td><a href="comment_list.jsp?from=0&cnt=<%=cnt%>">&lt;&lt;</a></td> <%-- << : 1페이지로 이동 --%>
+					<td><a href="comment_list.jsp?from=0&cnt=<%=cnt%>">&lt;</a></td>  <%-- < : 1페이지로 이동 --%>
 			<%
 				} else if (from != 0) {
 			%>
 			
-					<td><a href="gongji_list.jsp?from=0&cnt=<%=cnt%>">&lt;&lt;</a></td> <%-- << : 1페이지로 이동 --%>
-					<td><a href="gongji_list.jsp?from=<%=beforePage%>&cnt=<%=cnt%>">&lt;</a></td> <%-- << : 1페이지 앞으로 이동 --%>
+					<td><a href="comment_list.jsp?from=0&cnt=<%=cnt%>">&lt;&lt;</a></td> <%-- << : 1페이지로 이동 --%>
+					<td><a href="comment_list.jsp?from=<%=beforePage%>&cnt=<%=cnt%>">&lt;</a></td> <%-- << : 1페이지 앞으로 이동 --%>
 			<%
 				}
 				if (endPage > totpageNum) { // endPage가 totpageNum보다 크다면
@@ -149,12 +155,12 @@ a:visited { /* 방문한 적 있는 a 태그 */
 				    int nowPage = i; // nowPage = i
 					if (nowPage == currentPage) { // nowPage가 현재페이지와 같다면
 			%>
-						<td><a href="gongji_list.jsp?from=<%=nowFrom%>&cnt=<%=cnt%>" style="background-color:red; color:white"><%=nowPage%></a></td>
+						<td><a href="comment_list.jsp?from=<%=nowFrom%>&cnt=<%=cnt%>" style="background-color:red; color:white"><%=nowPage%></a></td>
 		    			<%--현재 페이지 출력하고 알아볼 수 있게 css 입힘--%>
 		    <%
 					} else { // nowPage가 현재페이지와 다르다면
 		    %>
-		    			<td><a href="gongji_list.jsp?from=<%=nowFrom%>&cnt=<%=cnt%>"><%=nowPage%></a></td>
+		    			<td><a href="comment_list.jsp?from=<%=nowFrom%>&cnt=<%=cnt%>"><%=nowPage%></a></td>
 		    			<%-- 페이지 출력 --%>
 		    <%
 					}
@@ -168,8 +174,8 @@ a:visited { /* 방문한 적 있는 a 태그 */
 					nextPage = (maxPage - 1) * cnt; // 다음 페이지를 최대 페이지로 설정
 				}
 		    %>
-		    	<td><a href="gongji_list.jsp?from=<%=nextPage%>&cnt=<%=cnt%>">&gt;</a></td> <%-- > 출력 --%>
-				<td><a href="gongji_list.jsp?from=<%=maxPage * cnt - cnt%>&cnt=<%=cnt%>">&gt;&gt;</a></td> <%-- >> 출력 --%>
+		    	<td><a href="comment_list.jsp?from=<%=nextPage%>&cnt=<%=cnt%>">&gt;</a></td> <%-- > 출력 --%>
+				<td><a href="comment_list.jsp?from=<%=maxPage * cnt - cnt%>&cnt=<%=cnt%>">&gt;&gt;</a></td> <%-- >> 출력 --%>
 			</tr>
 			<%
 				conn.close();

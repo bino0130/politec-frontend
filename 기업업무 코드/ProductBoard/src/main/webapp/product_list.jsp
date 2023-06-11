@@ -75,7 +75,7 @@ a:visited { /* 방문한 적 있는 a 태그 */
 		List<Integer> productId = new ArrayList<Integer>(); // 물건id 담는 리스트 productId
 		List<String> productName = new ArrayList<String>(); // 이름 리스트 productName
 		List<Integer> countList = new ArrayList<Integer>(); // 물건 개수 담는 리스트 count
-		List<String> checkDateList = new ArrayList<String>(); // 현재 재고수 담는 리스트 checkDateList
+		List<String> checkDateList = new ArrayList<String>(); // 현재 재고 체크날짜 담는 리스트 checkDateList
 		List<String> registerDateList = new ArrayList<String>(); // 재고 파악일 담는 리스트 registerDateList
 		%>
 		<form method="post">

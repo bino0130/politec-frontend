@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 작성 페이지</title>
+<title>공지사항 댓글 작성 페이지</title>
 <style>
 	table {
 		margin-top : 30px;
@@ -59,12 +59,29 @@
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	Calendar c1 = Calendar.getInstance();
-	String strToday = sdf.format(c1.getTime());
+	String strToday = sdf.format(c1.getTime()); // 오늘 날짜 설정
 	
 	int id = 1;
-	ResultSet rset2 = stmt.executeQuery("select id from gongji");
-	while(rset2.next()) {
-		id = rset2.getInt(1) + 1;
+	ResultSet rset2 = stmt.executeQuery("select id from comment");
+	while(rset2.next()) { 
+		id = rset2.getInt(1) + 1; // 최대 id + 1로 id 설정
+	} 
+	
+	request.setCharacterEncoding("utf-8"); // 인코딩 utf-8로 설정
+	int rootid = 0;
+	rootid = Integer.parseInt(request.getParameter("rootid")); // 원 글 id 나타내는 rootid
+	
+	int relevel = 0;
+	relevel = Integer.parseInt(request.getParameter("relevel")) + 1; // 댓글 순서 나타내는 relevel
+
+	int recnt = 1;
+	String Querytxt = String.format("select max(recnt) + 1 from comment where rootid=%d and relevel=%d", rootid, relevel);
+	ResultSet rset3 = stmt.executeQuery(Querytxt);
+	while (rset3.next()) {
+		recnt = rset3.getInt(1); // 댓글의 댓글 나타내는 recnt
+	}
+	if (recnt == 0) {
+		recnt = 1;
 	}
 	conn.close();
     stmt.close();
@@ -74,31 +91,41 @@
 			<tr>
 				<td class="one" style="height:30px;">번호</td>
 				<td class="nine" style="height:30px;"><%=id%>
-				<input type="hidden" name="autoId" value="<%=id%>">
+					<input type="hidden" name="commentId" value="<%=id%>">
 				</td>
 			</tr>
 			<tr>
 				<td class="one" style="height:30px;">제목</td>
 				<td class="nine" style="height:30px;">
-					<input type="text" name="title" onkeydown="validateInput(this)" maxlength="20" value="" style="width:400px;" required>
+					<input type="text" name="commentTitle" onkeydown="validateInput(this)" maxlength="20" value="" style="width:400px;" required>
 				</td>
 			</tr>
 			<tr>
 				<td class="one" style="height:30px;">일자</td>
-				<td class="nine" style="height:30px;"><%=strToday%><input type="hidden" name="today" value="<%=strToday%>"></td>
+				<td class="nine" style="height:30px;"><%=strToday%><input type="hidden" name="commentDate" value="<%=strToday%>"></td>
 			</tr>
 			<tr>
 				<td class="one">내용</td>
 				<td class="nine">
-					<textarea name="message" maxlength="600" onkeydown="validateInput(this)" style="overflow: auto; border: none; resize: none; width: 95%; height: 300px;" required></textarea>
+					<textarea name="commentContent" maxlength="600" onkeydown="validateInput(this)" style="overflow: auto; border: none; resize: none; width: 95%; height: 300px;" required></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td class="one">원글</td>
+				<td class="nine"><input type="text" name="belongId" value="<%=rootid%>" readonly></td>
+			</tr>
+			<tr>
+				<td>댓글 레벨</td>
+				<td><span style="width:100px; display:inline-block;"><input type="text" name="commentRelevel" value="<%=relevel%>" readonly></span>
+					<span style="margin-left:100px;">댓글 내 순서 <input type="text" name="commentRecnt" value="<%=recnt%>" readonly></span>
 				</td>
 			</tr>
 		</table>
 		<table id="down" style="margin-left : 50px;">
 			<tr>
 				<td style="border:0px; text-align:right;">
-					<input type="submit" name='' value="취소" formaction="gongji_list.jsp" formnovalidate>
-					<input type="submit" name='' value="쓰기" formaction="gongji_write.jsp">
+					<input type="submit" name='' value="취소" formaction="comment_list.jsp" formnovalidate>
+					<input type="submit" name='' value="쓰기" formaction="comment_rewrite.jsp">
 				</td>
 			</tr>
 		</table>

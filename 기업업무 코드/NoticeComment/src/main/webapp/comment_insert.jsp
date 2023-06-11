@@ -5,15 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 수정 페이지</title>
+<title>공지사항 작성 페이지</title>
 <style>
+	table {
+		margin-top : 30px;
+		margin-left : 50px;
+	}
+
 	#up {
 		width : 600px;
 		height : 300px;
 		border : 1px solid black;
 		border-collapse : collapse;
-		margin-top : 30px;
-		margin-left : 50px;
 	}
 	
 	td {
@@ -30,6 +33,7 @@
 	
 	#down {
 		width : 600px;
+		margin-top : 30px;
 		margin-left : 50px;
 	}
 </style>
@@ -46,66 +50,58 @@
 </script>
 </head>
 <body>
-<%
-	request.setCharacterEncoding("utf-8"); // 인코딩 utf-8로 설정
-	int id = Integer.parseInt(request.getParameter("id")); // "id"를 parameter로 받는 int형 변수 id 생성
-
+	<%
 	Class.forName("com.mysql.cj.jdbc.Driver");// Mysql의 버전이 8.0이므로 JDBC 이렇게 작성
 	Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:33060/kopo10", "root", "kopoctc");
 	// localhost : 서버 IP주소, 33060 : 포트번호, kopo10 : DB 이름, root : user, kopoctc : passwd 
 	// getConnection 안의 url을 사용해서 DriverManager클래스의 getConnection 메소드를 호출
 	Statement stmt = conn.createStatement(); // sql쿼리를 실행하기위한 객체 stmt 생성
 	
-	String Querytxt = String.format("select id, title, date, content from gongji where id= %d", id);
-	ResultSet rset = stmt.executeQuery(Querytxt);
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	Calendar c1 = Calendar.getInstance();
+	String strToday = sdf.format(c1.getTime());
 	
-	String title = "";
-	String date = "";
-	String content = "";
-%>
-<form>
-	<table id="up">
-		<%
-			while(rset.next()) {
-				id = rset.getInt(1);
-				title = rset.getString(2);
-				date = rset.getString(3);
-				content = rset.getString(4);
-		%>
+	int id = 1;
+	ResultSet rset2 = stmt.executeQuery("select id from comment");
+	while(rset2.next()) {
+		id = rset2.getInt(1) + 1;
+	}
+	conn.close();
+    stmt.close();
+	%>
+	<form method="post">
+		<table id="up">
 			<tr>
 				<td class="one" style="height:30px;">번호</td>
-				<td style="height:30px;"><input type="text" name="updateId" value="<%=id%>" style="width:400px;" readonly></td>
+				<td class="nine" style="height:30px;"><%=id%>
+				<input type="hidden" name="autoId" value="<%=id%>">
+				</td>
 			</tr>
 			<tr>
 				<td class="one" style="height:30px;">제목</td>
-				<td style="height:30px;">
-					<input type="text"  onkeydown="validateInput(this)" maxlength="20" name="updateTitle" value="<%=title%>" style="width:400px;" required>
+				<td class="nine" style="height:30px;">
+					<input type="text" name="title" onkeydown="validateInput(this)" maxlength="20" value="" style="width:400px;" required>
 				</td>
 			</tr>
 			<tr>
 				<td class="one" style="height:30px;">일자</td>
-				<td style="height:30px;"><p><%=date%></p></td>
+				<td class="nine" style="height:30px;"><%=strToday%><input type="hidden" name="today" value="<%=strToday%>"></td>
 			</tr>
 			<tr>
 				<td class="one">내용</td>
-				<td><textarea name="updateContent" maxlength="600" onkeydown="validateInput(this)" rows="20" cols="70" style="overflow: auto; border: none; resize: none;" required><%=content%></textarea></td>
+				<td class="nine">
+					<textarea name="message" maxlength="600" onkeydown="validateInput(this)" style="overflow: auto; border: none; resize: none; width: 95%; height: 300px;" required></textarea>
+				</td>
 			</tr>
-		<%
-			}
-		
-		conn.close();
-	    stmt.close();
-		%>
-	</table>
-	<table id="down">
-		<tr>
-			<td style="border:0px; text-align:right;">
-				<input type="submit" name='' value="취소" formaction="gongji_list.jsp" formnovalidate>
-				<input type="submit" name='' value="쓰기" formaction="gongji_write.jsp">
-				<input type="submit" name='' value="삭제" formaction="gongji_delete.jsp">
-			</td>
-		</tr>
-	</table>
-</form>
+		</table>
+		<table id="down" style="margin-left : 50px;">
+			<tr>
+				<td style="border:0px; text-align:right;">
+					<input type="submit" name='' value="취소" formaction="comment_list.jsp" formnovalidate>
+					<input type="submit" name='' value="쓰기" formaction="comment_write.jsp">
+				</td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>

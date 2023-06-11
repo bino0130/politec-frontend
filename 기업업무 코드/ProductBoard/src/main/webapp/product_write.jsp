@@ -63,7 +63,7 @@ try {
 			<td style="height : 10%;"><p style="text-align : center; font-weight: 600;">신규 상품 등록</p></td>
 		</tr>
 		<tr>
-			<td style="text-align : center;"><div style="margin-bottom : 10px; font-weight: 600;"><%=newId%>번 신규 상품 <%=itemName%>이(가) 등록되었습니다</div>
+			<td style="text-align : center;"><div style="margin-bottom : 10px; font-weight: 600;"><%=newId%>번 신규 상품 <%=itemName%>이(가) 등록되었습니다.</div>
 										<input type="submit" value="재고 현황"></td>
 		</tr>
 	</table>
