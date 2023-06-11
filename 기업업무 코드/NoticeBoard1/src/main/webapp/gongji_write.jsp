@@ -80,7 +80,7 @@
 			<td style="height : 20%;"><p style="text-align : center;">게시글 수정</p></td>
 		</tr>
 		<tr>
-			<td style="text-align : center;"><div style="margin-bottom : 10px;"><%=Integer.parseInt(updateId)%>번 <%=updateTitle%> 게시글이 생성되었습니다.</div>
+			<td style="text-align : center;"><div style="margin-bottom : 10px;"><%=Integer.parseInt(updateId)%>번 <%=updateTitle%> 게시글이 수정되었습니다.</div>
 										<input type="submit" value="게시판으로 이동"></td>
 		</tr>
 	</table>

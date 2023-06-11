@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 댓글 작성 실행 페이지</title>
+<title>댓글 작성 완료 페이지</title>
 <style>
 	table {
 		width : 400px;
@@ -31,7 +31,8 @@
 	
 	request.setCharacterEncoding("utf-8"); // 인코딩 utf-8로 설정
 	int commentId = Integer.parseInt(request.getParameter("commentId"));
-	String commentTitle = request.getParameter("commentTitle");
+	String commentTitle = request.getParameter("commentTitle"); // 가져온 데이터 입력
+	commentTitle = commentTitle.replace("<", "&lt;").replace(">", "&gt;"); // <, > 문자 대체
 	String commentDate = request.getParameter("commentDate");
 	String commentContent = request.getParameter("commentContent");
 	int belongId = Integer.parseInt(request.getParameter("belongId"));
@@ -44,21 +45,22 @@
 			hypen = hypen + "-";
 		}
 	}
-	commentTitle = hypen + ">[Re]" + commentTitle; 
-	out.println(commentTitle);
+	commentTitle = hypen + ">[Re]" + commentTitle + "[New]"; 
 	
-	/*String Querytxt = String.format("insert into comment (title, date, content, rootid, relevel, recnt) value"
-			+ "'%s', '%s', '%s', %d, %d, %d", commentTitle, commentDate, commentContent, belongId, commentRelevel, commentRecnt);
-	stmt.executeQuery(Querytxt);*/
+	String Querytxt = String.format("insert into comment (title, date, content, rootid, relevel, recnt, viewcnt) "
+		    + "values ('%s', '%s', '%s', %d, %d, %d, %d)", commentTitle, commentDate, commentContent, belongId, commentRelevel, commentRecnt, 0);
+	stmt.executeUpdate(Querytxt);
 %>
-<form method="post" action="gongji_list.jsp">
+<form method="post" action="comment_list.jsp">
 	<table>
 		<tr>
 			<td style="height : 20%;"><p style="text-align : center;">게시글 생성</p></td>
 		</tr>
 		<tr>
-			<td style="text-align : center;"><div style="margin-bottom : 10px;"><%=belongId%>번 게시글의 댓글이 생성되었습니다.</div>
-										<input type="submit" value="게시판으로 이동"></td>
+			<td style="text-align : center;">
+				<div style="margin-bottom : 10px;"><%=belongId%>번 게시글의 댓글이 생성되었습니다.</div>
+				<input type="submit" value="게시판으로 이동">
+			</td>
 		</tr>
 	</table>
 </form>

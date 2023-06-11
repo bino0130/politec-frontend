@@ -85,7 +85,7 @@ try {
 				</tr>
 				<tr>
 					<td>제목</td>
-					<td><%=title%></td>
+					<td><%=title%><input type="hidden" name="title" value="<%=title%>"></td>
 				</tr>
 				<tr>
 					<td>조회수</td>

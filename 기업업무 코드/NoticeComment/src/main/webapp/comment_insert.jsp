@@ -93,6 +93,16 @@
 					<textarea name="message" maxlength="600" onkeydown="validateInput(this)" style="overflow: auto; border: none; resize: none; width: 95%; height: 300px;" required></textarea>
 				</td>
 			</tr>
+			<tr>
+				<td>원글</td>
+				<td><%=id%><input type="hidden" name="rootid" value="<%=id%>"></td>
+			</tr>
+			<tr>
+				<td style="font-size:13px;">댓글 레벨</td>
+				<td><span style="width:100px; display:inline-block;">0<input type="hidden" name="relevel" value="0"></span>
+					<span>댓글 내 순서 <input type="text" name="recnt" value="0" readonly></span> <!-- 원글이므로 relevel, recnt = 0 -->
+				</td>
+			</tr>
 		</table>
 		<table id="down" style="margin-left : 50px;">
 			<tr>
