@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 리스트 페이지</title>
+<title>공지사항/댓글 리스트 페이지</title>
 <style>
 table {
 	width: 600px;
@@ -51,7 +51,7 @@ a:visited { /* 방문한 적 있는 a 태그 */
 	// getConnection 안의 url을 사용해서 DriverManager클래스의 getConnection 메소드를 호출
 	Statement stmt = conn.createStatement(); // sql쿼리를 실행하기위한 객체 stmt 생성
 
-	ResultSet rset = stmt.executeQuery("select id, title, date, recnt, viewcnt from comment order by rootid desc, recnt asc");
+	ResultSet rset = stmt.executeQuery("select id, title, date, recnt, viewcnt from comment order by rootid desc, relevel asc, recnt asc");
 	
 	List<Integer> gongjiId = new ArrayList<Integer>(); // id 담는 리스트 gongjiId
 	List<String> gongjiName = new ArrayList<String>(); // 이름 리스트 gongjiName

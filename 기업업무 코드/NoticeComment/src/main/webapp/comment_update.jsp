@@ -56,7 +56,7 @@
 	request.setCharacterEncoding("utf-8"); // 인코딩 utf-8로 설정
 	int id = Integer.parseInt(request.getParameter("id")); // "id"를 parameter로 받는 int형 변수 id 생성
 
-	String Querytxt = String.format("select * from gongji where id= %d", id);
+	String Querytxt = String.format("select * from comment where id= %d", id);
 	ResultSet rset = stmt.executeQuery(Querytxt);
 	
 	int printId = 0;

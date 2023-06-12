@@ -38,15 +38,29 @@
 	}
 </style>
 <script>
-	function validateInput(element) {
-		  var value = element.value.trim(); // 입력값의 양 끝 공백 제거
+function validateInput(element) {
+	var value = element.value.trim(); // 입력값의 양 끝 공백 제거
 
-	  	if (value === '') {
-	    	element.setCustomValidity('공백만으로 이루어진 문자는 사용할 수 없습니다.');
-	  	} else {
-	    	element.setCustomValidity(''); // 유효성 검사 통과
-	 	 }
-	}
+  	if (value === '') {
+    	element.setCustomValidity('공백만으로 이루어진 문자는 사용할 수 없습니다.');
+  	} else {
+    	var words = value.split(' '); // 입력값을 공백을 기준으로 분할하여 배열로 저장
+    	var isValid = true;
+    
+    	for (var i = 0; i < words.length; i++) {
+      		if (words[i] === '') {
+        		isValid = false; // 공백만 있는 단어가 있을 경우 유효하지 않음
+        		break;
+      		}
+    	}
+    
+    	if (isValid) {
+      		element.setCustomValidity(''); // 유효성 검사 통과
+    	} else {
+      		element.setCustomValidity('공백만으로 이루어진 문자는 사용할 수 없습니다.');
+    	}
+  	}
+}
 </script>
 </head>
 <body>
@@ -97,7 +111,7 @@
 			<tr>
 				<td class="one" style="height:30px;">제목</td>
 				<td class="nine" style="height:30px;">
-					<input type="text" name="commentTitle" onkeydown="validateInput(this)" maxlength="20" value="" style="width:400px;" required>
+					<input type="text" name="commentTitle" oninput="validateInput(this)" maxlength="20" value="" style="width:400px;" required>
 				</td>
 			</tr>
 			<tr>
@@ -107,7 +121,7 @@
 			<tr>
 				<td class="one">내용</td>
 				<td class="nine">
-					<textarea name="commentContent" maxlength="600" onkeydown="validateInput(this)" style="overflow: auto; border: none; resize: none; width: 95%; height: 300px;" required></textarea>
+					<textarea name="commentContent" maxlength="600" oninput="validateInput(this)" style="overflow: auto; border: none; resize: none; width: 95%; height: 300px;" required></textarea>
 				</td>
 			</tr>
 			<tr>

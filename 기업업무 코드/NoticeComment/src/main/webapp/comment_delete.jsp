@@ -24,7 +24,7 @@
 <body>
 <%
 	Class.forName("com.mysql.cj.jdbc.Driver");// Mysql의 버전이 8.0이므로 JDBC 이렇게 작성
-	Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:33060/kopo10", "root", "kopoctc");
+	Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/kopo10", "root", "kopoctc");
 	// localhost : 서버 IP주소, 33060 : 포트번호, kopo10 : DB 이름, root : user, kopoctc : passwd 
 	// getConnection 안의 url을 사용해서 DriverManager클래스의 getConnection 메소드를 호출
 	Statement stmt = conn.createStatement(); // sql쿼리를 실행하기위한 객체 stmt 생성
@@ -37,7 +37,7 @@
 	int recnt = Integer.parseInt(request.getParameter("recnt"));
 	
 	if (relevel == 0) {
-		String Querytxt = String.format("delete from comment where id=%d", id);
+		String Querytxt = String.format("delete from comment where rootid=%d", rootid);
 		stmt.execute(Querytxt);
 	
 		conn.close();
@@ -63,8 +63,6 @@
 		
 		conn.close();
     	stmt.close();
-	}
-	
 %>
 <form method="post" action="comment_list.jsp">
 	<table>
@@ -79,5 +77,8 @@
 		</tr>
 	</table>
 </form>
+<%
+	}
+%>
 </body>
 </html>

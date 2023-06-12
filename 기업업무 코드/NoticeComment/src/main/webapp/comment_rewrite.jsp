@@ -31,24 +31,28 @@
 	
 	request.setCharacterEncoding("utf-8"); // 인코딩 utf-8로 설정
 	int commentId = Integer.parseInt(request.getParameter("commentId"));
+	
 	String commentTitle = request.getParameter("commentTitle"); // 가져온 데이터 입력
 	commentTitle = commentTitle.replace("<", "&lt;").replace(">", "&gt;"); // <, > 문자 대체
+	
 	String commentDate = request.getParameter("commentDate");
+	
 	String commentContent = request.getParameter("commentContent");
+	commentContent = commentContent.replace("<", "&lt;").replace(">", "&gt;"); // <, > 문자 대체
+	
 	int belongId = Integer.parseInt(request.getParameter("belongId"));
 	int commentRelevel = Integer.parseInt(request.getParameter("commentRelevel"));
 	int commentRecnt = Integer.parseInt(request.getParameter("commentRecnt"));
 	
 	String hypen = "";
-	for (int i = 0; i <= commentRecnt; i++) {
+	for (int i = 0; i <= commentRelevel; i++) {
 		if (i > 0) {
 			hypen = hypen + "-";
 		}
 	}
 	commentTitle = hypen + ">[Re]" + commentTitle + "[New]"; 
 	
-	String Querytxt = String.format("insert into comment (title, date, content, rootid, relevel, recnt, viewcnt) "
-		    + "values ('%s', '%s', '%s', %d, %d, %d, %d)", commentTitle, commentDate, commentContent, belongId, commentRelevel, commentRecnt, 0);
+	String Querytxt = String.format("insert into comment values ('%s', '%s', '%s', %d, %d, %d, %d)", commentId, commentTitle, commentDate, commentContent, belongId, commentRelevel, commentRecnt, 0);
 	stmt.executeUpdate(Querytxt);
 %>
 <form method="post" action="comment_list.jsp">

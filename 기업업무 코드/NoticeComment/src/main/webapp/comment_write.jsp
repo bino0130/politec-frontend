@@ -49,8 +49,7 @@
 		int relevel = Integer.parseInt(request.getParameter("relevel")); // 전달받은 데이터 가져오기
 		int recnt = Integer.parseInt(request.getParameter("recnt")); // 전달받은 데이터 가져오기
 		
-		String Querytxt = String.format("insert into comment (title, date, content, rootid, relevel, recnt) "
-			    + "values ('%s', '%s', '%s', %d, %d, %d)", title, today, message, rootid, relevel, recnt, 0);
+		String Querytxt = String.format("insert into comment values (%d, '%s', '%s', '%s', %d, %d, %d)", autoId, title, today, message, rootid, relevel, recnt, 0);
 		stmt.executeUpdate(Querytxt);
 		
 %>
